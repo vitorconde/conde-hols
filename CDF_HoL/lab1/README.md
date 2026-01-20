@@ -22,7 +22,7 @@ The following is a step by step guide in building a data flow for use within CDF
 1. Login to Schema Registry by clicking the appropriate hyperlink in the Streams Messaging Datahub.
 
 <p align="center">
-  <img src="../CDF_HoL/assets/images/lab_images/lab1/1.12.png" alt="Schema Registry Screenshot" />
+  <img src="../assets/images/lab_images/lab1/1.12.png" alt="Schema Registry Screenshot" />
 </p>
 1. Click on the \+ button on the top right to create a new schema.  
 2. Create a new schema with the following information:  
@@ -102,7 +102,7 @@ The following is a step by step guide in building a data flow for use within CDF
 
 
 <p align="center">
-  <img src="../../assets/images/lab_images/lab1/3.22.png" alt="Schema Registry Screenshot" />
+  <img src="../assets/images/lab_images/lab1/3.22.png" alt="Schema Registry Screenshot" />
 </p>
 
 2. Add the parameters. Click on **Add Parameter \> Add Parameter** for each parameter to be added and enter the appropriate details:
@@ -119,21 +119,21 @@ The following is a step by step guide in building a data flow for use within CDF
 | Schema Registry Hostname  | Hostname of Schema Registry service         | `<hostname of Schema Registry service>`       |
 
 
-* **Kafka Broker Endpoint:** The Kafka brokers' addresses can be found in the Brokers page of the SMM UI. To get there, find your Streams Messaging DataHub and click on the Streams Messaging Manager (SMM) link <img src="../../assets/images/lab_images/lab1/1.32.1.png" alt="Schema Registry Screenshot" style="vertical-align:middle; width:240px; height:36px;" />. On the SMM UI, click on the Brokers icon.<img src="../../assets/images/lab_images/lab1/1.32.2.png" alt="Schema Registry Screenshot" style="vertical-align:middle; width:40px; height:36px;" />  The address of each broker will be shown in this page and consists of the broker host name and port number, as shown below.
+* **Kafka Broker Endpoint:** The Kafka brokers' addresses can be found in the Brokers page of the SMM UI. To get there, find your Streams Messaging DataHub and click on the Streams Messaging Manager (SMM) link <img src="../assets/images/lab_images/lab1/1.32.1.png" alt="Schema Registry Screenshot" style="vertical-align:middle; width:240px; height:36px;" />. On the SMM UI, click on the Brokers icon.<img src="../assets/images/lab_images/lab1/1.32.2.png" alt="Schema Registry Screenshot" style="vertical-align:middle; width:40px; height:36px;" />  The address of each broker will be shown in this page and consists of the broker host name and port number, as shown below.
 <p align="center">
-  <img src="../../assets/images/lab_images/lab1/1.32.7.png" alt="Schema Registry Screenshot" />
+  <img src="../assets/images/lab_images/lab1/1.32.7.png" alt="Schema Registry Screenshot" />
 </p>
     
 
   The value for the Kafka Broker Endpoint parameter must be a comma-separated list of the broker addresses, as shown in the example below:  
 <p align="center">
-  <img src="../../assets/images/lab_images/lab1/1.32.8.png" alt="Schema Registry Screenshot" />
+  <img src="../assets/images/lab_images/lab1/1.32.8.png" alt="Schema Registry Screenshot" />
 </p>
     
 * **Schema Registry Hostname**: to identify the name of the Schema Registry host using Cloudera Manager: on the Streams Messaging DataHub page, click on **CM-UI \> Clusters \> schemaregistry \> Instances** and copy the host name from there:  
 
 <p align="center">
-  <img src="../../assets/images/lab_images/lab1/1.32.9.png" alt="Schema Registry Screenshot" />
+  <img src="../assets/images/lab_images/lab1/1.32.9.png" alt="Schema Registry Screenshot" />
 </p>
 
 1. Add the *sensitive* parameters. Click on **Add Parameter \> Add Sensitive Parameter** for each parameter to be added and enter the appropriate details:
@@ -146,7 +146,7 @@ The following is a step by step guide in building a data flow for use within CDF
 
 4. Once all the parameters have been created verify with the list below
 <p align="center">
-  <img src="../../assets/images/lab_images/lab1/1.32.11.png" alt="Schema Registry Screenshot" />
+  <img src="../assets/images/lab_images/lab1/1.32.11.png" alt="Schema Registry Screenshot" />
 </p>
 
 
@@ -166,23 +166,23 @@ The following is a step by step guide in building a data flow for use within CDF
       - Wait for the status to change to **Active Test Session**.
    - *You are not yet at the point of testing the flow, butEnabling a test session forces the Default NiFi SSL Context Service controller service to be created, which you will need in the next steps.*
    <p align="center">
-     <img src="../../assets/images/lab_images/lab1/3.3.1.png" alt="Test Session" />
+     <img src="../assets/images/lab_images/lab1/3.3.1.png" alt="Test Session" />
    </p>
 
 2. **Click Flow Options > Services**
    <p align="center">
-     <img src="../../assets/images/lab_images/lab1/3.3.2.png" alt="Services Option" />
+     <img src="../assets/images/lab_images/lab1/3.3.2.png" alt="Services Option" />
    </p>
 
 3. **Add a new HortonworksSchemaRegistry controller service**
    - Click **Add Service**. The **Add Service** page opens.
      <p align="center">
-       <img src="../../assets/images/lab_images/lab1/3.3.3.png" alt="Add Service" />
+       <img src="../assets/images/lab_images/lab1/3.3.3.png" alt="Add Service" />
      </p>
    - In the text box, filter for **HortonworksSchemaRegistry**, select it and click **Add**.
    - Configure the HortonworksSchemaRegistry service:
      <p align="center">
-       <img src="../../assets/images/lab_images/lab1/3.3.4.png" alt="Schema Registry Properties" />
+       <img src="../assets/images/lab_images/lab1/3.3.4.png" alt="Schema Registry Properties" />
      </p>
      - Service Name: **WS_CDP_Schema_Registry**
      - Properties:
@@ -191,12 +191,12 @@ The following is a step by step guide in building a data flow for use within CDF
          - Kerberos Principal: `#{CDP Workload User}`
          - Kerberos Password: `#{CDP Workload User Password}`
      <p align="center">
-       <img src="../../assets/images/lab_images/lab1/3.3.5.png" alt="Schema Registry Properties" />
+       <img src="../assets/images/lab_images/lab1/3.3.5.png" alt="Schema Registry Properties" />
      </p>
    - Click **Apply**
    - Activate the service by clicking on the **Enable** icon
      <p align="center">
-       <img src="../../assets/images/lab_images/lab1/3.3.6.png" alt="Enable Service" />
+       <img src="../assets/images/lab_images/lab1/3.3.6.png" alt="Enable Service" />
      </p>
 
 4. Add a new **Syslog5424Reader** controller service  
@@ -276,7 +276,7 @@ The following is a step by step guide in building a data flow for use within CDF
 
 8. This completes the configuration of all the controller services. Please verify with the list below:  
    <p align="center">
-     <img src="../../assets/images/lab_images/lab1/3.3.7.png" alt="Controller Services List" />
+     <img src="../assets/images/lab_images/lab1/3.3.7.png" alt="Controller Services List" />
    </p>
 
 9. Click on the **Back to Flow Designer** link to go back to the flow canvas.
@@ -291,7 +291,7 @@ The following is a step by step guide in building a data flow for use within CDF
    1. Drag the Processor icon onto the canvas  
 
    <p align="center">
-     <img src="../../assets/images/lab_images/lab1/3.4.17.png" alt="Schema Registry Screenshot" />
+     <img src="../assets/images/lab_images/lab1/3.4.17.png" alt="Schema Registry Screenshot" />
    </p>
 
    1. Select the **ExecuteScript** processor.  
@@ -302,13 +302,13 @@ The following is a step by step guide in building a data flow for use within CDF
       4. Execution: **Primary Node**
 
         <p align="center">
-          <img src="../../assets/images/lab_images/lab1/3.4.18.png" alt="Schema Registry Screenshot" />
+          <img src="../assets/images/lab_images/lab1/3.4.18.png" alt="Schema Registry Screenshot" />
         </p>
 
 
 
         <p align="center">
-          <img src="../../assets/images/lab_images/lab1/3.4.18.png" alt="Schema Registry Screenshot" />
+          <img src="../assets/images/lab_images/lab1/3.4.18.png" alt="Schema Registry Screenshot" />
         </p>
 
 
@@ -364,13 +364,13 @@ if (flowFile != None):
 
    6. Relationships: check **Terminate** for the **failure** relationship  
     <p align="center">
-    <img src="../../assets/images/lab_images/lab1/3.4.19.png" alt="Schema Registry Screenshot" />
+    <img src="../assets/images/lab_images/lab1/3.4.19.png" alt="Schema Registry Screenshot" />
     </p>
 
    4. Click **Apply**  
         
     <p align="center">
-    <img src="../../assets/images/lab_images/lab1/3.4.20.png" alt="Schema Registry Screenshot" />
+    <img src="../assets/images/lab_images/lab1/3.4.20.png" alt="Schema Registry Screenshot" />
     </p>
 
 3. Create the **Filter Events** processor  
@@ -386,11 +386,11 @@ if (flowFile != None):
          1. Property Name: **filtered\_event**  
          2. Property Value: **\#{Filter Rule}**  
       4. Relationships: check **Terminate** for the **failure** and **original** relationships  
-            <p align="center"><img src="../../assets/images/lab_images/lab1/3.4.21.png" alt="Schema Registry Screenshot" /></p>
+            <p align="center"><img src="../assets/images/lab_images/lab1/3.4.21.png" alt="Schema Registry Screenshot" /></p>
 
    4. Click **Apply**  
         
-    <p align="center"><img src="../../assets/images/lab_images/lab1/3.4.22.png" alt="Schema Registry Screenshot" /></p>
+    <p align="center"><img src="../assets/images/lab_images/lab1/3.4.22.png" alt="Schema Registry Screenshot" /></p>
 
 4. Create the **Write To Kafka \- Avro** processor  
      
@@ -413,7 +413,7 @@ if (flowFile != None):
       3. Relationships: check **Terminate** for the **success** relationship  
    4. Click **Apply**  
         
-    <p align="center"><img src="../../assets/images/lab_images/lab1/3.4.23.png" alt="Schema Registry Screenshot" /></p>
+    <p align="center"><img src="../assets/images/lab_images/lab1/3.4.23.png" alt="Schema Registry Screenshot" /></p>
         
 5. Create the **Write To Kafka \- JSON** processor  
      
@@ -436,7 +436,7 @@ if (flowFile != None):
       3. Relationships: check **Terminate** for the **success** relationship  
    4. Click **Apply**
 
-    <p align="center"><img src="../../assets/images/lab_images/lab1/3.4.23.png" alt="Schema Registry Screenshot" /></p>
+    <p align="center"><img src="../assets/images/lab_images/lab1/3.4.23.png" alt="Schema Registry Screenshot" /></p>
 
 6. Connect the processors as shown in the diagram below:
 
@@ -445,7 +445,7 @@ if (flowFile != None):
 * Connect Processors **Filter Events** & **Write To Kafka \- JSON** for Relationship **filtered\_events**  
 * Connect **Write To Kafka** to itself to retry for **failures**
 
-    <p align="center"><img src="../../assets/images/lab_images/lab1/3.4.24.png" alt="Schema Registry Screenshot" /></p>
+    <p align="center"><img src="../assets/images/lab_images/lab1/3.4.24.png" alt="Schema Registry Screenshot" /></p>
 
 
 ### **3.5 Naming the queues**
@@ -460,7 +460,7 @@ For example:
 * The **success** queue between **Filter Events** and **Write To Kafka** should be named **filtered\_event\_Filter-WriteToKafka**  
 * The **failure** retry queue from **Write To Kafka** to itself should be named **failure\_WriteToKafka**
 
-    <p align="center"><img src="../../assets/images/lab_images/lab1/3.4.26.png" alt="Schema Registry Screenshot" /></p>
+    <p align="center"><img src="../assets/images/lab_images/lab1/3.4.26.png" alt="Schema Registry Screenshot" /></p>
 
 
 
@@ -471,7 +471,7 @@ Test sessions are a feature in the CDF Flow Designer that allow you to start/sto
 To test your draft flow, start a Test Session by clicking **Flow Options \> Test Session \> Start Test Session**. This launches a NiFi sandbox to enable you to validate your draft flow and interactively work with live data by starting and stopping components.
 
 **Tip:** You can check the status of your Test Session in the upper right corner of your workspace. That is where you can also deactivate your Test Session.  
-<p align="center"><img src="../../assets/images/lab_images/lab1/4.27.png" alt="Schema Registry Screenshot" /></p> 
+<p align="center"><img src="../assets/images/lab_images/lab1/4.27.png" alt="Schema Registry Screenshot" /></p> 
 
 1. If your test session is not yet started, start one by clicking on **Flow Options \> Test Session \> Start**.
 
@@ -487,11 +487,11 @@ To test your draft flow, start a Test Session by clicking **Flow Options \> Test
 
 5. Start all processors that are not running.
 
-   Stopped processors are identified by the icon <img src="../../assets/images/lab_images/lab1/4.28.png" alt="Schema Registry Screenshot" style="vertical-align:middle; width:40px; height:36px;" />. Right-click on a stopped processor and select **Start** to start it.
+   Stopped processors are identified by the icon <img src="../assets/images/lab_images/lab1/4.28.png" alt="Schema Registry Screenshot" style="vertical-align:middle; width:40px; height:36px;" />. Right-click on a stopped processor and select **Start** to start it.
 
    The flow starts executing. On the Flow Design Canvas you can observe statistics on your processors change as they consume data and execute their respective tasks. 
 
-   <p align="center"><img src="../../assets/images/lab_images/lab1/4.29.png" alt="Schema Registry Screenshot" /></p> 
+   <p align="center"><img src="../assets/images/lab_images/lab1/4.29.png" alt="Schema Registry Screenshot" /></p> 
 
    You should see the flow running successfully and writing records to Kafka.
 
@@ -499,17 +499,17 @@ To test your draft flow, start a Test Session by clicking **Flow Options \> Test
 
 6. Access the SMM UI from the Streams Messaging DataHub page and check the topic metrics and data:  
      
-   <p align="center"><img src="../../assets/images/lab_images/lab1/4.30.png" alt="Schema Registry Screenshot" /></p>   
+   <p align="center"><img src="../assets/images/lab_images/lab1/4.30.png" alt="Schema Registry Screenshot" /></p>   
      
    Here are the topic metrics:  
      
-   <p align="center"><img src="../../assets/images/lab_images/lab1/4.31.png" alt="Schema Registry Screenshot" /></p> 
+   <p align="center"><img src="../assets/images/lab_images/lab1/4.31.png" alt="Schema Registry Screenshot" /></p> 
 
    You can also view the data from the data explorer:
 
    
 
-   <p align="center"><img src="../../assets/images/lab_images/lab1/4.32.png" alt="Schema Registry Screenshot" /></p> 
+   <p align="center"><img src="../assets/images/lab_images/lab1/4.32.png" alt="Schema Registry Screenshot" /></p> 
 
    
 
@@ -518,10 +518,10 @@ To test your draft flow, start a Test Session by clicking **Flow Options \> Test
    Fortunately, SMM is integrated to Schema Registry and can fetch the correct schema to properly deserialize the data and present a human-readable form of it.
 
    To do that select **Avro** as the **Values** Deserializer for the topic:  
-   <p align="center"><img src="../../assets/images/lab_images/lab1/4.33.png" alt="Schema Registry Screenshot" /></p>   
+   <p align="center"><img src="../assets/images/lab_images/lab1/4.33.png" alt="Schema Registry Screenshot" /></p>   
      
    You will notice that after Avro is selected the messages are shown with a readable JSON encoding:  
-   <p align="center"><img src="../../assets/images/lab_images/lab1/4.34.png" alt="Schema Registry Screenshot" /></p> 
+   <p align="center"><img src="../assets/images/lab_images/lab1/4.34.png" alt="Schema Registry Screenshot" /></p> 
 
 
 
@@ -534,13 +534,13 @@ On the first time a flow draft is exported to the catalog you are asked to provi
 When you want to publish a draft flow as a flow definition, you have two options: 
 
 * On the Flow Design Canvas, click Flow Options \> Publish To Catalog \> Publish Flow.  
-  <p align="center"><img src="../../assets/images/lab_images/lab1/5.35.png" alt="Schema Registry Screenshot" /></p>  
+  <p align="center"><img src="../assets/images/lab_images/lab1/5.35.png" alt="Schema Registry Screenshot" /></p>  
   **OR**  
-* Click on **Flow Design** (left-hand side) to see the **All Flows** page, which lists all the flows. Then click on the <img src="../../assets/images/lab_images/lab1/5.36.png" alt="Schema Registry Screenshot" style="vertical-align:middle; width:40px; height:24px;" />menu for the flow you want to publish and select **View Flow Workspace**.  
-  <p align="center"><img src="../../assets/images/lab_images/lab1/5.37.png" alt="Schema Registry Screenshot" /></p>   
+* Click on **Flow Design** (left-hand side) to see the **All Flows** page, which lists all the flows. Then click on the <img src="../assets/images/lab_images/lab1/5.36.png" alt="Schema Registry Screenshot" style="vertical-align:middle; width:40px; height:24px;" />menu for the flow you want to publish and select **View Flow Workspace**.  
+  <p align="center"><img src="../assets/images/lab_images/lab1/5.37.png" alt="Schema Registry Screenshot" /></p>   
     
-  This will take you to the list of all flows running on the same environment (workspace) as the flow you selected. To publish the flow, Workspace view, click again on the <img src="../../assets/images/lab_images/lab1/5.36.png" alt="Schema Registry Screenshot" style="vertical-align:middle; width:40px; height:24px;" /> menu for the desired flow and select **Publish Flow**.   
-  <p align="center"><img src="../../assets/images/lab_images/lab1/5.38.png" alt="Schema Registry Screenshot" /></p> 
+  This will take you to the list of all flows running on the same environment (workspace) as the flow you selected. To publish the flow, Workspace view, click again on the <img src="../assets/images/lab_images/lab1/5.36.png" alt="Schema Registry Screenshot" style="vertical-align:middle; width:40px; height:24px;" /> menu for the desired flow and select **Publish Flow**.   
+  <p align="center"><img src="../assets/images/lab_images/lab1/5.38.png" alt="Schema Registry Screenshot" /></p> 
 
 1. Choose one of the methods explained above and publish your flow.  
 2. In the Publish Flow dialog box, enter the following details:  
@@ -556,15 +556,15 @@ When you want to publish a draft flow as a flow definition, you have two options
 ## **6\. Deploy the flow in Production** 
 
 1. Search for the flow in the Flow Catalog  
-   <p align="center"><img src="../../assets/images/lab_images/lab1/6.39.png" alt="Schema Registry Screenshot" /></p>  
+   <p align="center"><img src="../assets/images/lab_images/lab1/6.39.png" alt="Schema Registry Screenshot" /></p>  
 2. Click on the Flow to see its details, including the list of versions:  
-   <p align="center"><img src="../../assets/images/lab_images/lab1/6.40.png" alt="Schema Registry Screenshot" /></p>  
+   <p align="center"><img src="../assets/images/lab_images/lab1/6.40.png" alt="Schema Registry Screenshot" /></p>  
 3. Click on **Version 1**, you should see a **Deploy** Option appear shortly. Then click on **Deploy**.  
-   <p align="center"><img src="../../assets/images/lab_images/lab1/6.41.png" alt="Schema Registry Screenshot" /></p>  
+   <p align="center"><img src="../assets/images/lab_images/lab1/6.41.png" alt="Schema Registry Screenshot" /></p>  
 4. Select the CDP environment where this flow will be deployed and click **Continue**  
-   <p align="center"><img src="../../assets/images/lab_images/lab1/6.42.png" alt="Schema Registry Screenshot" /></p>  
+   <p align="center"><img src="../assets/images/lab_images/lab1/6.42.png" alt="Schema Registry Screenshot" /></p>  
 5. Give the deployment a unique name (e.g **\<userid\>-syslog-to-kafka-001**), then click **Next**  
-   <p align="center"><img src="../../assets/images/lab_images/lab1/6.43.png" alt="Schema Registry Screenshot" /></p>  
+   <p align="center"><img src="../assets/images/lab_images/lab1/6.43.png" alt="Schema Registry Screenshot" /></p>  
 6. In the **NiFi Configuration** page, accept all the defaults (runtime version, autostart behavior, inbound connections and custom NAR) and click **Next**.  
 7. In the **Parameters** page, provide the correct values for the parameter for the production run and then click **Next**. Most of the parameters already have good defaults and you only need to change them if needed. However, you must re-enter the **CDP Workload User Password**.  
 * CDP Workload User: The workload username for the current user  
@@ -582,10 +582,10 @@ When you want to publish a draft flow as a flow definition, you have two options
 * Enable Auto Scaling: **True**  
 * Min Nodes: **1**  
 * Max Nodes: **3**  
-  <p align="center"><img src="../../assets/images/lab_images/lab1/6.44.png" alt="Schema Registry Screenshot" /></p>  
+  <p align="center"><img src="../assets/images/lab_images/lab1/6.44.png" alt="Schema Registry Screenshot" /></p>  
 9. In the Key Performance Indicators page, click on Add New KPI to add the following KPIs.
 
-<p align="center"><img src="../../assets/images/lab_images/lab1/6.45.png" alt="Schema Registry Screenshot" /></p>
+<p align="center"><img src="../assets/images/lab_images/lab1/6.45.png" alt="Schema Registry Screenshot" /></p>
 
 1. Add the following KPI  
 * KPI Scope: **Connection**  
@@ -595,7 +595,7 @@ When you want to publish a draft flow as a flow definition, you have two options
   * Trigger alert when metric is greater than: **1 MB**  
   * Alert will be triggered when metrics is outside the boundary(s) for: **30 seconds**
 
-    <p align="center"><img src="../../assets/images/lab_images/lab1/6.46.png" alt="Schema Registry Screenshot" /></p>
+    <p align="center"><img src="../assets/images/lab_images/lab1/6.46.png" alt="Schema Registry Screenshot" /></p>
 
   2.  Add the following KPI  
 * KPI Scope: **Connection**  
@@ -605,10 +605,10 @@ When you want to publish a draft flow as a flow definition, you have two options
   * Trigger alert when metric is greater than: **10 KB**  
   * Alert will be triggered when metrics is outside the boundary(s) for: **30 seconds**
 
-    <p align="center"><img src="../../assets/images/lab_images/lab1/6.47.png" alt="Schema Registry Screenshot" /></p>
+    <p align="center"><img src="../assets/images/lab_images/lab1/6.47.png" alt="Schema Registry Screenshot" /></p>
 
 10. Review the KPIs and click **Next**.  
-    <p align="center"><img src="../../assets/images/lab_images/lab1/6.48.png" alt="Schema Registry Screenshot" /></p>  
+    <p align="center"><img src="../assets/images/lab_images/lab1/6.48.png" alt="Schema Registry Screenshot" /></p>  
 11. In the **Review** page, review your deployment details.
 
     Notice that in this page there's a **\>\_ View CLI Command** link. You will use the information in the page in the next section to deploy a flow using the CLI. For now you just need to save the script and dependencies provided there:
@@ -623,7 +623,7 @@ When you want to publish a draft flow as a flow definition, you have two options
 12. Click Deploy to initiate the flow deployment.  
       
 13. In the DataFlow **Dashboard,** monitor your flow until it's running successfully (a green check mark will appear once the deployment has completed)  
-    <p align="center"><img src="../../assets/images/lab_images/lab1/6.50.png" alt="Schema Registry Screenshot" /></p
+    <p align="center"><img src="../assets/images/lab_images/lab1/6.50.png" alt="Schema Registry Screenshot" /></p
 
 14.  Click on your deployment and explore the flow details and monitor the KPI metrics that are shown on this page.  
       

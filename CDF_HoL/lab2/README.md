@@ -15,21 +15,21 @@ In this module you will practice the streaming analytic capabilities of Cloudera
 Use SMM to to show the kafka topics **<userid>-syslog-avro** that is being written to from the NiFi flow in module 1
 
 1. Login to **SMM**.  
-2. Click on the **Topics icon** <img src="../../assets/images/lab_images/lab2/2.50.png" alt="SMM Topics icon and syslog-avro topic" style="vertical-align:middle; width:40px; height:36px;" />
+2. Click on the **Topics icon** <img src="../assets/images/lab_images/lab2/2.50.png" alt="SMM Topics icon and syslog-avro topic" style="vertical-align:middle; width:40px; height:36px;" />
    
 3. and filter the topic **<userid>-syslog-avro**, which was created by the NiFi flow in Module 1  
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.51.png" alt="Profile icon for syslog-avro topic" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.51.png" alt="Profile icon for syslog-avro topic" /></p>
 
 4. Click on the **Profile** icon for the topic, as shown below:  
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.52.png" alt="Data Explorer tab for topic" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.52.png" alt="Data Explorer tab for topic" /></p>
 
 5. On the Topic page, click on the **DATA EXPLORER** tab:  
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.53.png" alt="Binary data in Data Explorer" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.53.png" alt="Binary data in Data Explorer" /></p>
 
 6. Use the Data Explorer tool for the Avro topic and verify that the data is binary. Change the Value Deserializer to **Avro** to use the Schema Registry integration and verify that the data was deserialized correctly:  
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.54.png" alt="Binary data in Data Explorer" /></p>
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.55.png" alt="Change Value Deserializer to Avro" /></p>
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.56.png" alt="Deserialized Avro data" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.54.png" alt="Binary data in Data Explorer" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.55.png" alt="Change Value Deserializer to Avro" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.56.png" alt="Deserialized Avro data" /></p>
 
 ## **3. Create a Project in SSB and configure GitHub repo for it**
 
@@ -48,28 +48,28 @@ Before you do that, though, you need to create a Git repository under your own G
 
    If you don't have a SSH key register or don't know where it's the private key file associated with the registered key, click on the **New SSH key** button and create/register a new one.
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.57.png" alt="GitHub SSH and GPG keys settings" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.57.png" alt="GitHub SSH and GPG keys settings" /></p>
      
 3. Click the "plus" icon at the top right of the page and select **New repository** to add a new repository. Call it **ssb-workshop** and set it like the one below:
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.58.png" alt="Create new GitHub repository" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.58.png" alt="Create new GitHub repository" /></p>
 
 4. Make sure that the “Add a README file” option is checked.  
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.59.png" alt="Add README file option in GitHub" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.59.png" alt="Add README file option in GitHub" /></p>
      
 5. Once the repository is created, click on the Code button on the repository page, select the SSH tab and copy the associated URL. This is the URL you will use to configure the SSB project:
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.60.png" alt="Copy SSH URL from GitHub repository" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.60.png" alt="Copy SSH URL from GitHub repository" /></p>
      
 6. In the CDP Console, find the **Streaming Analytics (Flink) DataHub** and click on it to open the DataHub page.  
-7. Click on the <img src="../../assets/images/lab_images/lab2/2.61.png" style="vertical-align:middle; width:240px;" alt="Open SSB UI from DataHub" /> icon to open the SSB UI. You will notice that there are already two projects created by default:  
+7. Click on the <img src="../assets/images/lab_images/lab2/2.61.png" style="vertical-align:middle; width:240px;" alt="Open SSB UI from DataHub" /> icon to open the SSB UI. You will notice that there are already two projects created by default:  
    1. **ssb_default** - a global project accessible to all users  
    2. **<userid>_default** - a private project accessible only to your user  
       
    You won't use any of those. Instead, you will create a GitHub-backed repository next.  
      
 8. In the **Projects** page, click on the **New Project** button:  
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.62.png" alt="Create new project in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.62.png" alt="Create new project in SSB" /></p>
 
 9. Enter the following details in the Create Project dialog box:  
       1. Name: **\<an unique name for your project\>**  
@@ -80,22 +80,22 @@ Before you do that, though, you need to create a Git repository under your own G
       6. Private Key: **\<upload the private key file associated with the key in your GitHub account\>**  
       7. Public Key: **\<upload the public key file associated with the key in your GitHub account\>**  
       8. Passphrase for Private Key: **\<if your private key is protected by a passphrase, enter it here; otherwise, leave it blank\>**  
-      <p align="center"><img src="../../assets/images/lab_images/lab2/2.63.png" alt="Create Project dialog in SSB" /></p>
+      <p align="center"><img src="../assets/images/lab_images/lab2/2.63.png" alt="Create Project dialog in SSB" /></p>
 
 10. The new project will be listed in the Projects page:  
-    <p align="center"><img src="../../assets/images/lab_images/lab2/2.64.png" alt="New project listed in SSB" /></p>
+    <p align="center"><img src="../assets/images/lab_images/lab2/2.64.png" alt="New project listed in SSB" /></p>
 
 11. Click on the **Switch** button of the new project to switch to it, and you will see the main page for your project::  
-    <p align="center"><img src="../../assets/images/lab_images/lab2/2.65.png" alt="Switch to new project in SSB" /></p>
-    <p align="center"><img src="../../assets/images/lab_images/lab2/2.66.png" alt="Main page for SSB project" /></p>
+    <p align="center"><img src="../assets/images/lab_images/lab2/2.65.png" alt="Switch to new project in SSB" /></p>
+    <p align="center"><img src="../assets/images/lab_images/lab2/2.66.png" alt="Main page for SSB project" /></p>
 
 ##  **4. Register a Kafka Data Source**
 
 Before you can use SSB to process data from Kafka topics you must register one or more Kafka clusters as Data Sources in your project. In this section you will register the Kafka DataHub as your data source.
 
 1. In your project workspace, expand the Data Sources item in the navigation tree. You will see two items under it: "Kafka" and "Catalog"  
-2. Click on the kebab menu (<img src="../../assets/images/lab_images/lab2/2.67.png" style="vertical-align:middle; width:30px;" alt="Open SSB UI from DataHub" />) of the **Kafka** node to create a new Kafka data source:  
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.68.png" alt="Create new Kafka data source in SSB" /></p>
+2. Click on the kebab menu (<img src="../assets/images/lab_images/lab2/2.67.png" style="vertical-align:middle; width:30px;" alt="Open SSB UI from DataHub" />) of the **Kafka** node to create a new Kafka data source:  
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.68.png" alt="Create new Kafka data source in SSB" /></p>
 
 3. Provide the following details in the Kafka Data Source dialog box:  
       1. Name: **<name of your data source. E.g. dh-kafka\>**  
@@ -105,8 +105,8 @@ Before you can use SSB to process data from Kafka topics you must register one o
       5. SASL Username: **<your workload username\>**  
       6. SASL Password: **<your workload password\>**
 
-      <p align="center"><img src="../../assets/images/lab_images/lab2/2.69.png" alt="Kafka Data Source dialog in SSB" /></p>
-      <p align="center"><img src="../../assets/images/lab_images/lab2/2.70.png" alt="Kafka Data Source configuration" /></p>
+      <p align="center"><img src="../assets/images/lab_images/lab2/2.69.png" alt="Kafka Data Source dialog in SSB" /></p>
+      <p align="center"><img src="../assets/images/lab_images/lab2/2.70.png" alt="Kafka Data Source configuration" /></p>
 
 ## **5. Register a Schema Registry catalog**
 
@@ -116,7 +116,7 @@ Schema Registry stores schemas that are used to read/write data from/to Kafka to
 
 1. In your project workspace, navigate to **Data Sources \-\> Catalog.** Click the kebab menu of the Catalog item and select **New Catalog** to create a new catalog.
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.71.png" alt="New Catalog dialog in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.71.png" alt="New Catalog dialog in SSB" /></p>
 
 2. Enter the following details in the Catalog dialog box:  
       1. Name: **<name of the catalog. E.g. dh-schreg\>**  
@@ -125,23 +125,23 @@ Schema Registry stores schemas that are used to read/write data from/to Kafka to
       4. Enable TLS: **Enabled**  
       5. Schema Registry URL: **https://<schreg\_hostname\>:7790/api/v1** (See the Notes under Module 1's section 3.2.2 for more details on how to find the Schema Registry hostname)
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.72.png" alt="Schema Registry Catalog dialog" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.72.png" alt="Schema Registry Catalog dialog" /></p>
 
 3. Click on the **Validate** link to validate the Catalog. If the catalog is successfully validated you will see a message saying "Data Source is valid". If you hover the mouse over that message you will see how many tables were discovered from Schema Registry during the validation:  
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.73.png" alt="Validate Catalog in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.73.png" alt="Validate Catalog in SSB" /></p>
 
 4. Once the catalog is validated. Press the **Create** button to register the Schema Registry catalog.  
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.74.png" alt="Create Schema Registry Catalog" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.74.png" alt="Create Schema Registry Catalog" /></p>
 
 5. After the registration is completed you can browse the Schema Registry tables by navigating to **External Resources\> Virtual Tables \> \[schema\_registry\_catalog\_name\] \> default\_database**:
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.75.png" alt="Browse Schema Registry tables in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.75.png" alt="Browse Schema Registry tables in SSB" /></p>
 
 6. The Virtual Tables are created based on the schemas retrieved from Schema Registry. Virtual table names are the same as that of schema names. 
 
    **Note:** The topic names in Kafka must also be the same as the name of the schema associated with it.
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.76.png" alt="Virtual Tables created from Schema Registry" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.76.png" alt="Virtual Tables created from Schema Registry" /></p>
 
 ## **6. Register a Kudu catalog**
 
@@ -156,24 +156,24 @@ This will make the **syslog\_severity** table, which has already been created in
       2. Catalog Type: **Kudu**  
       3. Kudu Masters: **\<kudu\_master1\>:7051,\<kudu\_master2\>:7051,\<kudu\_master3\>:7051** *(see **Notes** below)*  
         
-      <p align="center"><img src="../../assets/images/lab_images/lab2/2.77.png" alt="Kudu Masters configuration in SSB" /></p>
+      <p align="center"><img src="../assets/images/lab_images/lab2/2.77.png" alt="Kudu Masters configuration in SSB" /></p>
 
    **Notes:**  
 * **Kudu Masters:** The hostname of the Kudu master nodes can be found in the Real-time Data Mart (Kudu) DataHub page. In the CDP Console, find your Real-time Data Mart DataHub and click on the **Nodes** tab. Copy the FQDN for the 3 masters, as shown in the screenshot below.
 
   The full masters address to be provided during the catalog registration is the following:
 
-  <p align="center"><img src="../../assets/images/lab_images/lab2/2.78.png" alt="Kudu Masters address example" /></p>  
+  <p align="center"><img src="../assets/images/lab_images/lab2/2.78.png" alt="Kudu Masters address example" /></p>  
     
 3. Click on the **Validate** link to validate the Catalog. If the catalog is successfully validated you will see a message saying "Data Source is valid". If you hover the mouse over that message you will see how many tables were discovered from Schema Registry during the validation:  
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.73.png" alt="Validate Catalog in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.73.png" alt="Validate Catalog in SSB" /></p>
 
 4. Once the catalog is validated. Press the **Create** button to register the Kudu catalog.  
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.74.png" alt="Create Kudu Catalog" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.74.png" alt="Create Kudu Catalog" /></p>
 
 5. After the registration is completed you can browse the Kudu tables by navigating to **External Resources\> Virtual Tables \> \[kudu\_catalog\_name\] \> default\_database**:
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.79.png" alt="Browse Kudu tables in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.79.png" alt="Browse Kudu tables in SSB" /></p>
 
 ## **7. Create a Kafka Table manually**
 
@@ -185,7 +185,7 @@ Sometimes, though, you don't have a schema for a particular topic and you may st
      
 2. Click the kebab menu of the Virtual Tables item and select **New Kafka Table** to create a new virtual table.
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.80.png" alt="Create new Kafka Table in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.80.png" alt="Create new Kafka Table in SSB" /></p>
 
 3. Enter the following details in the Kafka Table dialog box:  
    * Table Name: **syslog\_data**  
@@ -193,7 +193,7 @@ Sometimes, though, you don't have a schema for a particular topic and you may st
    * Data Format: **JSON**  
    * Topic Name: **\<userid\>-syslog-json**
 
-     <p align="center"><img src="../../assets/images/lab_images/lab2/2.81.png" alt="Kafka Table dialog in SSB" /></p>
+     <p align="center"><img src="../assets/images/lab_images/lab2/2.81.png" alt="Kafka Table dialog in SSB" /></p>
 
 4. When you select Data Format as AVRO, you must provide the correct Schema Definition when creating the table for SSB to be able to successfully process the topic data.
 
@@ -206,7 +206,7 @@ Sometimes, though, you don't have a schema for a particular topic and you may st
      
 5. You will also notice that a "Schema is invalid" message appears upon the schema detection. If you hover the mouse over the message it shows the reason:  
      
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.82.png" alt="Schema is invalid message in SSB" /></p>  
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.82.png" alt="Schema is invalid message in SSB" /></p>  
      
    You will fix this in the next step.  
      
@@ -221,10 +221,10 @@ Sometimes, though, you don't have a schema for a particular topic and you may st
    * Event Time Column: **event\_time**  
    * Watermark Seconds: **3**
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.83.png" alt="Event Time tab in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.83.png" alt="Event Time tab in SSB" /></p>
 
 7. Now that you have configured the event time column, click on **Detect Schema** again. You should see the schema turn valid:  
-   <img src="../../assets/images/lab_images/lab2/2.84.png" style="vertical-align:middle; width:230px;" alt="Valid schema in SSB" />
+   <img src="../assets/images/lab_images/lab2/2.84.png" style="vertical-align:middle; width:230px;" alt="Valid schema in SSB" />
      
 8. Click the **Create and Review** button to create the table.  
 9. Review the table's DDL and click **Close**.  
@@ -236,9 +236,9 @@ Before running jobs in SSB you must unlock your keytab following the steps below
 
 1. Ensure you are at the SSB home page. If not in the home page, click the Projects link at the top of the screen  
 2. Click on your user's icon/name at the bottom-left of the screen and select **Manage Keytab**:  
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.85.png" alt="Manage Keytab in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.85.png" alt="Manage Keytab in SSB" /></p>
 3. Enter your username and password and click on **Unlock Keytab**:  
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.86.png" alt="Unlock Keytab dialog in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.86.png" alt="Unlock Keytab dialog in SSB" /></p>
 
 ## **9. Create Streaming SQL jobs**
 
@@ -252,20 +252,20 @@ In this section you will practice creating and executing SQL Streaming jobs to i
 ### **9.1. Job 1: Selecting records from a Kafka virtual table**
 
 1. In the SSB console, ensure you have switched to your project and you are at your project's main page.  
-2. On the Explorer view, click the kebab menu (<img src="../../assets/images/lab_images/lab2/2.87.png" style="vertical-align:middle; width:30px;" alt="Valid schema in SSB" />)  of the **Jobs** item and select **New Job** to create a new one.
+2. On the Explorer view, click the kebab menu (<img src="../assets/images/lab_images/lab2/2.87.png" style="vertical-align:middle; width:30px;" alt="Valid schema in SSB" />)  of the **Jobs** item and select **New Job** to create a new one.
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.88.png" alt="Create new job in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.88.png" alt="Create new job in SSB" /></p>
 
 3. Enter **job1** as a **Job Name** and click on the **Create** button:
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.89.png" alt="Job Name dialog in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.89.png" alt="Job Name dialog in SSB" /></p>
      
    You are redirected to the SQL Editor where you can perform a number of tasks, including:  
    1. Compose and execute SQL queries  
    2. Create and manage Materialized Views  
    3. Configure your SQL job
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.90.png" alt="SQL Editor in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.90.png" alt="SQL Editor in SSB" /></p>
 
 4. Click on the SQL editor area and type the job query.
 
@@ -275,20 +275,20 @@ In this section you will practice creating and executing SQL Streaming jobs to i
      
 5. In the editor type "**SELECT \* FROM** " (with a space in the end) and then press \<CTRL\>+\<SPACE\>. Select the syslog\_data table from the list.
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.91.png" alt="Auto-complete table in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.91.png" alt="Auto-complete table in SSB" /></p>
 
 6. Click **Execute**.
 
    The Logs tab will show that the job execution has started and once data is retrieved it will automatically switch to the Results tab to show the results:
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.92.png" alt="Job execution logs in SSB" /></p>
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.93.png" alt="Job results tab in SSB" /></p>  
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.92.png" alt="Job execution logs in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.93.png" alt="Job results tab in SSB" /></p>  
      
 7. You will notice that the Results tab shows approximately one record every second, even though there is a lot more data flowing through the Kafka topic. This is because, by default, SSB only shows a sample of the data on the screen to give the user some feedback about what the query is retrieving. If you leave the query running you will also notice that the sample polling will automatically stop once 100 records have been retrieved.
 
    You can change the sample behavior and other settings by clicking on the Job Settings button, as shown below:
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.94.png" alt="Job Settings in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.94.png" alt="Job Settings in SSB" /></p>
 
    **NOTE:** Selecting "Sample all messages" can have a negative effect in performance and will increase the resource consumption of your browser as well. Use this only when necessary to check or troubleshoot data.
 
@@ -307,7 +307,7 @@ In this section you will practice creating and executing SQL Streaming jobs to i
 
 9. Once you're done, **Stop** your job. In the Explorer tree you can see all the jobs and which ones are running. You can also stop jobs from there by right-clicking on the job item. If the job status doesn't look correct, try click on the Reload icon, shown below:
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.95.png" alt="Reload icon in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.95.png" alt="Reload icon in SSB" /></p>
 
 ### **9.2. Job 2: Selecting records from a Schema Registry virtual table**
 
@@ -404,7 +404,7 @@ You will start by creating a topic to store the results of your query and then m
    3. Availability: **MAXIMUM**  
    4. Cleanup Policy: **delete**
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.96.png" alt="Create new topic in SMM" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.96.png" alt="Create new topic in SMM" /></p>
  
 
 
@@ -416,7 +416,7 @@ You will start by creating a topic to store the results of your query and then m
      
    Click on the **Templates** button above the SQL editor and select **upsert-kafka \> json**.
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.97.png" alt="Templates button in SSB" /></p>  
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.97.png" alt="Templates button in SSB" /></p>  
      
    You will notice that a **CREATE TABLE** template was inserted at the beginning of the editor. Scroll up and down to check the contents of the editor. **Please do NOT execute it yet**.  
      
@@ -441,15 +441,15 @@ You will start by creating a topic to store the results of your query and then m
 
    
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.98.png" alt="Completed CREATE TABLE template in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.98.png" alt="Completed CREATE TABLE template in SSB" /></p>
 
 7. With your mouse, select only the text of the entire CREATE TABLE statement and click on the **Execute Selection** button to run only that statement and create the Virtual Table.
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.99.png" alt="Execute Selection button in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.99.png" alt="Execute Selection button in SSB" /></p>
 
    After the CREATE TABLE execution you can see the created table in the Explorer tree:
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.100.png" alt="Created table in Explorer tree in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.100.png" alt="Created table in Explorer tree in SSB" /></p>
 
 8. Once the table is created successfully, delete the CREATE TABLE statement from the SQL editor.  
      
@@ -460,15 +460,15 @@ You will start by creating a topic to store the results of your query and then m
      
    Your final statement should look like this:  
      
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.101.png" alt="Final statement for job4 in SSB" /></p>  
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.101.png" alt="Final statement for job4 in SSB" /></p>  
      
 10. Click on the **Execute** button to submit your job for execution.  
       
 11. You should see the output of the query on the Results tab once the job starts executing. You can close the tab or window at any time and the job will continue running on the Flink cluster.  
-12. Open the SMM UI again, click on the **Topics icon** <img src="../../assets/images/lab_images/lab2/2.50.png" style="vertical-align:middle; width:30px;" alt="Valid schema in SSB" /> and search for the **<userid\>-severity-counts** topic.  
-13. Click on the Data Explorer icon (<img src="../../assets/images/lab_images/lab2/2.102.png" style="vertical-align:middle; width:30px;" alt="Valid schema in SSB" />) for the topic  to visualize the data in the topic. You should be able to see recently added data with the aggregations produced by **job4**:
+12. Open the SMM UI again, click on the **Topics icon** <img src="../assets/images/lab_images/lab2/2.50.png" style="vertical-align:middle; width:30px;" alt="Valid schema in SSB" /> and search for the **<userid\>-severity-counts** topic.  
+13. Click on the Data Explorer icon (<img src="../assets/images/lab_images/lab2/2.102.png" style="vertical-align:middle; width:30px;" alt="Valid schema in SSB" />) for the topic  to visualize the data in the topic. You should be able to see recently added data with the aggregations produced by **job4**:
 
-    <p align="center"><img src="../../assets/images/lab_images/lab2/2.103.png" alt="Aggregations produced by job4 in SMM" /></p>
+    <p align="center"><img src="../assets/images/lab_images/lab2/2.103.png" alt="Aggregations produced by job4 in SMM" /></p>
    
    
    
@@ -480,21 +480,21 @@ Now that you have completed the changes to your project, at least for now, you c
 
 1. Click on the Source Control icon, as shown below:
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.104.png" alt="Source Control icon in SSB" /></p>  
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.104.png" alt="Source Control icon in SSB" /></p>  
      
 2. Click on the **Push** tab at the top, enter your commit message and click on the **Push** button.
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.105.png" alt="Push tab in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.105.png" alt="Push tab in SSB" /></p>
 
    If your push is successful you should see the following message:
 
    
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.106.png" alt="Push successful message in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.106.png" alt="Push successful message in SSB" /></p>
 
 3. Verify the github repository. Changes will be pushed to the remote repository.
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.107.png" alt="Verify GitHub repository" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.107.png" alt="Verify GitHub repository" /></p>
 
 ## **12. Troubleshooting Flink/SSB jobs**
 
@@ -502,19 +502,19 @@ If you have problems with running your jobs, follow the steps below to check job
 
 1. Click on your job (under Jobs on the left bar) to open the job editor:
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.108.png" alt="Open job editor in SSB" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.108.png" alt="Open job editor in SSB" /></p>
 
 2. Click on the **Flink Dashboard** link to open the Flink Dashboard for job
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.109.png" alt="Open Flink Dashboard for job" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.109.png" alt="Open Flink Dashboard for job" /></p>
 
 3. Navigate the dashboard pages to explore details and metrics of the job execution:
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.110.png" alt="Flink Dashboard metrics and details" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.110.png" alt="Flink Dashboard metrics and details" /></p>
 
 4. Browse the job's DAG. Click on each of the operators (blue boxes) to see metrics and details of each one, including their individual tasks.
 
-   <p align="center"><img src="../../assets/images/lab_images/lab2/2.111.png" alt="Flink job DAG and operator metrics" /></p>
+   <p align="center"><img src="../assets/images/lab_images/lab2/2.111.png" alt="Flink job DAG and operator metrics" /></p>
 
 
 ## **13. Common issues**

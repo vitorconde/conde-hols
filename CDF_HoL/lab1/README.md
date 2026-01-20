@@ -86,7 +86,7 @@ The following is a step by step guide in building a data flow for use within CDF
 1. In Cloudera DataFlow, open the Flow Designer and create a new flow called **\<userid\>-syslog-kafka-flow**  
 
 <p align="center">
-  <img src="../../assets/images/lab_images/lab1/3.1.png" alt="Schema Registry Screenshot" />
+  <img src="../assets/images/lab_images/lab1/3.1.png" alt="Schema Registry Screenshot" />
 </p>
    
 

@@ -22,7 +22,7 @@ The following is a step by step guide in building a data flow for use within CDF
 1. Login to Schema Registry by clicking the appropriate hyperlink in the Streams Messaging Datahub.
 
 <p align="center">
-  <img src="../../../assets/images/lab_images/lab1/1.12.png" alt="Schema Registry Screenshot" />
+  <img src="CDF_HoL/assets/images/lab_images/lab1/1.12.png" alt="Schema Registry Screenshot" />
 </p>
 1. Click on the \+ button on the top right to create a new schema.  
 2. Create a new schema with the following information:  

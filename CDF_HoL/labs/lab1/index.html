@@ -1,0 +1,1751 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="GOES">
+      
+      
+      
+        <link rel="prev" href="../../index.html">
+      
+      
+        <link rel="next" href="../lab2/index.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>Lab 1 - Data Distribution with Cloudera DataFlow - Cloudera DataFlow - Hands on Labs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#getting-started" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="Cloudera DataFlow - Hands on Labs" class="md-header__button md-logo" aria-label="Cloudera DataFlow - Hands on Labs" data-md-component="logo">
+      
+  <img src="../../assets/images/logo-cloudera-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Cloudera DataFlow - Hands on Labs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lab 1 - Data Distribution with Cloudera DataFlow
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.infra.cloudera.com/GOES/hol-001-cdf" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GOES/hol-001-cdf
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="Cloudera DataFlow - Hands on Labs" class="md-nav__button md-logo" aria-label="Cloudera DataFlow - Hands on Labs" data-md-component="logo">
+      
+  <img src="../../assets/images/logo-cloudera-white.svg" alt="logo">
+
+    </a>
+    Cloudera DataFlow - Hands on Labs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.infra.cloudera.com/GOES/hol-001-cdf" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GOES/hol-001-cdf
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Labs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Labs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 1 - Data Distribution with Cloudera DataFlow
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="index.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 1 - Data Distribution with Cloudera DataFlow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-create-a-schema-in-schema-registry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Create a schema in Schema Registry
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-design-the-flow-in-the-flow-designer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Design the flow in the Flow Designer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Design the flow in the Flow Designer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-create-a-new-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Create a new flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-configure-parameters-for-the-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Configure parameters for the flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-create-controller-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Create Controller Services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-create-controller-services_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Create Controller Services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-design-the-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Design the flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-naming-the-queues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Naming the queues
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-interactively-test-the-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Interactively test the flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-version-control-the-flow-into-the-dataflow-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Version Control the flow into the DataFlow Catalog
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-deploy-the-flow-in-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Deploy the flow in Production
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-deploy-the-flow-using-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Deploy the Flow using CLI
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab2/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 2 - Streaming Analytics with Stream Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab3/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 3 - Deploy a DataFlow Function
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab4/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 4 - CDC with Kafka Connect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-create-a-schema-in-schema-registry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Create a schema in Schema Registry
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-design-the-flow-in-the-flow-designer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Design the flow in the Flow Designer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Design the flow in the Flow Designer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-create-a-new-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Create a new flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-configure-parameters-for-the-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Configure parameters for the flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-create-controller-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Create Controller Services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-create-controller-services_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Create Controller Services
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-design-the-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Design the flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-naming-the-queues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Naming the queues
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-interactively-test-the-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Interactively test the flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-version-control-the-flow-into-the-dataflow-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Version Control the flow into the DataFlow Catalog
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-deploy-the-flow-in-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Deploy the flow in Production
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-deploy-the-flow-using-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Deploy the Flow using CLI
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="getting-started"><strong>Getting Started</strong></h1>
+<h2 id="1-overview"><strong>1. Overview</strong></h2>
+<p>In this module you will practice creating, testing and deploying a flow in CDF PC. You will learn to:</p>
+<ul>
+<li>Develop flows using the low-code Flow Designer.  </li>
+<li>Create a test session and interactively test a flow.  </li>
+<li>Version-control a flow into the DataFlow Catalog.  </li>
+<li>Deploy a flow on an auto-scaling production cluster on k8s.</li>
+</ul>
+<p>You'll also learn flow design best practices like:</p>
+<ul>
+<li>Create self-contained flow within a Process Group  </li>
+<li>Parameterize flows for reusability  </li>
+<li>Set meaningful names for flow components, including queues (inplace of Success, Fail, and Retry). These names will be used to define Key Performance Indicators in CDF-PC.</li>
+</ul>
+<p>The following is a step by step guide in building a data flow for use within CDF-PC.</p>
+<h2 id="2-create-a-schema-in-schema-registry"><strong>2. Create a schema in Schema Registry</strong></h2>
+<ol>
+<li>Login to Schema Registry by clicking the appropriate hyperlink in the Streams Messaging Datahub.</li>
+</ol>
+<p align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/1.12.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/1.12.png" alt="Schema Registry Screenshot"></a>
+</p>
+<ol>
+<li>Click on the + button on the top right to create a new schema.  </li>
+<li>Create a new schema with the following information:<br>
+<strong>Note</strong>: The name of the schema ("syslog") must match the name of the Kafka topic you will create later.  </li>
+</ol>
+<ul>
+<li>
+<p>Name: <strong><code>&lt;userid&gt;-syslog-avro</code></strong></p>
+</li>
+<li>
+<p>Description: <strong>syslog schema for dataflow workshop</strong></p>
+</li>
+<li>
+<p>Type: <strong>Avro schema provider</strong>  </p>
+</li>
+<li>Schema Group: <strong>Kafka</strong>  </li>
+<li>Compatibility: <strong>Backward</strong>  </li>
+<li>Evolve: <strong>True</strong>  </li>
+<li>Schema Text:</li>
+</ul>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"syslog"</span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"record"</span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">"namespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.cloudera"</span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"priority"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"int"</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"severity"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"int"</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"facility"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"int"</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"version"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"int"</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"timestamp"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"long"</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hostname"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"body"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"appName"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"procid"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"messageid"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"structuredData"</span><span class="p">,</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"structuredData"</span><span class="p">,</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"record"</span><span class="p">,</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">          </span><span class="nt">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SDID"</span><span class="p">,</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SDID"</span><span class="p">,</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"record"</span><span class="p">,</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">                </span><span class="nt">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">                  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eventId"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">                  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eventSource"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">                  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"iut"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">                </span><span class="p">]</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="w">              </span><span class="p">}</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">          </span><span class="p">]</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="w">      </span><span class="p">}</span>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="w">    </span><span class="p">]</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="p">}</span>
+</span></code></pre></div>
+<h2 id="3-design-the-flow-in-the-flow-designer"><strong>3. Design the flow in the Flow Designer</strong></h2>
+<h3 id="31-create-a-new-flow"><strong>3.1 Create a new flow</strong></h3>
+<ol>
+<li>In Cloudera DataFlow, open the Flow Designer and create a new flow called <strong>\&lt;userid&gt;-syslog-kafka-flow</strong>  </li>
+</ol>
+<p align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.1.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.1.png" alt="Schema Registry Screenshot"></a>
+</p>
+
+<h3 id="32-configure-parameters-for-the-flow"><strong>3.2 Configure parameters for the flow</strong></h3>
+<p><em>Parameters are created within Parameter Contexts. In the context of CDP Flow Designer, one default Parameter Context is auto-created when you create a new draft flow.</em> </p>
+<p><em>You can then add parameters to this one Context, you cannot create additional ones.</em> </p>
+<p><em>This default context is automatically bound to each Process Group you create within your draft Flow, making all parameters available to be used in any process group.</em></p>
+<ol>
+<li>To create a Parameter, click on Flow Options in the top right corner and select Parameters  </li>
+</ol>
+<p align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.22.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.22.png" alt="Schema Registry Screenshot"></a>
+</p>
+
+<ol start="2">
+<li>Add the parameters. Click on <strong>Add Parameter &gt; Add Parameter</strong> for each parameter to be added and enter the appropriate details:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CDP Workload User</td>
+<td>CDP Workload User</td>
+<td><code>&lt;your own workload user name&gt;</code></td>
+</tr>
+<tr>
+<td>Filter Rule</td>
+<td>Filter Rule</td>
+<td><code>SELECT * FROM FLOWFILE</code></td>
+</tr>
+<tr>
+<td>Kafka Broker Endpoint</td>
+<td>Comma-separated list of Kafka Broker addresses</td>
+<td><code>&lt;comma-separated list of Kafka Broker addresses&gt;</code></td>
+</tr>
+<tr>
+<td>Kafka Destination Avro Topic</td>
+<td>Kafka Avro topic name</td>
+<td><code>&lt;userid&gt;-syslog-avro</code></td>
+</tr>
+<tr>
+<td>Kafka Destination JSON Topic</td>
+<td>Kafka JSON topic name</td>
+<td><code>&lt;userid&gt;-syslog-json</code></td>
+</tr>
+<tr>
+<td>Kafka Producer ID</td>
+<td>Kafka Producer ID</td>
+<td><code>&lt;userid&gt;-producer</code></td>
+</tr>
+<tr>
+<td>Schema Name</td>
+<td>Schema name</td>
+<td><code>&lt;userid&gt;-syslog-avro</code></td>
+</tr>
+<tr>
+<td>Schema Registry Hostname</td>
+<td>Hostname of Schema Registry service</td>
+<td><code>&lt;hostname of Schema Registry service&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Kafka Broker Endpoint:</strong> The Kafka brokers' addresses can be found in the Brokers page of the SMM UI. To get there, find your Streams Messaging DataHub and click on the Streams Messaging Manager (SMM) link <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/1.32.1.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/1.32.1.png" alt="Schema Registry Screenshot" style="vertical-align:middle; width:240px; height:36px;"></a>. On the SMM UI, click on the Brokers icon.<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/1.32.2.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/1.32.2.png" alt="Schema Registry Screenshot" style="vertical-align:middle; width:40px; height:36px;"></a>  The address of each broker will be shown in this page and consists of the broker host name and port number, as shown below.</li>
+</ul>
+<p align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/1.32.7.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/1.32.7.png" alt="Schema Registry Screenshot"></a>
+</p>
+
+<p>The value for the Kafka Broker Endpoint parameter must be a comma-separated list of the broker addresses, as shown in the example below:  </p>
+<p align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/1.32.8.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/1.32.8.png" alt="Schema Registry Screenshot"></a>
+</p>
+
+<ul>
+<li><strong>Schema Registry Hostname</strong>: to identify the name of the Schema Registry host using Cloudera Manager: on the Streams Messaging DataHub page, click on <strong>CM-UI &gt; Clusters &gt; schemaregistry &gt; Instances</strong> and copy the host name from there:  </li>
+</ul>
+<p align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/1.32.9.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/1.32.9.png" alt="Schema Registry Screenshot"></a>
+</p>
+
+<ol>
+<li>Add the <em>sensitive</em> parameters. Click on <strong>Add Parameter &gt; Add Sensitive Parameter</strong> for each parameter to be added and enter the appropriate details:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">CDP Workload User Password</td>
+<td style="text-align: left;">CDP Workload User Password</td>
+<td style="text-align: left;">&lt;Your own workload password for the environment&gt;</td>
+</tr>
+</tbody>
+</table>
+<ol start="4">
+<li>Once all the parameters have been created verify with the list below</li>
+</ol>
+<p align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/1.32.11.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/1.32.11.png" alt="Schema Registry Screenshot"></a>
+</p>
+
+<ol>
+<li>Click <strong>Apply Changes</strong> and then <strong>Back To Flow Designer</strong> to go back to the Flow Designer main page<strong>.</strong></li>
+</ol>
+<h3 id="33-create-controller-services"><strong>3.3 Create Controller Services</strong></h3>
+<p><em>Controller Services are extension points that provide information for use by other components (such as processors or other controller services). The idea is that, rather than configure this information in every processor that might need it, the controller service provides it for any processor to use as needed.</em></p>
+<h3 id="33-create-controller-services_1"><strong>3.3 Create Controller Services</strong></h3>
+<ol>
+<li>
+<p><strong>Enable the Test Session before configuring the services</strong></p>
+<ul>
+<li>Select <strong>Flow Options &gt; Test Session</strong>. Use the latest NiFi version (default).</li>
+<li>Click <strong>Start Test Session</strong>. Test session status changes to Initializing Test Session…</li>
+<li>Wait for the status to change to <strong>Active Test Session</strong>.</li>
+<li><em>You are not yet at the point of testing the flow, butEnabling a test session forces the Default NiFi SSL Context Service controller service to be created, which you will need in the next steps.</em>
+ <br>
+<p align="center">
+     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.3.1.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.3.1.png" alt="Test Session"></a>
+   </p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Click Flow Options &gt; Services</strong>
+ <br>
+</p><p align="center">
+     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.3.2.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.3.2.png" alt="Services Option"></a>
+   </p>
+<p></p>
+</li>
+<li>
+<p><strong>Add a new HortonworksSchemaRegistry controller service</strong>
+   - Click <strong>Add Service</strong>. The <strong>Add Service</strong> page opens.
+     </p><p align="center">
+       <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.3.3.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.3.3.png" alt="Add Service"></a>
+     </p>
+   - In the text box, filter for <strong>HortonworksSchemaRegistry</strong>, select it and click <strong>Add</strong>.
+   - Configure the HortonworksSchemaRegistry service:
+     <p align="center">
+       <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.3.4.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.3.4.png" alt="Schema Registry Properties"></a>
+     </p><p></p>
+<ul>
+<li>Service Name: <strong>WS_CDP_Schema_Registry</strong></li>
+<li>Properties:<ul>
+<li>Schema Registry URL: <code>https://#{Schema Registry Hostname}:7790/api/v1</code></li>
+<li>SSL Context Service: <strong>Default NiFi SSL Context Service</strong></li>
+<li>Kerberos Principal: <code>#{CDP Workload User}</code></li>
+<li>Kerberos Password: <code>#{CDP Workload User Password}</code>
+ <p align="center">
+   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.3.5.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.3.5.png" alt="Schema Registry Properties"></a>
+ </p></li>
+</ul>
+</li>
+<li>Click <strong>Apply</strong></li>
+<li>Activate the service by clicking on the <strong>Enable</strong> icon
+ <p align="center">
+   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.3.6.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.3.6.png" alt="Enable Service"></a>
+ </p></li>
+</ul>
+</li>
+<li>
+<p>Add a new <strong>Syslog5424Reader</strong> controller service<br>
+<br>
+</p><ol type="a">
+     <li>Click <strong>Add Service</strong>. The <strong>Add Service</strong> page opens.</li>
+     <li>In the text box, filter for <strong>Syslog5424Reader</strong>, select it and click <strong>Add</strong></li>
+     <li>Configure the Syslog5424Reader service:
+       <ol type="i">
+         <li>Service Name: <strong>WS_Syslog_5424_Reader</strong></li>
+       </ol>
+     </li>
+     <li>Click <strong>Apply</strong></li>
+     <li>Activate the service by clicking on the <strong>Enable</strong> icon</li>
+   </ol>
+<p></p>
+</li>
+<li>
+<p>Add a new <strong>JsonTreeReader</strong> controller service<br>
+<br>
+</p><ol type="a">
+     <li>Click <strong>Add Service</strong>. The <strong>Add Service</strong> page opens.</li>
+     <li>In the text box, filter for <strong>JsonTreeReader</strong>, select it and click <strong>Add</strong></li>
+     <li>Configure the JsonTreeReader service:
+       <ol type="i">
+         <li>Service Name: <strong>WS_JSON_Syslog_Reader</strong></li>
+         <li>Properties:
+           <ol>
+             <li>Schema Access Strategy: <strong>Use 'Schema Name' Property</strong></li>
+             <li>Schema Registry: <strong>WS_CDP_Schema_Registry</strong></li>
+             <li>Schema Name: <strong>#{Schema Name}</strong></li>
+           </ol>
+         </li>
+       </ol>
+     </li>
+     <li>Click <strong>Apply</strong></li>
+     <li>Activate the service by clicking on the <strong>Enable</strong> icon</li>
+   </ol>
+<p></p>
+</li>
+<li>
+<p>Add a new <strong>JsonRecordSetWriter</strong> controller service<br>
+<br>
+</p><ol type="a">
+     <li>Click <strong>Add Service</strong>. The <strong>Add Service</strong> page opens.</li>
+     <li>In the text box, filter for <strong>JsonRecordSetWriter</strong>, select it and click <strong>Add</strong></li>
+     <li>Configure the JsonRecordSetWriter service:
+       <ol type="i">
+         <li>Service Name: <strong>WS_JSON_Syslog_Writer</strong></li>
+         <li>Properties:
+           <ol>
+             <li>Schema Access Strategy: <strong>Use 'Schema Name' Property</strong></li>
+             <li>Schema Registry: <strong>WS_CDP_Schema_Registry</strong></li>
+             <li>Schema Name: <strong>#{Schema Name}</strong></li>
+           </ol>
+         </li>
+       </ol>
+     </li>
+     <li>Click <strong>Apply</strong></li>
+     <li>Activate the service by clicking on the <strong>Enable</strong> icon</li>
+   </ol>
+<p></p>
+</li>
+<li>
+<p>Add a new <strong>AvroRecordSetWriter</strong> controller service<br>
+<br>
+</p><ol type="a">
+     <li>Click <strong>Add Service</strong>. The <strong>Add Service</strong> page opens.</li>
+     <li>In the text box, filter for <strong>AvroRecordSetWriter</strong>, select it and click <strong>Add</strong></li>
+     <li>Configure the AvroRecordSetWriter service:
+       <ol type="i">
+         <li>Service Name: <strong>WS_Avro_Syslog_Writer</strong></li>
+         <li>Properties:
+           <ol>
+             <li>Schema Write Strategy: <strong>HWX Content-Encoded Schema Reference</strong></li>
+             <li>Schema Access Strategy: <strong>Use 'Schema Name' Property</strong></li>
+             <li>Schema Registry: <strong>WS_CDP_Schema_Registry</strong></li>
+             <li>Schema Name: <strong>#{Schema Name}</strong></li>
+           </ol>
+         </li>
+       </ol>
+     </li>
+     <li>Click <strong>Apply</strong></li>
+     <li>Activate the service by clicking on the
+    </li></ol>
+<p></p>
+</li>
+<li>
+<p>This completes the configuration of all the controller services. Please verify with the list below:<br>
+<br>
+</p><p align="center">
+     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.3.7.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.3.7.png" alt="Controller Services List"></a>
+   </p>
+<p></p>
+</li>
+<li>
+<p>Click on the <strong>Back to Flow Designer</strong> link to go back to the flow canvas.</p>
+</li>
+</ol>
+<h3 id="34-design-the-flow"><strong>3.4 Design the flow</strong></h3>
+<ol>
+<li>
+<p>Open the Flow Design page  </p>
+</li>
+<li>
+<p>Create the <strong>Generate Syslog RFC5424</strong> processor  </p>
+</li>
+<li>
+<p>Drag the Processor icon onto the canvas  </p>
+</li>
+</ol>
+<p align="center">
+     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.4.17.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.4.17.png" alt="Schema Registry Screenshot"></a>
+   </p>
+
+<ol>
+<li>Select the <strong>ExecuteScript</strong> processor.  </li>
+<li>
+<p>Configure the processor as follows:  </p>
+<ol>
+<li>Processor Name: <strong>Generate Syslog RFC5424</strong>  </li>
+<li>Concurrent Tasks: <strong>4</strong>  </li>
+<li>Run Schedule: <strong>1 sec</strong>  </li>
+<li>
+<p>Execution: <strong>Primary Node</strong></p>
+<p></p><p align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.4.18.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.4.18.png" alt="Schema Registry Screenshot"></a>
+</p><p></p>
+<p></p><p align="center">
+  <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.4.18.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.4.18.png" alt="Schema Registry Screenshot"></a>
+</p><p></p>
+</li>
+<li>
+<p>Properties:  </p>
+<ol>
+<li>Script Engine: <strong>python</strong>  </li>
+<li>Script Body: &lt;copy and paste the following script&gt;</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="err">##</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="err">##</span><span class="w"> </span><span class="err">Au</span><span class="kc">t</span><span class="err">hor</span><span class="p">:</span><span class="w"> </span><span class="err">Nasheb</span><span class="w"> </span><span class="err">Ismaily</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="err">##</span><span class="w"> </span><span class="err">Descrip</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="p">:</span><span class="w"> </span><span class="err">Ge</span><span class="kc">nerates</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">ra</span><span class="kc">n</span><span class="err">dom</span><span class="w"> </span><span class="err">RFC</span><span class="mi">5424</span><span class="w"> </span><span class="kc">f</span><span class="err">orma</span><span class="kc">t</span><span class="w"> </span><span class="err">syslog</span><span class="w"> </span><span class="err">message</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="err">##</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="kc">fr</span><span class="err">om</span><span class="w"> </span><span class="err">org.apache.commo</span><span class="kc">ns</span><span class="err">.io</span><span class="w"> </span><span class="err">impor</span><span class="kc">t</span><span class="w"> </span><span class="err">IOU</span><span class="kc">t</span><span class="err">ils</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="kc">fr</span><span class="err">om</span><span class="w"> </span><span class="err">java.</span><span class="kc">n</span><span class="err">io.charse</span><span class="kc">t</span><span class="w"> </span><span class="err">impor</span><span class="kc">t</span><span class="w"> </span><span class="err">S</span><span class="kc">tan</span><span class="err">dardCharse</span><span class="kc">ts</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="kc">fr</span><span class="err">om</span><span class="w"> </span><span class="err">org.apache.</span><span class="kc">n</span><span class="err">i</span><span class="kc">f</span><span class="err">i.processor.io</span><span class="w"> </span><span class="err">impor</span><span class="kc">t</span><span class="w"> </span><span class="err">Ou</span><span class="kc">t</span><span class="err">pu</span><span class="kc">t</span><span class="err">S</span><span class="kc">trea</span><span class="err">mCallback</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="err">impor</span><span class="kc">t</span><span class="w"> </span><span class="err">ra</span><span class="kc">n</span><span class="err">dom</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="kc">fr</span><span class="err">om</span><span class="w"> </span><span class="err">da</span><span class="kc">tet</span><span class="err">ime</span><span class="w"> </span><span class="err">impor</span><span class="kc">t</span><span class="w"> </span><span class="err">da</span><span class="kc">tet</span><span class="err">ime</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="err">class</span><span class="w"> </span><span class="err">PyOu</span><span class="kc">t</span><span class="err">pu</span><span class="kc">t</span><span class="err">S</span><span class="kc">trea</span><span class="err">mCallback(Ou</span><span class="kc">t</span><span class="err">pu</span><span class="kc">t</span><span class="err">S</span><span class="kc">trea</span><span class="err">mCallback)</span><span class="p">:</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="err">de</span><span class="kc">f</span><span class="w"> </span><span class="err">__i</span><span class="kc">n</span><span class="err">i</span><span class="kc">t</span><span class="err">__(sel</span><span class="kc">f</span><span class="err">)</span><span class="p">:</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">        </span><span class="err">pass</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="err">de</span><span class="kc">f</span><span class="w"> </span><span class="err">process(sel</span><span class="kc">f</span><span class="p">,</span><span class="w"> </span><span class="err">ou</span><span class="kc">t</span><span class="err">pu</span><span class="kc">t</span><span class="err">S</span><span class="kc">trea</span><span class="err">m)</span><span class="p">:</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">        </span><span class="err">hos</span><span class="kc">tna</span><span class="err">me</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="s2">"host"</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">        </span><span class="err">domai</span><span class="kc">n</span><span class="err">_</span><span class="kc">na</span><span class="err">me</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="s2">".example.com"</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">        </span><span class="kc">ta</span><span class="err">g</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"kernel"</span><span class="p">,</span><span class="w"> </span><span class="s2">"python"</span><span class="p">,</span><span class="w"> </span><span class="s2">"application"</span><span class="p">]</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">        </span><span class="err">versio</span><span class="kc">n</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="s2">"1"</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">        </span><span class="kc">n</span><span class="err">ou</span><span class="kc">ns</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="s2">"application"</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">        </span><span class="err">verbs</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">(</span><span class="s2">"started"</span><span class="p">,</span><span class="w"> </span><span class="s2">"stopped"</span><span class="p">,</span><span class="w"> </span><span class="s2">"exited"</span><span class="p">,</span><span class="w"> </span><span class="s2">"completed"</span><span class="err">)</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">        </span><span class="err">adv</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">(</span><span class="s2">"successfully"</span><span class="p">,</span><span class="w"> </span><span class="s2">"unexpectedly"</span><span class="p">,</span><span class="w"> </span><span class="s2">"cleanly"</span><span class="p">,</span><span class="w"> </span><span class="s2">"gracefully"</span><span class="err">)</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">        </span><span class="kc">f</span><span class="err">or</span><span class="w"> </span><span class="err">i</span><span class="w"> </span><span class="err">i</span><span class="kc">n</span><span class="w"> </span><span class="err">ra</span><span class="kc">n</span><span class="err">ge(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="err">)</span><span class="p">:</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">            </span><span class="err">applica</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="s2">"{0}{1}"</span><span class="err">.</span><span class="kc">f</span><span class="err">orma</span><span class="kc">t</span><span class="err">(</span><span class="kc">n</span><span class="err">ou</span><span class="kc">ns</span><span class="p">,</span><span class="w"> </span><span class="err">ra</span><span class="kc">n</span><span class="err">dom.choice(ra</span><span class="kc">n</span><span class="err">ge(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="err">)))</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">            </span><span class="err">message_id</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="s2">"ID{0}"</span><span class="err">.</span><span class="kc">f</span><span class="err">orma</span><span class="kc">t</span><span class="err">(ra</span><span class="kc">n</span><span class="err">dom.choice(ra</span><span class="kc">n</span><span class="err">ge(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="err">)))</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">            </span><span class="err">ra</span><span class="kc">n</span><span class="err">dom_</span><span class="kc">ta</span><span class="err">g</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">ra</span><span class="kc">n</span><span class="err">dom.choice(</span><span class="kc">ta</span><span class="err">g)</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">            </span><span class="err">s</span><span class="kc">tru</span><span class="err">c</span><span class="kc">ture</span><span class="err">d_da</span><span class="kc">ta</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="s2">"[SDID iut=\"{0}\" eventSource=\"{1}\" eventId=\"{2}\"]"</span><span class="err">.</span><span class="kc">f</span><span class="err">orma</span><span class="kc">t</span><span class="err">(ra</span><span class="kc">n</span><span class="err">dom.choice(ra</span><span class="kc">n</span><span class="err">ge(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="err">))</span><span class="p">,</span><span class="w"> </span><span class="err">ra</span><span class="kc">n</span><span class="err">dom_</span><span class="kc">ta</span><span class="err">g</span><span class="p">,</span><span class="w"> </span><span class="err">ra</span><span class="kc">n</span><span class="err">dom.choice(ra</span><span class="kc">n</span><span class="err">ge(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="err">)))</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">            </span><span class="kc">t</span><span class="err">ime_ou</span><span class="kc">t</span><span class="err">pu</span><span class="kc">t</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">da</span><span class="kc">tet</span><span class="err">ime.u</span><span class="kc">t</span><span class="err">c</span><span class="kc">n</span><span class="err">ow().s</span><span class="kc">trft</span><span class="err">ime('%Y</span><span class="mi">-</span><span class="err">%m</span><span class="mi">-</span><span class="err">%dT%H</span><span class="p">:</span><span class="err">%M</span><span class="p">:</span><span class="err">%S.%</span><span class="kc">f</span><span class="err">')</span><span class="p">[:</span><span class="mi">-3</span><span class="p">]</span><span class="w"> </span><span class="err">+</span><span class="w"> </span><span class="err">'Z'</span>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="w">            </span><span class="err">ra</span><span class="kc">n</span><span class="err">dom_hos</span><span class="kc">t</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">ra</span><span class="kc">n</span><span class="err">dom.choice(ra</span><span class="kc">n</span><span class="err">ge(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="err">))</span>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">            </span><span class="kc">f</span><span class="err">qd</span><span class="kc">n</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="s2">"{0}{1}{2}"</span><span class="err">.</span><span class="kc">f</span><span class="err">orma</span><span class="kc">t</span><span class="err">(hos</span><span class="kc">tna</span><span class="err">me</span><span class="p">,</span><span class="w"> </span><span class="err">ra</span><span class="kc">n</span><span class="err">dom_hos</span><span class="kc">t</span><span class="p">,</span><span class="w"> </span><span class="err">domai</span><span class="kc">n</span><span class="err">_</span><span class="kc">na</span><span class="err">me)</span>
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">            </span><span class="err">ra</span><span class="kc">n</span><span class="err">dom_pid</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">ra</span><span class="kc">n</span><span class="err">dom.choice(ra</span><span class="kc">n</span><span class="err">ge(</span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="mi">9999</span><span class="err">))</span>
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="w">            </span><span class="err">priori</span><span class="kc">t</span><span class="err">y</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">ra</span><span class="kc">n</span><span class="err">dom.choice(ra</span><span class="kc">n</span><span class="err">ge(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">191</span><span class="err">))</span>
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="w">            </span><span class="kc">nu</span><span class="err">m</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">ra</span><span class="kc">n</span><span class="err">dom.ra</span><span class="kc">n</span><span class="err">dra</span><span class="kc">n</span><span class="err">ge(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="err">)</span>
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="w">            </span><span class="err">ra</span><span class="kc">n</span><span class="err">dom_message</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">applica</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="w"> </span><span class="err">+</span><span class="w"> </span><span class="err">'</span><span class="w"> </span><span class="err">has</span><span class="w"> </span><span class="err">'</span><span class="w"> </span><span class="err">+</span><span class="w"> </span><span class="err">verbs</span><span class="p">[</span><span class="kc">nu</span><span class="err">m</span><span class="p">]</span><span class="w"> </span><span class="err">+</span><span class="w"> </span><span class="err">'</span><span class="w"> </span><span class="err">'</span><span class="w"> </span><span class="err">+</span><span class="w"> </span><span class="err">adv</span><span class="p">[</span><span class="kc">nu</span><span class="err">m</span><span class="p">]</span>
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="w">            </span><span class="err">syslog_ou</span><span class="kc">t</span><span class="err">pu</span><span class="kc">t</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">(</span><span class="s2">"&lt;{0}&gt;{1} {2} {3} {4} {5} {6} {7} {8}\n"</span><span class="err">.</span><span class="kc">f</span><span class="err">orma</span><span class="kc">t</span><span class="err">(priori</span><span class="kc">t</span><span class="err">y</span><span class="p">,</span><span class="w"> </span><span class="err">versio</span><span class="kc">n</span><span class="p">,</span><span class="w"> </span><span class="kc">t</span><span class="err">ime_ou</span><span class="kc">t</span><span class="err">pu</span><span class="kc">t</span><span class="p">,</span><span class="w"> </span><span class="kc">f</span><span class="err">qd</span><span class="kc">n</span><span class="p">,</span><span class="w"> </span><span class="err">applica</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="p">,</span><span class="err">ra</span><span class="kc">n</span><span class="err">dom_pid</span><span class="p">,</span><span class="w"> </span><span class="err">message_id</span><span class="p">,</span><span class="err">s</span><span class="kc">tru</span><span class="err">c</span><span class="kc">ture</span><span class="err">d_da</span><span class="kc">ta</span><span class="p">,</span><span class="w"> </span><span class="err">ra</span><span class="kc">n</span><span class="err">dom_message))</span>
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="w">            </span><span class="err">ou</span><span class="kc">t</span><span class="err">pu</span><span class="kc">t</span><span class="err">S</span><span class="kc">trea</span><span class="err">m.wri</span><span class="kc">te</span><span class="err">(by</span><span class="kc">tearra</span><span class="err">y(syslog_ou</span><span class="kc">t</span><span class="err">pu</span><span class="kc">t</span><span class="err">.e</span><span class="kc">n</span><span class="err">code('u</span><span class="kc">tf</span><span class="mi">-8</span><span class="err">')))</span>
+</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>
+</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="kc">fl</span><span class="err">owFile</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">sessio</span><span class="kc">n</span><span class="err">.crea</span><span class="kc">te</span><span class="err">()</span>
+</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="err">i</span><span class="kc">f</span><span class="w"> </span><span class="err">(</span><span class="kc">fl</span><span class="err">owFile</span><span class="w"> </span><span class="err">!=</span><span class="w"> </span><span class="err">No</span><span class="kc">ne</span><span class="err">)</span><span class="p">:</span>
+</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="w">    </span><span class="kc">fl</span><span class="err">owFile</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">sessio</span><span class="kc">n</span><span class="err">.wri</span><span class="kc">te</span><span class="err">(</span><span class="kc">fl</span><span class="err">owFile</span><span class="p">,</span><span class="w"> </span><span class="err">PyOu</span><span class="kc">t</span><span class="err">pu</span><span class="kc">t</span><span class="err">S</span><span class="kc">trea</span><span class="err">mCallback())</span>
+</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="w">    </span><span class="err">sessio</span><span class="kc">n</span><span class="err">.</span><span class="kc">transfer</span><span class="err">(</span><span class="kc">fl</span><span class="err">owFile</span><span class="p">,</span><span class="w"> </span><span class="err">REL_SUCCESS)</span>
+</span></code></pre></div>
+<ol start="6">
+<li>
+<p>Relationships: check <strong>Terminate</strong> for the <strong>failure</strong> relationship<br>
+    </p><p align="center">
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.4.19.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.4.19.png" alt="Schema Registry Screenshot"></a>
+    </p><p></p>
+</li>
+<li>
+<p>Click <strong>Apply</strong>  </p>
+<p></p><p align="center">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.4.20.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.4.20.png" alt="Schema Registry Screenshot"></a>
+</p><p></p>
+</li>
+<li>
+<p>Create the <strong>Filter Events</strong> processor  </p>
+</li>
+<li>
+<p>Drag the Processor icon onto the canvas  </p>
+</li>
+<li>Select the <strong>QueryRecord</strong> processor.  </li>
+<li>
+<p>Configure the processor as follows:  </p>
+<ol>
+<li>Processor Name: <strong>Filter Events</strong>  </li>
+<li>Properties:  <ol>
+<li>Record Reader: <strong>WS_Syslog_5424_Reader</strong>  </li>
+<li>Record Writer: <strong>WS_JSON_Syslog_Writer</strong>  </li>
+</ol>
+</li>
+<li>Click on the <strong>Add Property</strong> button to add a new property:  <ol>
+<li>Property Name: <strong>filtered_event</strong>  </li>
+<li>Property Value: <strong>#{Filter Rule}</strong>  </li>
+</ol>
+</li>
+<li>Relationships: check <strong>Terminate</strong> for the <strong>failure</strong> and <strong>original</strong> relationships<br>
+        <p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.4.21.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.4.21.png" alt="Schema Registry Screenshot"></a></p></li>
+</ol>
+</li>
+<li>
+<p>Click <strong>Apply</strong>  </p>
+<p></p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.4.22.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.4.22.png" alt="Schema Registry Screenshot"></a></p><p></p>
+</li>
+<li>
+<p>Create the <strong>Write To Kafka - Avro</strong> processor  </p>
+</li>
+<li>
+<p>Drag the Processor icon onto the canvas  </p>
+</li>
+<li>Select the <strong>PublishKafka2RecordCDP</strong> processor.  </li>
+<li>Configure the processor as follows:  <ol>
+<li>Processor Name: <strong>Write To Kafka - Avro</strong>  </li>
+<li>Properties:  <ol>
+<li>Kafka Brokers: <strong>#{Kafka Broker Endpoint}</strong>  </li>
+<li>Topic Name: <strong>#{Kafka Destination Avro Topic}</strong>  </li>
+<li>Record Reader: <strong>WS_JSON_Syslog_Reader</strong>  </li>
+<li>Record Writer: <strong>WS_Avro_Syslog_Writer</strong>   </li>
+<li>Use Transactions: <strong>false</strong>  </li>
+<li>Security Protocol: <strong>SASL_SSL</strong>  </li>
+<li>SASL Mechanism: <strong>PLAIN</strong>  </li>
+<li>Username: <strong>#{CDP Workload User}</strong>   </li>
+<li>Password: <strong>#{CDP Workload User Password}</strong>   </li>
+<li>SSL Context Service: <strong>Default NiFi SSL Context Service</strong>  </li>
+<li>To set a specific id for the producer, click on the <strong>Add Property</strong> button to add a property, call it <strong>client.id</strong> and set the value to <strong>#{Kafka Producer ID}</strong>  </li>
+</ol>
+</li>
+<li>Relationships: check <strong>Terminate</strong> for the <strong>success</strong> relationship  </li>
+</ol>
+</li>
+<li>
+<p>Click <strong>Apply</strong>  </p>
+<p></p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.4.23.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.4.23.png" alt="Schema Registry Screenshot"></a></p><p></p>
+</li>
+<li>
+<p>Create the <strong>Write To Kafka - JSON</strong> processor  </p>
+</li>
+<li>
+<p>Drag the Processor icon onto the canvas  </p>
+</li>
+<li>Select the <strong>PublishKafka2RecordCDP</strong> processor.  </li>
+<li>Configure the processor as follows:  <ol>
+<li>Processor Name: <strong>Write To Kafka - JSON</strong>  </li>
+<li>Properties:  <ol>
+<li>Kafka Brokers: <strong>#{Kafka Broker Endpoint}</strong>  </li>
+<li>Topic Name: <strong>#{Kafka Destination JSON Topic}</strong>  </li>
+<li>Record Reader: <strong>WS_JSON_Syslog_Reader</strong>  </li>
+<li>Record Writer: <strong>WS_JSON_Syslog_Writer</strong>   </li>
+<li>Use Transactions: <strong>false</strong>  </li>
+<li>Security Protocol: <strong>SASL_SSL</strong>  </li>
+<li>SASL Mechanism: <strong>PLAIN</strong>  </li>
+<li>Username: <strong>#{CDP Workload User}</strong>   </li>
+<li>Password: <strong>#{CDP Workload User Password}</strong>   </li>
+<li>SSL Context Service: <strong>Default NiFi SSL Context Service</strong>  </li>
+<li>To set a specific id for the producer, click on the <strong>Add Property</strong> button to add a property, call it <strong>client.id</strong> and set the value to <strong>#{Kafka Producer ID}</strong>  </li>
+</ol>
+</li>
+<li>Relationships: check <strong>Terminate</strong> for the <strong>success</strong> relationship  </li>
+</ol>
+</li>
+<li>
+<p>Click <strong>Apply</strong></p>
+<p></p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.4.23.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.4.23.png" alt="Schema Registry Screenshot"></a></p><p></p>
+</li>
+<li>
+<p>Connect the processors as shown in the diagram below:</p>
+</li>
+</ol>
+<ul>
+<li>Connect the Processors <strong>Generate Syslog RFC5424</strong> &amp; <strong>Filter Events</strong> for Relationship <strong>success</strong>  </li>
+<li>Connect Processors <strong>Filter Events</strong> &amp; <strong>Write To Kafka - Avro</strong> for Relationship <strong>filtered_events</strong>  </li>
+<li>Connect Processors <strong>Filter Events</strong> &amp; <strong>Write To Kafka - JSON</strong> for Relationship <strong>filtered_events</strong>  </li>
+<li>
+<p>Connect <strong>Write To Kafka</strong> to itself to retry for <strong>failures</strong></p>
+<p></p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.4.24.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.4.24.png" alt="Schema Registry Screenshot"></a></p><p></p>
+</li>
+</ul>
+<h3 id="35-naming-the-queues"><strong>3.5 Naming the queues</strong></h3>
+<p>Providing unique names to all queues is important when creating flows in CDP-PC. The queue names are used to define Key Performance Indicators and having unique names for them make it easier to understand and create CDF-PC dashboards.</p>
+<p>To name a queue, double-click the queue and give it a unique name. The best practice here is to start with the existing queue name (i.e. success, failure, retry, etc…) and, if that name is not unique, add the source and destination processor to the name.</p>
+<p>For example:</p>
+<ul>
+<li>The <strong>success</strong> queue between <strong>Generate Flow File</strong> and <strong>Filter Events</strong> should be named   </li>
+<li>The <strong>success</strong> queue between <strong>Filter Events</strong> and <strong>Write To Kafka</strong> should be named <strong>filtered_event_Filter-WriteToKafka</strong>  </li>
+<li>
+<p>The <strong>failure</strong> retry queue from <strong>Write To Kafka</strong> to itself should be named <strong>failure_WriteToKafka</strong></p>
+<p></p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.4.26.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.4.26.png" alt="Schema Registry Screenshot"></a></p><p></p>
+</li>
+</ul>
+<h2 id="4-interactively-test-the-flow"><strong>4. Interactively test the flow</strong></h2>
+<p>Test sessions are a feature in the CDF Flow Designer that allow you to start/stop processors and work with live data to validate your data flow logic. </p>
+<p>To test your draft flow, start a Test Session by clicking <strong>Flow Options &gt; Test Session &gt; Start Test Session</strong>. This launches a NiFi sandbox to enable you to validate your draft flow and interactively work with live data by starting and stopping components.</p>
+<p><strong>Tip:</strong> You can check the status of your Test Session in the upper right corner of your workspace. That is where you can also deactivate your Test Session.  </p>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/4.27.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/4.27.png" alt="Schema Registry Screenshot"></a></p>
+
+<ol>
+<li>If your test session is not yet started, start one by clicking on <strong>Flow Options &gt; Test Session &gt; Start</strong>.</li>
+</ol>
+<p><strong>Note:</strong> If you had previously started and stopped a test session, the <strong>Start</strong> button is replaced with the <strong>Restart</strong> button. Clicking on <strong>Restart</strong> restarts the session with the same settings used previously. If you want to change the settings, click on the <strong>Edit Settings</strong> button.</p>
+<ol start="2">
+<li>
+<p>Click <strong>Start Test Session</strong> (accept all defaults). Test session status changes to <strong>Initializing Test Session…</strong></p>
+</li>
+<li>
+<p>Wait for the status to change to <strong>Active Test Session</strong>.</p>
+</li>
+<li>
+<p>Click <strong>Flow Options &gt; Services</strong> to enable Controller Services, if not already enabled. </p>
+</li>
+<li>
+<p>Start all processors that are not running.</p>
+</li>
+</ol>
+<p>Stopped processors are identified by the icon <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/4.28.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/4.28.png" alt="Schema Registry Screenshot" style="vertical-align:middle; width:40px; height:36px;"></a>. Right-click on a stopped processor and select <strong>Start</strong> to start it.</p>
+<p>The flow starts executing. On the Flow Design Canvas you can observe statistics on your processors change as they consume data and execute their respective tasks. </p>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/4.29.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/4.29.png" alt="Schema Registry Screenshot"></a></p>
+
+<p>You should see the flow running successfully and writing records to Kafka.</p>
+<ol start="6">
+<li>Access the SMM UI from the Streams Messaging DataHub page and check the topic metrics and data:  </li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/4.30.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/4.30.png" alt="Schema Registry Screenshot"></a></p>
+
+<p>Here are the topic metrics:  </p>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/4.31.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/4.31.png" alt="Schema Registry Screenshot"></a></p>
+
+<p>You can also view the data from the data explorer:</p>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/4.32.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/4.32.png" alt="Schema Registry Screenshot"></a></p>
+
+<ol start="7">
+<li>You can see that the data in that topic is binary (lots of garbage-like characters on the screen. This is because the topic contains Avro messages, which is a binary serialization format.)</li>
+</ol>
+<p>Fortunately, SMM is integrated to Schema Registry and can fetch the correct schema to properly deserialize the data and present a human-readable form of it.</p>
+<p>To do that select <strong>Avro</strong> as the <strong>Values</strong> Deserializer for the topic:<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/4.33.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/4.33.png" alt="Schema Registry Screenshot"></a></p>
+<p></p>
+<p>You will notice that after Avro is selected the messages are shown with a readable JSON encoding:<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/4.34.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/4.34.png" alt="Schema Registry Screenshot"></a></p>
+<p></p>
+<h2 id="5-version-control-the-flow-into-the-dataflow-catalog"><strong>5. Version Control the flow into the DataFlow Catalog</strong></h2>
+<p>When your flow draft has been tested and is ready to be used you can publish it to the DataFlow Catalog so that you can deploy it from there.</p>
+<p>On the first time a flow draft is exported to the catalog you are asked to provide a name for the flow. This name must be unique and must not already exist in the catalog. After a flow is published, subsequent changes that are published will be saved in the catalog as new versions using the same name provided the first time. This name cannot be changed.</p>
+<p>When you want to publish a draft flow as a flow definition, you have two options: </p>
+<ul>
+<li>On the Flow Design Canvas, click Flow Options &gt; Publish To Catalog &gt; Publish Flow.<br>
+<br>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/5.35.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/5.35.png" alt="Schema Registry Screenshot"></a></p></li>
+</ul>
+<p><strong>OR</strong><br>
+<em> Click on </em><em>Flow Design</em><em> (left-hand side) to see the </em><em>All Flows</em><em> page, which lists all the flows. Then click on the <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/5.36.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/5.36.png" alt="Schema Registry Screenshot" style="vertical-align:middle; width:40px; height:24px;"></a>menu for the flow you want to publish and select </em><em>View Flow Workspace</em>*.<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/5.37.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/5.37.png" alt="Schema Registry Screenshot"></a></p>
+<p></p>
+<p>This will take you to the list of all flows running on the same environment (workspace) as the flow you selected. To publish the flow, Workspace view, click again on the <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/5.36.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/5.36.png" alt="Schema Registry Screenshot" style="vertical-align:middle; width:40px; height:24px;"></a> menu for the desired flow and select <strong>Publish Flow</strong>. <br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/5.38.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/5.38.png" alt="Schema Registry Screenshot"></a></p>
+<p></p>
+<ol>
+<li>Choose one of the methods explained above and publish your flow.  </li>
+<li>In the Publish Flow dialog box, enter the following details:  </li>
+<li>Flow Name: only when you publish your flow for the first time.  </li>
+<li>Flow Description: only when you publish your flow for the first time.  </li>
+<li>Version Comments: every time a flow version is published.  </li>
+<li>Click <strong>Publish</strong>.  </li>
+<li>Click on <strong>Catalog</strong> and verify that your flow was successfully published.  </li>
+<li>Make a simple change to your flow (e.g move processors to different positions)  </li>
+<li>Publish your flow again.  </li>
+<li>Check that your flow in the Catalog has multiple versions now.</li>
+</ol>
+<h2 id="6-deploy-the-flow-in-production"><strong>6. Deploy the flow in Production</strong></h2>
+<ol>
+<li>Search for the flow in the Flow Catalog<br>
+<br>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/6.39.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/6.39.png" alt="Schema Registry Screenshot"></a></p></li>
+</ol>
+<p>2. Click on the Flow to see its details, including the list of versions:<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/6.40.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/6.40.png" alt="Schema Registry Screenshot"></a></p><p></p>
+<p>3. Click on <strong>Version 1</strong>, you should see a <strong>Deploy</strong> Option appear shortly. Then click on <strong>Deploy</strong>.<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/6.41.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/6.41.png" alt="Schema Registry Screenshot"></a></p><p></p>
+<p>4. Select the CDP environment where this flow will be deployed and click <strong>Continue</strong><br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/6.42.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/6.42.png" alt="Schema Registry Screenshot"></a></p><p></p>
+<p>5. Give the deployment a unique name (e.g <strong>\&lt;userid&gt;-syslog-to-kafka-001</strong>), then click <strong>Next</strong><br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/6.43.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/6.43.png" alt="Schema Registry Screenshot"></a></p><p></p>
+<p>6. In the <strong>NiFi Configuration</strong> page, accept all the defaults (runtime version, autostart behavior, inbound connections and custom NAR) and click <strong>Next</strong>.<br>
+7. In the <strong>Parameters</strong> page, provide the correct values for the parameter for the production run and then click <strong>Next</strong>. Most of the parameters already have good defaults and you only need to change them if needed. However, you must re-enter the <strong>CDP Workload User Password</strong>.<br>
+<em> CDP Workload User: The workload username for the current user<br>
+</em> CDP Workload Password: The workload password for the current user<br>
+<em> Kafka Broker Endpoint: A comma separated list of Kafka Brokers. <br>
+</em> Kafka Destination Avro Topic: <strong>\&lt;userid&gt;-syslog-avro</strong><br>
+<em> Kafka Destination JSON Topic: </em><em>\&lt;userid&gt;-syslog-json</em><em><br>
+</em> Kafka Producer ID: <strong>\&lt;userid&gt;-producer</strong><br>
+<em> Schema Name: </em><em>\&lt;userid&gt;-syslog-avro</em><em><br>
+</em> Schema Registry Hostname: The hostname of the master server in the Kafka Datahub.<br>
+<em> Filter Rule: </em><em>SELECT * FROM FLOWFILE</em>*  </p>
+<ol start="8">
+<li>In the <strong>Sizing &amp; Scaling</strong>, select the following and then click <strong>Next</strong>:<br>
+<em> Size: </em><em>Extra Small</em><em><br>
+</em> Enable Auto Scaling: <strong>True</strong><br>
+<em> Min Nodes: </em><em>1</em><em><br>
+</em> Max Nodes: <strong>3</strong><br>
+<br>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/6.44.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/6.44.png" alt="Schema Registry Screenshot"></a></p></li>
+</ol>
+<p>9. In the Key Performance Indicators page, click on Add New KPI to add the following KPIs.</p>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/6.45.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/6.45.png" alt="Schema Registry Screenshot"></a></p>
+
+<ol>
+<li>
+<p>Add the following KPI<br>
+<em> KPI Scope: </em><em>Connection</em><em><br>
+</em> Connection Name: <strong>failure_WriteToKafka</strong><br>
+<em> Metrics to Track: </em><em>Bytes Queued</em><em><br>
+</em> Alerts:<br>
+  * Trigger alert when metric is greater than: <strong>1 MB</strong><br>
+  * Alert will be triggered when metrics is outside the boundary(s) for: <strong>30 seconds</strong></p>
+<p></p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/6.46.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/6.46.png" alt="Schema Registry Screenshot"></a></p><p></p>
+</li>
+<li>
+<p>Add the following KPI<br>
+<em> KPI Scope: </em><em>Connection</em><em><br>
+</em> Connection Name: <strong>filtered_event_Filter-WriteToKafka</strong><br>
+<em> Metrics to Track: </em><em>Bytes Queued</em><em><br>
+</em> Alerts:<br>
+  * Trigger alert when metric is greater than: <strong>10 KB</strong><br>
+  * Alert will be triggered when metrics is outside the boundary(s) for: <strong>30 seconds</strong></p>
+<p></p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/6.47.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/6.47.png" alt="Schema Registry Screenshot"></a></p><p></p>
+</li>
+<li>
+<p>Review the KPIs and click <strong>Next</strong>.<br>
+    </p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/6.48.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/6.48.png" alt="Schema Registry Screenshot"></a></p>  <p></p>
+</li>
+<li>
+<p>In the <strong>Review</strong> page, review your deployment details.</p>
+<p>Notice that in this page there's a <strong>&gt;_ View CLI Command</strong> link. You will use the information in the page in the next section to deploy a flow using the CLI. For now you just need to save the script and dependencies provided there:</p>
+<ol>
+<li>Click on the <strong>&gt;_ View CLI Command</strong> link and familiarize yourself with the content.  </li>
+<li>Download the 2 JSON dependency files by click on the download button:  </li>
+<li>Flow Deployment Parameters JSON  </li>
+<li>Flow Deployment KPIs JSON  </li>
+<li>Copy the command at the end of this page and save that in a file called <strong>deploy.sh</strong>  </li>
+<li>Close the <strong>Equivalent CDP CLI Command</strong> tab.</li>
+</ol>
+</li>
+<li>
+<p>Click Deploy to initiate the flow deployment.  </p>
+</li>
+<li>
+<p>In the DataFlow <strong>Dashboard,</strong> monitor your flow until it's running successfully (a green check mark will appear once the deployment has completed)<br>
+    </p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/6.50.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/6.50.png" alt="Schema Registry Screenshot"></a>&lt;/p</p>
+</li>
+<li>
+<p>Click on your deployment and explore the flow details and monitor the KPI metrics that are shown on this page.  </p>
+</li>
+<li>
+<p>Then click on <strong>Manage Deployment</strong> and explore the options under Deployment Settings, which allow you to manage your production flow deployment.  </p>
+</li>
+<li>
+<p>Explore the links in the <strong>Actions</strong> menu on this page.</p>
+</li>
+</ol>
+<h2 id="7-deploy-the-flow-using-cli"><strong>7. Deploy the Flow using CLI</strong></h2>
+<p>In this section you will use the CDP CLI to deploy a flow in Cloudera DataFlow. For this you will use the following files created in the last section:</p>
+<ul>
+<li><strong>deploy.sh</strong>: file created with the CLI command copied from the CLI Command page.  </li>
+<li><strong>\&lt;deployment_name&gt;-parameter-groups.json</strong>: file downloaded from the CLI Command page, containing the parameter definitions for the deployment  </li>
+<li><strong>\&lt;deployment_name&gt;-kpis.json</strong>: file downloaded from the CLI Command page, containing the KPI definitions for the deployment</li>
+</ul>
+<ol>
+<li>If you don't have the CDP CLI installed on your laptop, follow the <a href="https://docs.cloudera.com/cdp-public-cloud/cloud/cli/topics/mc-cli-client-setup.html">documentation</a> to install and configure it.  </li>
+<li>To test that the CDP CLI is working properly, execute the command below. If the command executes successfully, it will show the details of your CDP account:  </li>
+</ol>
+<p>cdp iam get-user</p>
+<p>The output should be a JSON like the one below:<br>
+</p><div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="w">   </span><span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">       </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">           </span><span class="nt">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">           </span><span class="nt">"crn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">           </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">           </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">           </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">           </span><span class="nt">"creationDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">           </span><span class="nt">"accountAdmin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">           </span><span class="nt">"identityProviderCrn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">           </span><span class="nt">"lastInteractiveLogin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">           </span><span class="nt">"workloadUsername"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">           </span><span class="nt">"workloadPasswordDetails"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">               </span><span class="nt">"isPasswordSet"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">           </span><span class="p">}</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">       </span><span class="p">}</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">   </span><span class="p">}</span>
+</span></code></pre></div><p></p>
+<ol start="3">
+<li>Edit the <strong>deploy.sh</strong> file and modify the details for the following parameters:  </li>
+<li><strong>--deployment-name</strong>: change the deployment name to something unique. Since you already deployed this flow from the UI you already have a deployment with the name in this file.  </li>
+<li>
+<p><strong>--parameter-groups</strong>: replace the \&lt;\&lt;PATH_TO_UPDATE&gt;&gt; string with the full path of the parameter group definition file. E.g.:<br>
+</p><div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="w">      </span><span class="kc">f</span><span class="err">ile</span><span class="p">:</span><span class="c1">///Users/rbearden/Downloads/syslog001-parameter-groups.json</span>
+</span></code></pre></div><p></p>
+</li>
+<li>
+<p><strong>--kpis</strong>: replace the \&lt;\&lt;PATH_TO_UPDATE&gt;&gt; string with the full path of the KPI definition file. E.g.:<br>
+</p><div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w">      </span><span class="kc">f</span><span class="err">ile</span><span class="p">:</span><span class="c1">///Users/rbearden/Downloads/syslog001-kpis.json</span>
+</span></code></pre></div><p></p>
+</li>
+<li>
+<p>Edit the <strong>\&lt;deployment_name&gt;-parameter-groups.json</strong> file and replace the <strong>\&lt;\&lt;CDP_MISSING_SENSITIVE_VALUE&gt;&gt;</strong> string with the proper value for the corresponding parameter(s).</p>
+</li>
+</ol>
+<p>You can also change values of other parameters if wanted/needed.  </p>
+<ol start="2">
+<li>
+<p>Execute the deploy.sh script to create the new flow deployment:<br>
+</p><div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="w">   </span><span class="err">bash</span><span class="w"> </span><span class="err">deploy.sh</span>
+</span></code></pre></div><p></p>
+</li>
+<li>
+<p>Go to the Cloudera DataFlow Dashboard, monitor the flow deployment and verify that the deployment completes successfully.</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../../index.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../lab2/index.html" class="md-footer__link md-footer__link--next" aria-label="Next: Lab 2 - Streaming Analytics with Stream Processing">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Lab 2 - Streaming Analytics with Stream Processing
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2026 Cloudera Inc. All rights reserved.<br><a href="https://www.cloudera.com/legal/terms-and-conditions.html" target="_blank">Terms &amp; Conditions | </a>  <a href="https://www.cloudera.com/legal/policies.html" target="_blank"> Privacy Policy and Data Policy</a>
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.annotate", "content.code.copy", "navigation.footer", "navigation.top"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

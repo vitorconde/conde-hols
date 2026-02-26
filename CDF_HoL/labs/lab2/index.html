@@ -1,0 +1,1620 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="GOES">
+      
+      
+      
+        <link rel="prev" href="../lab1/index.html">
+      
+      
+        <link rel="next" href="../lab3/index.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>Lab 2 - Streaming Analytics with Stream Processing - Cloudera DataFlow - Hands on Labs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#module-2-streaming-analytics-with-cloudera-stream-processing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="Cloudera DataFlow - Hands on Labs" class="md-header__button md-logo" aria-label="Cloudera DataFlow - Hands on Labs" data-md-component="logo">
+      
+  <img src="../../assets/images/logo-cloudera-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Cloudera DataFlow - Hands on Labs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lab 2 - Streaming Analytics with Stream Processing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.infra.cloudera.com/GOES/hol-001-cdf" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GOES/hol-001-cdf
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="Cloudera DataFlow - Hands on Labs" class="md-nav__button md-logo" aria-label="Cloudera DataFlow - Hands on Labs" data-md-component="logo">
+      
+  <img src="../../assets/images/logo-cloudera-white.svg" alt="logo">
+
+    </a>
+    Cloudera DataFlow - Hands on Labs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.infra.cloudera.com/GOES/hol-001-cdf" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GOES/hol-001-cdf
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Labs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Labs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab1/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 1 - Data Distribution with Cloudera DataFlow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 2 - Streaming Analytics with Stream Processing
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="index.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 2 - Streaming Analytics with Stream Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-inspect-kafka-topics-in-smm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Inspect Kafka topics in SMM
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-create-a-project-in-ssb-and-configure-github-repo-for-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Create a Project in SSB and configure GitHub repo for it
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-register-a-kafka-data-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Register a Kafka Data Source
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-register-a-schema-registry-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Register a Schema Registry catalog
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-register-a-kudu-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Register a Kudu catalog
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-create-a-kafka-table-manually" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Create a Kafka Table manually
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-unlock-your-keytab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Unlock your keytab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-create-streaming-sql-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Create Streaming SQL jobs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Create Streaming SQL jobs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-job-1-selecting-records-from-a-kafka-virtual-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. Job 1: Selecting records from a Kafka virtual table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-job-2-selecting-records-from-a-schema-registry-virtual-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. Job 2: Selecting records from a Schema Registry virtual table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-job-3-using-a-windowing-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. Job 3: Using a windowing function
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-job-4-enriching-streaming-data-with-data-at-rest-data-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4. Job 4: Enriching streaming data with data-at-rest data sources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-create-a-production-job-sending-data-to-kafka" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Create a Production job sending data to Kafka
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-versioning-your-project-changes-into-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Versioning your project changes into GitHub
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-troubleshooting-flinkssb-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Troubleshooting Flink/SSB jobs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Common issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab3/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 3 - Deploy a DataFlow Function
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab4/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 4 - CDC with Kafka Connect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-inspect-kafka-topics-in-smm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Inspect Kafka topics in SMM
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-create-a-project-in-ssb-and-configure-github-repo-for-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Create a Project in SSB and configure GitHub repo for it
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-register-a-kafka-data-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Register a Kafka Data Source
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-register-a-schema-registry-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Register a Schema Registry catalog
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-register-a-kudu-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Register a Kudu catalog
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-create-a-kafka-table-manually" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Create a Kafka Table manually
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-unlock-your-keytab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Unlock your keytab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-create-streaming-sql-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Create Streaming SQL jobs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Create Streaming SQL jobs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-job-1-selecting-records-from-a-kafka-virtual-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. Job 1: Selecting records from a Kafka virtual table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-job-2-selecting-records-from-a-schema-registry-virtual-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. Job 2: Selecting records from a Schema Registry virtual table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-job-3-using-a-windowing-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. Job 3: Using a windowing function
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-job-4-enriching-streaming-data-with-data-at-rest-data-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4. Job 4: Enriching streaming data with data-at-rest data sources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-create-a-production-job-sending-data-to-kafka" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Create a Production job sending data to Kafka
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-versioning-your-project-changes-into-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Versioning your project changes into GitHub
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-troubleshooting-flinkssb-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Troubleshooting Flink/SSB jobs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Common issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="module-2-streaming-analytics-with-cloudera-stream-processing"><strong>Module 2 - Streaming Analytics with Cloudera Stream Processing</strong></h1>
+<h2 id="1-overview"><strong>1. Overview</strong></h2>
+<p>In this module you will practice the streaming analytic capabilities of Cloudera Stream Processing using SQL Stream Builder to develop and deploy a real-time streaming job in production. You will leverage the NiFi Flow deployed in CDF-PC from the previous workshop and demonstrate how to query live data and subsequently sink it to another location. You will learn to:</p>
+<ul>
+<li>Use Stream Messaging Manager to inspect Kafka topics.  </li>
+<li>Create a Project in SQL Stream Builder (SSB).  </li>
+<li>Register Schema Registry and Kudu Catalogs in SSB.  </li>
+<li>Create Virtual Tables in SSB.  </li>
+<li>Create and execute Jobs in SSB.</li>
+</ul>
+<h2 id="2-inspect-kafka-topics-in-smm"><strong>2. Inspect Kafka topics in SMM</strong></h2>
+<p>Use SMM to to show the kafka topics <strong><userid>-syslog-avro</userid></strong> that is being written to from the NiFi flow in module 1</p>
+<ol>
+<li>Login to <strong>SMM</strong>.  </li>
+<li>
+<p>Click on the <strong>Topics icon</strong> <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.50.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.50.png" alt="SMM Topics icon and syslog-avro topic" style="vertical-align:middle; width:40px; height:36px;"></a></p>
+</li>
+<li>
+<p>and filter the topic <strong><userid>-syslog-avro</userid></strong>, which was created by the NiFi flow in Module 1<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.51.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.51.png" alt="Profile icon for syslog-avro topic"></a></p>
+<p></p>
+</li>
+<li>
+<p>Click on the <strong>Profile</strong> icon for the topic, as shown below:<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.52.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.52.png" alt="Data Explorer tab for topic"></a></p>
+<p></p>
+</li>
+<li>
+<p>On the Topic page, click on the <strong>DATA EXPLORER</strong> tab:<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.53.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.53.png" alt="Binary data in Data Explorer"></a></p>
+<p></p>
+</li>
+<li>
+<p>Use the Data Explorer tool for the Avro topic and verify that the data is binary. Change the Value Deserializer to <strong>Avro</strong> to use the Schema Registry integration and verify that the data was deserialized correctly:<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.54.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.54.png" alt="Binary data in Data Explorer"></a></p><p></p>
+</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.55.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.55.png" alt="Change Value Deserializer to Avro"></a></p>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.56.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.56.png" alt="Deserialized Avro data"></a></p>
+
+<h2 id="3-create-a-project-in-ssb-and-configure-github-repo-for-it"><strong>3. Create a Project in SSB and configure GitHub repo for it</strong></h2>
+<p>In this section you will start getting familiar with SQL Stream Builder (SSB) and will create a project in it to use throughout the remainder of this workshop. Projects in SSB can be stored in a Git repository and you will learn how to configure your project to use one.</p>
+<p>Before you do that, though, you need to create a Git repository under your own GitHub account. It is recommended that you <em>register a SSH key with your GitHub account</em> so that you can use SSH authentication. Using BASIC authentication (username and password) is not recommended since that will not work if you have two-factor authentication enabled for it.</p>
+<ol>
+<li>Login to <a href="http://github.com">github.com</a> with your own personal user.</li>
+</ol>
+<blockquote>
+<p>⚠️ <strong>Important: Use a Public GitHub Account</strong></p>
+<p>You must use a personal account from the public <code>github.com</code> website. The internal Cloudera GitHub is not accessible by <code>SSB</code> and will not work.</p>
+</blockquote>
+<ol start="2">
+<li>Click on <strong>Settings</strong> for your account and then on the <strong>SSH and GPG keys</strong> menu. If you already have a SSH key registered and you have a copy of the private key in your computer, you can use it when configuring your Project in SSB.</li>
+</ol>
+<p>If you don't have a SSH key register or don't know where it's the private key file associated with the registered key, click on the <strong>New SSH key</strong> button and create/register a new one.</p>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.57.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.57.png" alt="GitHub SSH and GPG keys settings"></a></p>
+
+<ol start="3">
+<li>Click the "plus" icon at the top right of the page and select <strong>New repository</strong> to add a new repository. Call it <strong>ssb-workshop</strong> and set it like the one below:</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.58.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.58.png" alt="Create new GitHub repository"></a></p>
+
+<ol start="4">
+<li>
+<p>Make sure that the “Add a README file” option is checked.<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.59.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.59.png" alt="Add README file option in GitHub"></a></p>
+<p></p>
+</li>
+<li>
+<p>Once the repository is created, click on the Code button on the repository page, select the SSH tab and copy the associated URL. This is the URL you will use to configure the SSB project:</p>
+</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.60.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.60.png" alt="Copy SSH URL from GitHub repository"></a></p>
+
+<ol start="6">
+<li>In the CDP Console, find the <strong>Streaming Analytics (Flink) DataHub</strong> and click on it to open the DataHub page.  </li>
+<li>Click on the <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.61.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.61.png" style="vertical-align:middle; width:240px;" alt="Open SSB UI from DataHub"></a> icon to open the SSB UI. You will notice that there are already two projects created by default:  </li>
+<li><strong>ssb_default</strong> - a global project accessible to all users  </li>
+<li><strong><userid>_default</userid></strong> - a private project accessible only to your user  </li>
+</ol>
+<p>You won't use any of those. Instead, you will create a GitHub-backed repository next.  </p>
+<ol start="8">
+<li>
+<p>In the <strong>Projects</strong> page, click on the <strong>New Project</strong> button:<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.62.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.62.png" alt="Create new project in SSB"></a></p>
+<p></p>
+</li>
+<li>
+<p>Enter the following details in the Create Project dialog box:  </p>
+<ol>
+<li>Name: <strong>\&lt;an unique name for your project&gt;</strong>  </li>
+<li>Clone URL: <strong>\&lt;the URL you copied in step 4&gt;</strong>  </li>
+<li>Branch: <strong>main</strong> (by default a GitHub repository is created with a <strong>main</strong> branch. If you modified that, make sure you specify the correct branch name here)  </li>
+<li>Authentication: <strong>Enabled</strong>  </li>
+<li>Method: <strong>SSH</strong>  </li>
+<li>Private Key: <strong>\&lt;upload the private key file associated with the key in your GitHub account&gt;</strong>  </li>
+<li>Public Key: <strong>\&lt;upload the public key file associated with the key in your GitHub account&gt;</strong>  </li>
+<li>Passphrase for Private Key: <strong>\&lt;if your private key is protected by a passphrase, enter it here; otherwise, leave it blank&gt;</strong><br>
+  <p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.63.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.63.png" alt="Create Project dialog in SSB"></a></p></li>
+</ol>
+</li>
+<li>
+<p>The new project will be listed in the Projects page:<br>
+    </p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.64.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.64.png" alt="New project listed in SSB"></a></p><p></p>
+</li>
+<li>
+<p>Click on the <strong>Switch</strong> button of the new project to switch to it, and you will see the main page for your project::<br>
+    </p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.65.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.65.png" alt="Switch to new project in SSB"></a></p>
+    <p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.66.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.66.png" alt="Main page for SSB project"></a></p><p></p>
+</li>
+</ol>
+<h2 id="4-register-a-kafka-data-source"><strong>4. Register a Kafka Data Source</strong></h2>
+<p>Before you can use SSB to process data from Kafka topics you must register one or more Kafka clusters as Data Sources in your project. In this section you will register the Kafka DataHub as your data source.</p>
+<ol>
+<li>In your project workspace, expand the Data Sources item in the navigation tree. You will see two items under it: "Kafka" and "Catalog"  </li>
+<li>
+<p>Click on the kebab menu (<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.67.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.67.png" style="vertical-align:middle; width:30px;" alt="Open SSB UI from DataHub"></a>) of the <strong>Kafka</strong> node to create a new Kafka data source:<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.68.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.68.png" alt="Create new Kafka data source in SSB"></a></p>
+<p></p>
+</li>
+<li>
+<p>Provide the following details in the Kafka Data Source dialog box:  </p>
+<ol>
+<li>Name: <strong>&lt;name of your data source. E.g. dh-kafka&gt;</strong>  </li>
+<li>Brokers: <strong>&lt;comma-separated list of brokers&gt;</strong> (See the Notes under Module 1's section 3.2.2 for more details on how to find the Kafka broker addresses)  </li>
+<li>Protocol: <strong>SASL/SSL</strong>  </li>
+<li>SASL Mechanism: <strong>PLAIN</strong>  </li>
+<li>SASL Username: <strong>&lt;your workload username&gt;</strong>  </li>
+<li>SASL Password: <strong>&lt;your workload password&gt;</strong></li>
+</ol>
+<p></p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.69.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.69.png" alt="Kafka Data Source dialog in SSB"></a></p>
+  <p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.70.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.70.png" alt="Kafka Data Source configuration"></a></p><p></p>
+</li>
+</ol>
+<h2 id="5-register-a-schema-registry-catalog"><strong>5. Register a Schema Registry catalog</strong></h2>
+<p>Schema Registry stores schemas that are used to read/write data from/to Kafka topics. Registering a Schema Registry instance in SSB automatically creates SSB tables for the schemas retrieved from it, making it simpler to start accessing data from those topics.</p>
+<p><strong>Note</strong>: For this to work the schemas stored in Schema Registry need to be stored with the same name of the Kafka topic.</p>
+<ol>
+<li>In your project workspace, navigate to <strong>Data Sources -&gt; Catalog.</strong> Click the kebab menu of the Catalog item and select <strong>New Catalog</strong> to create a new catalog.</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.71.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.71.png" alt="New Catalog dialog in SSB"></a></p>
+
+<ol start="2">
+<li>Enter the following details in the Catalog dialog box:  <ol>
+<li>Name: <strong>&lt;name of the catalog. E.g. dh-schreg&gt;</strong>  </li>
+<li>Catalog Type: <strong>Schema Registry</strong>  </li>
+<li>Kafka Cluster: <strong>&lt;select the Kafka data source you created the previous section&gt;</strong>  </li>
+<li>Enable TLS: <strong>Enabled</strong>  </li>
+<li>Schema Registry URL: <strong>https://&lt;schreg_hostname&gt;:7790/api/v1</strong> (See the Notes under Module 1's section 3.2.2 for more details on how to find the Schema Registry hostname)</li>
+</ol>
+</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.72.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.72.png" alt="Schema Registry Catalog dialog"></a></p>
+
+<ol start="3">
+<li>
+<p>Click on the <strong>Validate</strong> link to validate the Catalog. If the catalog is successfully validated you will see a message saying "Data Source is valid". If you hover the mouse over that message you will see how many tables were discovered from Schema Registry during the validation:<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.73.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.73.png" alt="Validate Catalog in SSB"></a></p>
+<p></p>
+</li>
+<li>
+<p>Once the catalog is validated. Press the <strong>Create</strong> button to register the Schema Registry catalog.<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.74.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.74.png" alt="Create Schema Registry Catalog"></a></p>
+<p></p>
+</li>
+<li>
+<p>After the registration is completed you can browse the Schema Registry tables by navigating to <strong>External Resources&gt; Virtual Tables &gt; [schema_registry_catalog_name] &gt; default_database</strong>:</p>
+</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.75.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.75.png" alt="Browse Schema Registry tables in SSB"></a></p>
+
+<ol start="6">
+<li>The Virtual Tables are created based on the schemas retrieved from Schema Registry. Virtual table names are the same as that of schema names. </li>
+</ol>
+<p><strong>Note:</strong> The topic names in Kafka must also be the same as the name of the schema associated with it.</p>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.76.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.76.png" alt="Virtual Tables created from Schema Registry"></a></p>
+
+<h2 id="6-register-a-kudu-catalog"><strong>6. Register a Kudu catalog</strong></h2>
+<p>Similar to a Schema Registry catalog, a Kudu catalog makes Kudu tables automatically available for use in SSB, simplifying the process of mapping Virtual Tables to the actual Kudu ones. In this section you will register the DataHub Kudu cluster as a catalog in your SSB project.</p>
+<p>This will make the <strong>syslog_severity</strong> table, which has already been created in Kudu, available for queries in SSB.</p>
+<ol>
+<li>
+<p>In your project workspace, navigate to <strong>Data Sources -&gt; Catalog.</strong> Click the kebab menu of the Catalog item and select <strong>New Catalog</strong> to create a new catalog.</p>
+</li>
+<li>
+<p>Enter the following details in the Catalog dialog box:  </p>
+<ol>
+<li>Name: <strong>\&lt;name of the catalog. E.g. dh-kudu&gt;</strong>  </li>
+<li>Catalog Type: <strong>Kudu</strong>  </li>
+<li>Kudu Masters: <strong>\&lt;kudu_master1&gt;:7051,\&lt;kudu_master2&gt;:7051,\&lt;kudu_master3&gt;:7051</strong> <em>(see </em><em>Notes</em><em> below)</em>  </li>
+</ol>
+<p></p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.77.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.77.png" alt="Kudu Masters configuration in SSB"></a></p><p></p>
+</li>
+</ol>
+<p><strong>Notes:</strong><br>
+<em> </em><em>Kudu Masters:</em><em> The hostname of the Kudu master nodes can be found in the Real-time Data Mart (Kudu) DataHub page. In the CDP Console, find your Real-time Data Mart DataHub and click on the </em><em>Nodes</em>* tab. Copy the FQDN for the 3 masters, as shown in the screenshot below.</p>
+<p>The full masters address to be provided during the catalog registration is the following:</p>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.78.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.78.png" alt="Kudu Masters address example"></a></p>
+
+<ol start="3">
+<li>
+<p>Click on the <strong>Validate</strong> link to validate the Catalog. If the catalog is successfully validated you will see a message saying "Data Source is valid". If you hover the mouse over that message you will see how many tables were discovered from Schema Registry during the validation:<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.73.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.73.png" alt="Validate Catalog in SSB"></a></p>
+<p></p>
+</li>
+<li>
+<p>Once the catalog is validated. Press the <strong>Create</strong> button to register the Kudu catalog.<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.74.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.74.png" alt="Create Kudu Catalog"></a></p>
+<p></p>
+</li>
+<li>
+<p>After the registration is completed you can browse the Kudu tables by navigating to <strong>External Resources&gt; Virtual Tables &gt; [kudu_catalog_name] &gt; default_database</strong>:</p>
+</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.79.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.79.png" alt="Browse Kudu tables in SSB"></a></p>
+
+<h2 id="7-create-a-kafka-table-manually"><strong>7. Create a Kafka Table manually</strong></h2>
+<p>You saw that when you register a Schema Registry catalog SSB automatically maps all the schemas found in there as SSB tables that can be used to access data in the Kafka topics named after the schemas.</p>
+<p>Sometimes, though, you don't have a schema for a particular topic and you may still want to consume or produce data to that topic. In SSB you can manually create a table and specify its schema directly, as well as the mapping to an existing Kafka topic. In this section you will practice this using the Add Table wizard.</p>
+<ol>
+<li>
+<p>In your project workspace, navigate to <strong>Data Sources -&gt; Virtual Tables.</strong>   </p>
+</li>
+<li>
+<p>Click the kebab menu of the Virtual Tables item and select <strong>New Kafka Table</strong> to create a new virtual table.</p>
+</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.80.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.80.png" alt="Create new Kafka Table in SSB"></a></p>
+
+<ol start="3">
+<li>
+<p>Enter the following details in the Kafka Table dialog box:<br>
+   * Table Name: <strong>syslog_data</strong><br>
+   * Kafka Cluster: <strong>\&lt;select the Kafka data source you created previously&gt;</strong><br>
+   * Data Format: <strong>JSON</strong><br>
+   * Topic Name: <strong>\&lt;userid&gt;-syslog-json</strong></p>
+<p></p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.81.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.81.png" alt="Kafka Table dialog in SSB"></a></p><p></p>
+</li>
+<li>
+<p>When you select Data Format as AVRO, you must provide the correct Schema Definition when creating the table for SSB to be able to successfully process the topic data.</p>
+</li>
+</ol>
+<p>For JSON tables, though, SSB can look at the data flowing through the topic and try to infer the schema automatically, which is quite handy at times. Obviously, there must be data in the topic already for this feature to work correctly.</p>
+<p><strong>Note:</strong> SSB tries its best to infer the schema correctly, but this is not always possible and sometimes data types are inferred incorrectly. You should always review the inferred schemas to check if it's correctly inferred and make the necessary adjustments.</p>
+<p>Since you are reading data from a JSON topic, go ahead and click on <strong>Detect Schema</strong> to get the schema inferred. You should see the schema be updated in the <strong>Schema Definition</strong> tab.  </p>
+<ol start="5">
+<li>You will also notice that a "Schema is invalid" message appears upon the schema detection. If you hover the mouse over the message it shows the reason:  </li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.82.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.82.png" alt="Schema is invalid message in SSB"></a></p>
+
+<p>You will fix this in the next step.  </p>
+<ol start="6">
+<li>Each record read from Kafka by SSB has an associated timestamp column of data type TIMESTAMP ROWTIME. By default, this timestamp is sourced from the internal timestamp of the Kafka message and is exposed through a column called eventTimestamp. </li>
+</ol>
+<p>However, if your message payload already contains a timestamp associated with the event (event time), you may want to use that instead of the Kafka internal timestamp.</p>
+<p>In this case, the syslog message has a field called "<strong>timestamp</strong>" that contains the timestamp you should use. You want to expose this field as the table's "<strong>event_time</strong>" column. To do this, click on the Event Time tab and enter the following properties:  </p>
+<ul>
+<li>Use Kafka Timestamps: <strong>Disable</strong>  </li>
+<li>Input Timestamp Column: <strong>timestamp</strong>  </li>
+<li>Event Time Column: <strong>event_time</strong>  </li>
+<li>Watermark Seconds: <strong>3</strong></li>
+</ul>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.83.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.83.png" alt="Event Time tab in SSB"></a></p>
+
+<ol start="7">
+<li>
+<p>Now that you have configured the event time column, click on <strong>Detect Schema</strong> again. You should see the schema turn valid:<br>
+   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.84.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.84.png" style="vertical-align:middle; width:230px;" alt="Valid schema in SSB"></a></p>
+</li>
+<li>
+<p>Click the <strong>Create and Review</strong> button to create the table.  </p>
+</li>
+<li>Review the table's DDL and click <strong>Close</strong>.  </li>
+</ol>
+<h2 id="8-unlock-your-keytab"><strong>8. Unlock your keytab</strong></h2>
+<p>Before running jobs in SSB you must unlock your keytab following the steps below:</p>
+<ol>
+<li>Ensure you are at the SSB home page. If not in the home page, click the Projects link at the top of the screen  </li>
+<li>
+<p>Click on your user's icon/name at the bottom-left of the screen and select <strong>Manage Keytab</strong>:<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.85.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.85.png" alt="Manage Keytab in SSB"></a></p><p></p>
+</li>
+<li>
+<p>Enter your username and password and click on <strong>Unlock Keytab</strong>:<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.86.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.86.png" alt="Unlock Keytab dialog in SSB"></a></p>
+<p></p>
+</li>
+</ol>
+<h2 id="9-create-streaming-sql-jobs"><strong>9. Create Streaming SQL jobs</strong></h2>
+<p>In this section you will practice creating and executing SQL Streaming jobs to implement different types of use cases. You will create the following jobs:</p>
+<ul>
+<li>Job 1: Selecting records from a Kafka virtual table  </li>
+<li>Job 2: Selecting records from a Schema Registry virtual table  </li>
+<li>Job 3: Using a windowing function  </li>
+<li>Job 4: Enriching streaming data with data-at-rest data sources</li>
+</ul>
+<h3 id="91-job-1-selecting-records-from-a-kafka-virtual-table"><strong>9.1. Job 1: Selecting records from a Kafka virtual table</strong></h3>
+<ol>
+<li>In the SSB console, ensure you have switched to your project and you are at your project's main page.  </li>
+<li>On the Explorer view, click the kebab menu (<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.87.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.87.png" style="vertical-align:middle; width:30px;" alt="Valid schema in SSB"></a>)  of the <strong>Jobs</strong> item and select <strong>New Job</strong> to create a new one.</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.88.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.88.png" alt="Create new job in SSB"></a></p>
+
+<ol start="3">
+<li>Enter <strong>job1</strong> as a <strong>Job Name</strong> and click on the <strong>Create</strong> button:</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.89.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.89.png" alt="Job Name dialog in SSB"></a></p>
+
+<p>You are redirected to the SQL Editor where you can perform a number of tasks, including:<br>
+   1. Compose and execute SQL queries<br>
+   2. Create and manage Materialized Views<br>
+   3. Configure your SQL job</p>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.90.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.90.png" alt="SQL Editor in SSB"></a></p>
+
+<ol start="4">
+<li>Click on the SQL editor area and type the job query.</li>
+</ol>
+<p>In this first job you will simply select everything from the <strong>syslog_data</strong> table that you created previously. Notice that the editor has auto-completion for keywords, table names, etc. As you type you will see suggestions for completion being shown. To select one of the options, simply use the arrow keys to scroll to the option and press <strong>\&lt;ENTER&gt;</strong>.</p>
+<p>If the list of options doesn't not show at a particular position of the cursor you can press \&lt;CTRL&gt;+\&lt;SPACE&gt; to show the list of completion suggestions.  </p>
+<ol start="5">
+<li>In the editor type "<strong>SELECT * FROM</strong> " (with a space in the end) and then press \&lt;CTRL&gt;+\&lt;SPACE&gt;. Select the syslog_data table from the list.</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.91.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.91.png" alt="Auto-complete table in SSB"></a></p>
+
+<ol start="6">
+<li>Click <strong>Execute</strong>.</li>
+</ol>
+<p>The Logs tab will show that the job execution has started and once data is retrieved it will automatically switch to the Results tab to show the results:</p>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.92.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.92.png" alt="Job execution logs in SSB"></a></p>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.93.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.93.png" alt="Job results tab in SSB"></a></p>
+
+<ol start="7">
+<li>You will notice that the Results tab shows approximately one record every second, even though there is a lot more data flowing through the Kafka topic. This is because, by default, SSB only shows a sample of the data on the screen to give the user some feedback about what the query is retrieving. If you leave the query running you will also notice that the sample polling will automatically stop once 100 records have been retrieved.</li>
+</ol>
+<p>You can change the sample behavior and other settings by clicking on the Job Settings button, as shown below:</p>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.94.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.94.png" alt="Job Settings in SSB"></a></p>
+
+<p><strong>NOTE:</strong> Selecting "Sample all messages" can have a negative effect in performance and will increase the resource consumption of your browser as well. Use this only when necessary to check or troubleshoot data.</p>
+<ol start="8">
+<li>From the Results tab you can see that the data contains records of all severities. If you want to change that you can simply stop and edit your query and run it again.</li>
+</ol>
+<p>Click <strong>Stop</strong> to stop the job and edit the query so that it retrieves only records with severity 3:
+</p><div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">   </span><span class="err">SELECT</span><span class="w"> </span><span class="err">\*</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">   </span><span class="err">FROM</span><span class="w"> </span><span class="err">syslog\_da</span><span class="kc">ta</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">   </span><span class="err">WHERE</span><span class="w"> </span><span class="err">severi</span><span class="kc">t</span><span class="err">y</span><span class="w"> </span><span class="err">\=</span><span class="w"> </span><span class="mi">3</span>
+</span></code></pre></div><p></p>
+<p>Click <strong>Execute</strong> and check the results to confirm that the change was effective.</p>
+<ol start="9">
+<li>Once you're done, <strong>Stop</strong> your job. In the Explorer tree you can see all the jobs and which ones are running. You can also stop jobs from there by right-clicking on the job item. If the job status doesn't look correct, try click on the Reload icon, shown below:</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.95.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.95.png" alt="Reload icon in SSB"></a></p>
+
+<h3 id="92-job-2-selecting-records-from-a-schema-registry-virtual-table"><strong>9.2. Job 2: Selecting records from a Schema Registry virtual table</strong></h3>
+<p>Once virtual tables are created in SSB, their backend and data format are transparent to the user. Tables can be queried in SSB in exactly the same way. In this section you will execute the same query from job1 against a table that comes from an Kafka topic with AVRO format and will see that everything works the same:</p>
+<ol>
+<li>
+<p>On the Explorer view, right-click on the <strong>Jobs</strong> item and select <strong>New Job</strong> to create a new job. Call it <strong>job2</strong>.</p>
+</li>
+<li>
+<p>Enter the same query from the previous job, but using the <strong>\&lt;userid&gt;-syslog-avro</strong> table (use the auto-completion to find the correct table name - <strong>\&lt;CTRL&gt;+\&lt;SPACE&gt;</strong>). You will notice that the auto-completion will prefix the table name with the catalog and database names:
+</p><div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="w">   </span><span class="err">SELECT</span><span class="w"> </span><span class="err">\*</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">   </span><span class="err">FROM</span><span class="w"> </span><span class="err">**\</span><span class="p">[</span><span class="err">au</span><span class="kc">t</span><span class="err">o</span><span class="mi">-</span><span class="err">comple</span><span class="kc">te</span><span class="w"> </span><span class="kc">t</span><span class="err">he</span><span class="w"> </span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">\&lt;userid\&gt;</span><span class="mi">-</span><span class="err">syslog</span><span class="mi">-</span><span class="err">avro\</span><span class="p">]</span><span class="err">**</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">   </span><span class="err">WHERE</span><span class="w"> </span><span class="err">severi</span><span class="kc">t</span><span class="err">y</span><span class="w"> </span><span class="err">\=</span><span class="w"> </span><span class="mi">3</span>
+</span></code></pre></div><p></p>
+</li>
+</ol>
+<p>Click <strong>Execute</strong> and check the results to verify that everything works as expected.</p>
+<ol start="3">
+<li>Once you're done, <strong>Stop</strong> your job.</li>
+</ol>
+<h3 id="93-job-3-using-a-windowing-function"><strong>9.3. Job 3: Using a windowing function</strong></h3>
+<p>One powerful feature of Flink and SSB is the ability to perform windowing aggregations on streaming data. For more information on all the aggregation options available, please check the Flink documentation about <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/table/sql/queries/window-tvf/">table-valued functions</a>, <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/table/sql/queries/window-agg/">window aggregation</a>, <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/table/sql/queries/group-agg/">group aggregation</a> and <a href="https://nightlies.apache.org/flink/flink-docs-master/docs/dev/table/sql/queries/over-agg/">over aggregation</a>.</p>
+<p>In this section you will write a query that defines a sliding (HOP) window on the syslog stream to count how many events of each severity are being generated in intervals of 30 seconds. The 30-second window slides forward every 5 seconds, so the query produces results every 5 seconds for the previous window that ended at that point in time.</p>
+<ol>
+<li>
+<p>On the Explorer view, right-click on the <strong>Jobs</strong> item and select <strong>New Job</strong> to create a new job. Call it <strong>job3</strong>.</p>
+</li>
+<li>
+<p>Enter the following query in the SQL editor:
+</p><div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="w">   </span><span class="err">SELECT</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">     </span><span class="err">wi</span><span class="kc">n</span><span class="err">dow\_s</span><span class="kc">tart</span><span class="p">,</span><span class="w"> </span><span class="err">wi</span><span class="kc">n</span><span class="err">dow\_e</span><span class="kc">n</span><span class="err">d</span><span class="p">,</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">     </span><span class="err">severi</span><span class="kc">t</span><span class="err">y</span><span class="p">,</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">     </span><span class="err">cou</span><span class="kc">nt</span><span class="err">(\*)</span><span class="w"> </span><span class="err">as</span><span class="w"> </span><span class="err">severi</span><span class="kc">t</span><span class="err">y\_cou</span><span class="kc">nt</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">   </span><span class="err">FROM</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">     </span><span class="err">TABLE(</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">       </span><span class="err">HOP(TABLE</span><span class="w"> </span><span class="err">syslog\_da</span><span class="kc">ta</span><span class="p">,</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">           </span><span class="err">DESCRIPTOR(eve</span><span class="kc">nt</span><span class="err">\_</span><span class="kc">t</span><span class="err">ime)</span><span class="p">,</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">           </span><span class="err">INTERVAL</span><span class="w"> </span><span class="err">'</span><span class="mi">5</span><span class="err">'</span><span class="w"> </span><span class="err">SECOND</span><span class="p">,</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">           </span><span class="err">INTERVAL</span><span class="w"> </span><span class="err">'</span><span class="mi">30</span><span class="err">'</span><span class="w"> </span><span class="err">SECOND))</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">   </span><span class="err">GROUP</span><span class="w"> </span><span class="err">BY</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">     </span><span class="err">wi</span><span class="kc">n</span><span class="err">dow\_s</span><span class="kc">tart</span><span class="p">,</span><span class="w"> </span><span class="err">wi</span><span class="kc">n</span><span class="err">dow\_e</span><span class="kc">n</span><span class="err">d</span><span class="p">,</span><span class="w"> </span><span class="err">severi</span><span class="kc">t</span><span class="err">y</span>
+</span></code></pre></div><p></p>
+</li>
+</ol>
+<p>Click <strong>Execute</strong> and check the results to verify that everything works as expected.  </p>
+<p><strong>Tip:</strong> If you're not seeing all the counts for all the severities for each one of the aggregation windows, try setting the sample behavior to "Sample all messages"</p>
+<ol start="3">
+<li>Once you're done, <strong>Stop</strong> your job.</li>
+</ol>
+<h3 id="94-job-4-enriching-streaming-data-with-data-at-rest-data-sources"><strong>9.4. Job 4: Enriching streaming data with data-at-rest data sources</strong></h3>
+<p>Another powerful feature of Flink/SSB is that you can write queries joining tables that have different backends. A Kafka streaming table, for example, can be joined with batch tables stored in relational databases, Kudu or even HDFS.</p>
+<p>This opens a number of possibilities like using data-at-rest tables to enrich streaming data. In this section you will create a job that enriches the aggregation stream produced by the query from job3 by joining it with the <strong>syslog_severity</strong> table, which is stored in Kudu and has the definition of each one of the severity levels.</p>
+<ol>
+<li>
+<p>On the Explorer view, right-click on the <strong>Jobs</strong> item and select <strong>New Job</strong> to create a new job. Call it <strong>job4</strong>.</p>
+</li>
+<li>
+<p>Enter the following query in the SQL editor:
+</p><div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="w">   </span><span class="err">SELECT</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">     </span><span class="err">a.wi</span><span class="kc">n</span><span class="err">dow\_s</span><span class="kc">tart</span><span class="p">,</span><span class="w"> </span><span class="err">a.wi</span><span class="kc">n</span><span class="err">dow\_e</span><span class="kc">n</span><span class="err">d</span><span class="p">,</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">     </span><span class="err">a.severi</span><span class="kc">t</span><span class="err">y</span><span class="p">,</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">     </span><span class="err">b.severi</span><span class="kc">t</span><span class="err">y\_desc</span><span class="p">,</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">     </span><span class="err">cou</span><span class="kc">nt</span><span class="err">(\*)</span><span class="w"> </span><span class="err">as</span><span class="w"> </span><span class="err">severi</span><span class="kc">t</span><span class="err">y\_cou</span><span class="kc">nt</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">   </span><span class="err">FROM</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">     </span><span class="err">TABLE(</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">       </span><span class="err">HOP(TABLE</span><span class="w"> </span><span class="err">syslog\_da</span><span class="kc">ta</span><span class="p">,</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">           </span><span class="err">DESCRIPTOR(eve</span><span class="kc">nt</span><span class="err">\_</span><span class="kc">t</span><span class="err">ime)</span><span class="p">,</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">           </span><span class="err">INTERVAL</span><span class="w"> </span><span class="err">'</span><span class="mi">5</span><span class="err">'</span><span class="w"> </span><span class="err">SECOND</span><span class="p">,</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">           </span><span class="err">INTERVAL</span><span class="w"> </span><span class="err">'</span><span class="mi">30</span><span class="err">'</span><span class="w"> </span><span class="err">SECOND))</span><span class="w"> </span><span class="err">a</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">     </span><span class="err">JOIN</span><span class="w"> </span><span class="err">**\</span><span class="p">[</span><span class="err">au</span><span class="kc">t</span><span class="err">o</span><span class="mi">-</span><span class="err">comple</span><span class="kc">te</span><span class="w"> </span><span class="kc">t</span><span class="err">he</span><span class="w"> </span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">de</span><span class="kc">fault</span><span class="err">.syslog\_severi</span><span class="kc">t</span><span class="err">y\</span><span class="p">]</span><span class="err">**</span><span class="w"> </span><span class="err">b</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">       </span><span class="err">ON</span><span class="w"> </span><span class="err">a.severi</span><span class="kc">t</span><span class="err">y</span><span class="w"> </span><span class="err">\=</span><span class="w"> </span><span class="err">b.severi</span><span class="kc">t</span><span class="err">y</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">   </span><span class="err">GROUP</span><span class="w"> </span><span class="err">BY</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">     </span><span class="err">a.wi</span><span class="kc">n</span><span class="err">dow\_s</span><span class="kc">tart</span><span class="p">,</span><span class="w"> </span><span class="err">a.wi</span><span class="kc">n</span><span class="err">dow\_e</span><span class="kc">n</span><span class="err">d</span><span class="p">,</span><span class="w"> </span><span class="err">a.severi</span><span class="kc">t</span><span class="err">y</span><span class="p">,</span><span class="w"> </span><span class="err">b.severi</span><span class="kc">t</span><span class="err">y\_desc</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">   </span><span class="err">Click</span><span class="w"> </span><span class="err">**Execu</span><span class="kc">te</span><span class="err">**</span><span class="w"> </span><span class="err">a</span><span class="kc">n</span><span class="err">d</span><span class="w"> </span><span class="err">check</span><span class="w"> </span><span class="kc">t</span><span class="err">he</span><span class="w"> </span><span class="err">resul</span><span class="kc">ts</span><span class="w"> </span><span class="kc">t</span><span class="err">o</span><span class="w"> </span><span class="err">veri</span><span class="kc">f</span><span class="err">y</span><span class="w"> </span><span class="kc">t</span><span class="err">ha</span><span class="kc">t</span><span class="w"> </span><span class="err">every</span><span class="kc">t</span><span class="err">hi</span><span class="kc">n</span><span class="err">g</span><span class="w"> </span><span class="err">works</span><span class="w"> </span><span class="err">as</span><span class="w"> </span><span class="err">expec</span><span class="kc">te</span><span class="err">d.</span>
+</span></code></pre></div><p></p>
+</li>
+<li>Once you're done, <strong>Stop</strong> your job.</li>
+</ol>
+<h2 id="10-create-a-production-job-sending-data-to-kafka"><strong>10. Create a Production job sending data to Kafka</strong></h2>
+<p>So far, the results of all the jobs that you created were displayed on the screen but not saved anywhere. When you run jobs in production you will want to send the results somewhere (Kafka, databases, Kudu, HDFS, S3, etc.)<br>
+SSB makes it really easy to write data to different locations. All you have to do is to create a Virtual Table mapped to that location and then INSERT into that table the results of the query that you are running. You will practice this in this section by modifying job 4 to send its results to a Kafka topic.</p>
+<p>You will start by creating a topic to store the results of your query and then modify job4 so that it sends its aggregated and enriched stream output to that topic.</p>
+<ol>
+<li>Open the SMM UI (link is on the Streams Messaging DataHub page)  </li>
+<li>
+<p>Click on the <strong>Topics icon</strong> and then on the <strong>Add New</strong> button to create a new topic  </p>
+</li>
+<li>
+<p>Enter the following properties for your topic:  </p>
+</li>
+<li>Topic Name: <strong>\&lt;userid&gt;-severity-counts</strong>  </li>
+<li>Partitions: <strong>1</strong>  </li>
+<li>Availability: <strong>MAXIMUM</strong>  </li>
+<li>Cleanup Policy: <strong>delete</strong></li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.96.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.96.png" alt="Create new topic in SMM"></a></p>
+
+<ol start="4">
+<li>
+<p>Back in the SSB UI, select <strong>job4</strong> in the Explorer pane to open the SQL editor for it. You should see the aggregation query that you had created in the previous section.  </p>
+</li>
+<li>
+<p>Before you can run this job in production you need to create a Virtual Table in SSB and map it to the <strong>\&lt;userid&gt;-severity-counts</strong> Kafka topic that was created above.</p>
+</li>
+</ol>
+<p>The structure/schema of this table must match the structure of the output of the query that is being executed. Thankfully, SSB has a template feature that makes this very easy to do.  </p>
+<p>Click on the <strong>Templates</strong> button above the SQL editor and select <strong>upsert-kafka &gt; json</strong>.</p>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.97.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.97.png" alt="Templates button in SSB"></a></p>
+
+<p>You will notice that a <strong>CREATE TABLE</strong> template was inserted at the beginning of the editor. Scroll up and down to check the contents of the editor. <strong>Please do NOT execute it yet</strong>.  </p>
+<ol start="6">
+<li>The added template is a CREATE TABLE statement to create a Virtual Table of the type you selected. Before you can execute it you have to complete the template with the missing information.</li>
+</ol>
+<p>Make the following changes to the template:<br>
+   1. Table name: change the table name to <strong>&lt;userid&gt;_severity_counts</strong><br>
+   2. Primary key: add the following primary key clause after the last column in the table (severity_count):<br>
+   3. Properties: replace all the properties in the WITH clause with the following:  </p>
+<div class="language-text highlight"><pre><span></span><code>  'connector' = 'upsert-kafka: &lt;data_source_name&gt;',
+  'topic' = '&lt;userid&gt;-severity-counts',
+  'key.format' = 'json',
+  'value.format' = 'json'
+</code></pre></div>
+<ol start="4">
+<li>topic: <strong>&lt;userid&gt;-severity-counts</strong></li>
+</ol>
+<p>There are other optional properties commented out in the template that you can ignore. The completed template should look like the one below:</p>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.98.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.98.png" alt="Completed CREATE TABLE template in SSB"></a></p>
+
+<ol start="7">
+<li>With your mouse, select only the text of the entire CREATE TABLE statement and click on the <strong>Execute Selection</strong> button to run only that statement and create the Virtual Table.</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.99.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.99.png" alt="Execute Selection button in SSB"></a></p>
+
+<p>After the CREATE TABLE execution you can see the created table in the Explorer tree:</p>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.100.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.100.png" alt="Created table in Explorer tree in SSB"></a></p>
+
+<ol start="8">
+<li>
+<p>Once the table is created successfully, delete the CREATE TABLE statement from the SQL editor.  </p>
+</li>
+<li>
+<p>Modify the original query in the editor by adding the following line before the SELECT keyword:
+</p><div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w">   </span><span class="err">INSERT</span><span class="w"> </span><span class="err">INTO</span><span class="w"> </span><span class="err">&lt;userid&gt;_severi</span><span class="kc">t</span><span class="err">y_cou</span><span class="kc">nts</span>
+</span></code></pre></div><p></p>
+</li>
+</ol>
+<p>Your final statement should look like this:  </p>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.101.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.101.png" alt="Final statement for job4 in SSB"></a></p>
+
+<ol start="10">
+<li>
+<p>Click on the <strong>Execute</strong> button to submit your job for execution.  </p>
+</li>
+<li>
+<p>You should see the output of the query on the Results tab once the job starts executing. You can close the tab or window at any time and the job will continue running on the Flink cluster.  </p>
+</li>
+<li>Open the SMM UI again, click on the <strong>Topics icon</strong> <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.50.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.50.png" style="vertical-align:middle; width:30px;" alt="Valid schema in SSB"></a> and search for the <strong>&lt;userid&gt;-severity-counts</strong> topic.  </li>
+<li>
+<p>Click on the Data Explorer icon (<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.102.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.102.png" style="vertical-align:middle; width:30px;" alt="Valid schema in SSB"></a>) for the topic  to visualize the data in the topic. You should be able to see recently added data with the aggregations produced by <strong>job4</strong>:</p>
+<p></p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.103.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.103.png" alt="Aggregations produced by job4 in SMM"></a></p><p></p>
+</li>
+</ol>
+<h2 id="11-versioning-your-project-changes-into-github"><strong>11. Versioning your project changes into GitHub</strong></h2>
+<p>Now that you have completed the changes to your project, at least for now, you can commit the changes and version that into your GitHub repository.</p>
+<ol>
+<li>Click on the Source Control icon, as shown below:</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.104.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.104.png" alt="Source Control icon in SSB"></a></p>
+
+<ol start="2">
+<li>Click on the <strong>Push</strong> tab at the top, enter your commit message and click on the <strong>Push</strong> button.</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.105.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.105.png" alt="Push tab in SSB"></a></p>
+
+<p>If your push is successful you should see the following message:</p>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.106.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.106.png" alt="Push successful message in SSB"></a></p>
+
+<ol start="3">
+<li>Verify the github repository. Changes will be pushed to the remote repository.</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.107.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.107.png" alt="Verify GitHub repository"></a></p>
+
+<h2 id="12-troubleshooting-flinkssb-jobs"><strong>12. Troubleshooting Flink/SSB jobs</strong></h2>
+<p>If you have problems with running your jobs, follow the steps below to check job details in SSB and on the Flink Dashboard.</p>
+<ol>
+<li>Click on your job (under Jobs on the left bar) to open the job editor:</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.108.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.108.png" alt="Open job editor in SSB"></a></p>
+
+<ol start="2">
+<li>Click on the <strong>Flink Dashboard</strong> link to open the Flink Dashboard for job</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.109.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.109.png" alt="Open Flink Dashboard for job"></a></p>
+
+<ol start="3">
+<li>Navigate the dashboard pages to explore details and metrics of the job execution:</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.110.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.110.png" alt="Flink Dashboard metrics and details"></a></p>
+
+<ol start="4">
+<li>Browse the job's DAG. Click on each of the operators (blue boxes) to see metrics and details of each one, including their individual tasks.</li>
+</ol>
+<p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.111.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.111.png" alt="Flink job DAG and operator metrics"></a></p>
+
+<h2 id="13-common-issues"><strong>13. Common issues</strong></h2>
+<p>If you run into problem, look for commons issues and solutions below:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Issue: Job execution failed: Could not start Flink session for user: njayakumar"</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Solution:</strong> <a href="https://docs.cloudera.com/cdf-datahub/7.2.12/quick-start-sa/topics/cdf-datahub-sa-cluster-quick-start-giveaccess.html">Give users access to your cluster</a></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../lab1/index.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lab 1 - Data Distribution with Cloudera DataFlow">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Lab 1 - Data Distribution with Cloudera DataFlow
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../lab3/index.html" class="md-footer__link md-footer__link--next" aria-label="Next: Lab 3 - Deploy a DataFlow Function">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Lab 3 - Deploy a DataFlow Function
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2026 Cloudera Inc. All rights reserved.<br><a href="https://www.cloudera.com/legal/terms-and-conditions.html" target="_blank">Terms &amp; Conditions | </a>  <a href="https://www.cloudera.com/legal/policies.html" target="_blank"> Privacy Policy and Data Policy</a>
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.annotate", "content.code.copy", "navigation.footer", "navigation.top"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

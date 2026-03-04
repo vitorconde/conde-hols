@@ -494,49 +494,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-required-details" class="md-nav__link">
+  <a href="#2-deploy-the-postgresconnector" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Required details
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-create-a-work-table-in-the-postgresql-database" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Create a work table in the PostgreSQL database
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Create a work table in the PostgreSQL database">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#quick-psql-cheat-sheet" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🐘 Quick psql Cheat Sheet
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-deploy-the-postgresconnector" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Deploy the PostgresConnector
+        2. Deploy the PostgresConnector
       
     </span>
   </a>
@@ -619,49 +580,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-required-details" class="md-nav__link">
+  <a href="#2-deploy-the-postgresconnector" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Required details
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-create-a-work-table-in-the-postgresql-database" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Create a work table in the PostgreSQL database
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Create a work table in the PostgreSQL database">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#quick-psql-cheat-sheet" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🐘 Quick psql Cheat Sheet
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-deploy-the-postgresconnector" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Deploy the PostgresConnector
+        2. Deploy the PostgresConnector
       
     </span>
   </a>
@@ -718,102 +640,8 @@
 <li>Synchronizing incremental data from databases to other systems  </li>
 <li>Collecting and storing audit records from database changes</li>
 </ul>
-<p>In this module you will configure and use Kafka Connect to capture changes being made to a PostgreSQL database.</p>
-<h2 id="2-required-details">2. Required details</h2>
-<p>The PostgreSQL database used in the workshop is hosted in a VM created in the cloud environment. To connect to PostgreSQL you must first connect to the VM (using your web browser) and then connect to PostgreSQL using the command line tool psql.</p>
-<p>Your workshop instructor will share the IP address and credentials to connect to the VM and to the PostgreSQL database. Before starting the workshop, ensure you have the following details for your group:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Credential</th>
-<th style="text-align: left;">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">🖥️ <strong>VM IP Address</strong></td>
-<td style="text-align: left;"><code>provided by instructor</code> (1)</td>
-</tr>
-<tr>
-<td style="text-align: left;">👤 <strong>OS Username</strong></td>
-<td style="text-align: left;"><code>workshop</code></td>
-</tr>
-<tr>
-<td style="text-align: left;">🔑 <strong>OS Password</strong></td>
-<td style="text-align: left;"><code>clouderasko2024</code></td>
-</tr>
-<tr>
-<td style="text-align: left;">🗄️ <strong>DB Host IP</strong></td>
-<td style="text-align: left;"><code>provided by instructor</code> (2)</td>
-</tr>
-<tr>
-<td style="text-align: left;">🧑‍💻 <strong>DB Username</strong></td>
-<td style="text-align: left;"><code>cdc_userXX</code> <em>(replace <code>XX</code>)</em></td>
-</tr>
-<tr>
-<td style="text-align: left;">🔐 <strong>DB Password</strong></td>
-<td style="text-align: left;"><code>cloudera</code></td>
-</tr>
-<tr>
-<td style="text-align: left;">💾 <strong>DB Name</strong></td>
-<td style="text-align: left;"><code>cdc_dbXX</code> <em>(replace <code>XX</code>)</em></td>
-</tr>
-</tbody>
-</table>
-<p>where <strong>XX</strong> is a two digit number assigned to your group by the instructor (between 01 and 50, inclusive)</p>
-<p><strong>Notes:</strong></p>
-<ol>
-<li>Public IP of the bastion host  </li>
-<li>Private IP of the bastion host</li>
-</ol>
-<h2 id="3-create-a-work-table-in-the-postgresql-database">3. Create a work table in the PostgreSQL database</h2>
-<ol>
-<li>Open a new browser tab and connect to <strong>https://\&lt;VM IP address&gt;/workshop/</strong>  </li>
-<li>Login with the OS credentials listed in the table above  </li>
-<li>Once you are logged in, execute the following command to connect to your assigned PostgreSQL database:<br>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">      </span><span class="err">psql</span><span class="w"> </span><span class="mi">--</span><span class="err">hos</span><span class="kc">t</span><span class="w"> </span><span class="err">localhos</span><span class="kc">t</span><span class="w"> </span><span class="mi">--</span><span class="err">por</span><span class="kc">t</span><span class="w"> </span><span class="mi">5432</span><span class="w"> </span><span class="mi">--</span><span class="err">user</span><span class="w"> </span><span class="err">&lt;DB</span><span class="w"> </span><span class="err">user</span><span class="kc">na</span><span class="err">me&gt;</span><span class="w"> </span><span class="err">&lt;DB</span><span class="w"> </span><span class="kc">na</span><span class="err">me&gt;</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">      </span><span class="err">Password</span><span class="w"> </span><span class="kc">f</span><span class="err">or</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">&lt;DB</span><span class="w"> </span><span class="err">user</span><span class="kc">na</span><span class="err">me&gt;</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;DB</span><span class="w"> </span><span class="err">password&gt;</span>
-</span></code></pre></div></li>
-</ol>
-<p>Replace the parameters in bold with the values listed in the table above.  </p>
-<h3 id="quick-psql-cheat-sheet">🐘 Quick psql Cheat Sheet</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Command</th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>\d</code></td>
-<td style="text-align: left;">List all tables, views, and sequences.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>\d &lt;table_name&gt;</code></td>
-<td style="text-align: left;">Describe a specific table (columns, types, etc.).</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>\q</code></td>
-<td style="text-align: left;">Exit the psql interactive terminal.</td>
-</tr>
-</tbody>
-</table>
-<ol start="4">
-<li>
-<p>Create a table by executing the following commands in psql:<br>
-</p><div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="w">   </span><span class="err">DROP</span><span class="w"> </span><span class="err">TABLE</span><span class="w"> </span><span class="err">IF</span><span class="w"> </span><span class="err">EXISTS</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble;</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">   </span><span class="err">CREATE</span><span class="w"> </span><span class="err">TABLE</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">(col</span><span class="mi">1</span><span class="w"> </span><span class="err">INTEGER</span><span class="w"> </span><span class="err">PRIMARY</span><span class="w"> </span><span class="err">KEY</span><span class="p">,</span><span class="w"> </span><span class="err">col</span><span class="mi">2</span><span class="w"> </span><span class="err">TEXT);</span>
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p>Enable replication for the table so that you can capture changes made to it:<br>
-</p><div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="w">   </span><span class="err">ALTER</span><span class="w"> </span><span class="err">TABLE</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">REPLICA</span><span class="w"> </span><span class="err">IDENTITY</span><span class="w"> </span><span class="err">FULL;</span>
-</span></code></pre></div><p></p>
-</li>
-</ol>
-<h2 id="4-deploy-the-postgresconnector">4. Deploy the PostgresConnector</h2>
+<p>In this module you will configure and use Kafka Connect to capture changes being made to a PostgreSQL database.   </p>
+<h2 id="2-deploy-the-postgresconnector">2. Deploy the PostgresConnector</h2>
 <p>You will now deploy a PostgresConnector in Kafka Connect to capture changes in your assigned database.</p>
 <ol>
 <li>In the CDP Console, find the Streams Messaging (Kafka) DataHub of your environment and click on it to open the DataHub page.  </li>
@@ -919,17 +747,17 @@
 <ol>
 <li>If you are not connected to the PostgreSQL database, connect to it using psql (see steps 3.1 to 3.3 above)  </li>
 <li>Execute the following commands below to generate activity on the work table
-<div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="w">   </span><span class="err">INSERT</span><span class="w"> </span><span class="err">INTO</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">VALUES</span><span class="w"> </span><span class="err">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">'ONE');</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">   </span><span class="err">INSERT</span><span class="w"> </span><span class="err">INTO</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">VALUES</span><span class="w"> </span><span class="err">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="err">'TWO');</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">   </span><span class="err">INSERT</span><span class="w"> </span><span class="err">INTO</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">VALUES</span><span class="w"> </span><span class="err">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="err">'THREE');</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">   </span><span class="err">UPDATE</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">SET</span><span class="w"> </span><span class="err">col</span><span class="mi">2</span><span class="w"> </span><span class="err">\=</span><span class="w"> </span><span class="err">'TROIS'</span><span class="w"> </span><span class="err">WHERE</span><span class="w"> </span><span class="err">col</span><span class="mi">1</span><span class="w"> </span><span class="err">\=</span><span class="w"> </span><span class="mi">3</span><span class="err">;</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">   </span><span class="err">DELETE</span><span class="w"> </span><span class="err">FROM</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">WHERE</span><span class="w"> </span><span class="err">col</span><span class="mi">1</span><span class="w"> </span><span class="err">\=</span><span class="w"> </span><span class="mi">2</span><span class="err">;</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">   </span><span class="err">SELECT</span><span class="w"> </span><span class="err">\*</span><span class="w"> </span><span class="err">FROM</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble;</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">   </span><span class="err">INSERT</span><span class="w"> </span><span class="err">INTO</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">VALUES</span><span class="w"> </span><span class="err">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">'ONE');</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">   </span><span class="err">INSERT</span><span class="w"> </span><span class="err">INTO</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">VALUES</span><span class="w"> </span><span class="err">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="err">'TWO');</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">   </span><span class="err">INSERT</span><span class="w"> </span><span class="err">INTO</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">VALUES</span><span class="w"> </span><span class="err">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="err">'THREE');</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">   </span><span class="err">UPDATE</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">SET</span><span class="w"> </span><span class="err">col</span><span class="mi">2</span><span class="w"> </span><span class="err">\=</span><span class="w"> </span><span class="err">'TROIS'</span><span class="w"> </span><span class="err">WHERE</span><span class="w"> </span><span class="err">col</span><span class="mi">1</span><span class="w"> </span><span class="err">\=</span><span class="w"> </span><span class="mi">3</span><span class="err">;</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">   </span><span class="err">DELETE</span><span class="w"> </span><span class="err">FROM</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">WHERE</span><span class="w"> </span><span class="err">col</span><span class="mi">1</span><span class="w"> </span><span class="err">\=</span><span class="w"> </span><span class="mi">2</span><span class="err">;</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">   </span><span class="err">SELECT</span><span class="w"> </span><span class="err">\*</span><span class="w"> </span><span class="err">FROM</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble;</span>
 </span></code></pre></div></li>
 </ol>
 <h2 id="6-verify-results">6. Verify results</h2>

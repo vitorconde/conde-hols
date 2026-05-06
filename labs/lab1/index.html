@@ -85,7 +85,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#getting-started" class="md-skip">
+        <a href="#module-1-data-distribution-with-cdf" class="md-skip">
           Skip to content
         </a>
       
@@ -539,10 +539,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-deploy-the-flow-using-cli-optional" class="md-nav__link">
+  <a href="#7-deploy-the-flow-using-cli" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Deploy the Flow using CLI [Optional]
+        7. Deploy the Flow using CLI
       
     </span>
   </a>
@@ -814,10 +814,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-deploy-the-flow-using-cli-optional" class="md-nav__link">
+  <a href="#7-deploy-the-flow-using-cli" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Deploy the Flow using CLI [Optional]
+        7. Deploy the Flow using CLI
       
     </span>
   </a>
@@ -844,7 +844,7 @@
   
 
 
-<h1 id="getting-started"><strong>Getting Started</strong></h1>
+<h1 id="module-1-data-distribution-with-cdf"><strong>Module 1 - Data Distribution with CDF</strong></h1>
 <h2 id="1-overview"><strong>1. Overview</strong></h2>
 <p>In this module you will practice creating, testing and deploying a flow in CDF PC. You will learn to:</p>
 <ul>
@@ -872,21 +872,41 @@
 <li>Create a new schema with the following information:<br>
 <strong>Note</strong>: The name of the schema ("syslog") must match the name of the Kafka topic you will create later.  </li>
 </ol>
-<ul>
-<li>
-<p>Name: <strong><code>&lt;userid&gt;-syslog-avro</code></strong></p>
-</li>
-<li>
-<p>Description: <strong>syslog schema for dataflow workshop</strong></p>
-</li>
-<li>
-<p>Type: <strong>Avro schema provider</strong>  </p>
-</li>
-<li>Schema Group: <strong>Kafka</strong>  </li>
-<li>Compatibility: <strong>Backward</strong>  </li>
-<li>Evolve: <strong>True</strong>  </li>
-<li>Schema Text:</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td><code>USERNAME-syslog-avro</code></td>
+</tr>
+<tr>
+<td>Description</td>
+<td><code>syslog schema for dataflow workshop</code></td>
+</tr>
+<tr>
+<td>Type</td>
+<td><strong>Avro schema provider</strong></td>
+</tr>
+<tr>
+<td>Schema Group</td>
+<td><strong>Kafka</strong></td>
+</tr>
+<tr>
+<td>Compatibility</td>
+<td><strong>Backward</strong></td>
+</tr>
+<tr>
+<td>Evolve</td>
+<td><strong>True</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Schema Text:</strong> Copy and paste the following JSON schema definition:</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"syslog"</span><span class="p">,</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"record"</span><span class="p">,</span>
@@ -927,7 +947,7 @@
 <h2 id="3-design-the-flow-in-the-flow-designer"><strong>3. Design the flow in the Flow Designer</strong></h2>
 <h3 id="31-create-a-new-flow"><strong>3.1 Create a new flow</strong></h3>
 <ol>
-<li>In Cloudera DataFlow, open the Flow Designer and create a new flow called <strong>\&lt;userid&gt;-syslog-kafka-flow</strong>  </li>
+<li>In Cloudera DataFlow, open the Flow Designer and create a new flow called <code>USERNAME-syslog-kafka-flow</code></li>
 </ol>
 <p align="center">
   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.1.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.1.png" alt="Schema Registry Screenshot"></a>
@@ -944,7 +964,7 @@
   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.22.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.22.png" alt="Schema Registry Screenshot"></a>
 </p>
 
-<ol start="2">
+<ol>
 <li>Add the parameters. Click on <strong>Add Parameter &gt; Add Parameter</strong> for each parameter to be added and enter the appropriate details:</li>
 </ol>
 <table>
@@ -959,7 +979,7 @@
 <tr>
 <td>CDP Workload User</td>
 <td>CDP Workload User</td>
-<td><code>&lt;your own workload user name&gt;</code></td>
+<td><code>USERNAME</code></td>
 </tr>
 <tr>
 <td>Filter Rule</td>
@@ -969,32 +989,32 @@
 <tr>
 <td>Kafka Broker Endpoint</td>
 <td>Comma-separated list of Kafka Broker addresses</td>
-<td><code>&lt;comma-separated list of Kafka Broker addresses&gt;</code></td>
+<td><code>INSTRUCTOR - TODO Update kafka_broker_endpoints in mkdocs.yml</code></td>
 </tr>
 <tr>
 <td>Kafka Destination Avro Topic</td>
 <td>Kafka Avro topic name</td>
-<td><code>&lt;userid&gt;-syslog-avro</code></td>
+<td><code>USERNAME-syslog-avro</code></td>
 </tr>
 <tr>
 <td>Kafka Destination JSON Topic</td>
 <td>Kafka JSON topic name</td>
-<td><code>&lt;userid&gt;-syslog-json</code></td>
+<td><code>USERNAME-syslog-json</code></td>
 </tr>
 <tr>
 <td>Kafka Producer ID</td>
 <td>Kafka Producer ID</td>
-<td><code>&lt;userid&gt;-producer</code></td>
+<td><code>USERNAME-producer</code></td>
 </tr>
 <tr>
 <td>Schema Name</td>
 <td>Schema name</td>
-<td><code>&lt;userid&gt;-syslog-avro</code></td>
+<td><code>USERNAME-syslog-avro</code></td>
 </tr>
 <tr>
 <td>Schema Registry Hostname</td>
 <td>Hostname of Schema Registry service</td>
-<td><code>&lt;hostname of Schema Registry service&gt;</code></td>
+<td><code>INSTRUCTOR - TODO Update schema_registry_hostname in mkdocs.yml</code></td>
 </tr>
 </tbody>
 </table>
@@ -1016,7 +1036,7 @@
 <p align="center">
   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/1.32.9.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/1.32.9.png" alt="Schema Registry Screenshot"></a>
 </p>
-
+<!--  TODO Better info for user how to create and and workload password -->
 <ol>
 <li>Add the <em>sensitive</em> parameters. Click on <strong>Add Parameter &gt; Add Sensitive Parameter</strong> for each parameter to be added and enter the appropriate details:</li>
 </ol>
@@ -1073,35 +1093,59 @@
 <p></p>
 </li>
 <li>
-<p><strong>Add a new ClouderaSchemaRegistry controller service</strong>
+<p><strong>Add a new HortonworksSchemaRegistry controller service</strong>
    - Click <strong>Add Service</strong>. The <strong>Add Service</strong> page opens.
      </p><p align="center">
        <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.3.3.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.3.3.png" alt="Add Service"></a>
      </p>
-   - In the text box, filter for <strong>ClouderaSchemaRegistry</strong>, select it and click <strong>Add</strong>.
-   - Configure the ClouderaSchemaRegistry service:
+   - In the text box, filter for <strong>HortonworksSchemaRegistry</strong>, select it and click <strong>Add</strong>.
+   - Configure the HortonworksSchemaRegistry service:
      <p align="center">
        <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.3.4.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.3.4.png" alt="Schema Registry Properties"></a>
      </p><p></p>
-<ul>
-<li>Service Name: <strong>WS_CDP_Schema_Registry</strong></li>
-<li>Properties:<ul>
-<li>Schema Registry URL: <code>https://#{Schema Registry Hostname}:7790/api/v1</code></li>
-<li>SSL Context Service: <strong>Default NiFi SSL Context Service</strong></li>
-<li>basic-auth-username : <code>#{CDP Workload User}</code></li>
-<li>basic-auth-password: <code>#{CDP Workload User Password}</code>
- <p align="center">
-   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.3.5.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.3.5.png" alt="Schema Registry Properties"></a>
- </p></li>
-</ul>
 </li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Service Name</td>
+<td><strong>WS_CDP_Schema_Registry</strong></td>
+</tr>
+<tr>
+<td>Schema Registry URL</td>
+<td><code>https:// INSTRUCTOR - TODO Update schema_registry_hostname in mkdocs.yml:7790/api/v1</code></td>
+</tr>
+<tr>
+<td>SSL Context Service</td>
+<td><strong>Default NiFi SSL Context Service</strong></td>
+</tr>
+<tr>
+<td>Kerberos Principal</td>
+<td><code>#{CDP Workload User}</code></td>
+</tr>
+<tr>
+<td>Kerberos Password</td>
+<td><code>#{CDP Workload User Password}</code></td>
+</tr>
+</tbody>
+</table>
+<p align="center">
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.3.5.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.3.5.png" alt="Schema Registry Properties"></a>
+  </p>
+<ul>
 <li>Click <strong>Apply</strong></li>
 <li>Activate the service by clicking on the <strong>Enable</strong> icon
- <p align="center">
-   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.3.6.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.3.6.png" alt="Enable Service"></a>
- </p></li>
+     <p align="center">
+       <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.3.6.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.3.6.png" alt="Enable Service"></a>
+     </p></li>
 </ul>
-</li>
+<ol start="4">
 <li>
 <p>Add a new <strong>Syslog5424Reader</strong> controller service<br>
 <br>
@@ -1175,7 +1219,7 @@
          <li>Service Name: <strong>WS_Avro_Syslog_Writer</strong></li>
          <li>Properties:
            <ol>
-             <li>Schema Write Strategy: <strong>Embed Avro Schema</strong></li>
+             <li>Schema Write Strategy: <strong>HWX Content-Encoded Schema Reference</strong></li>
              <li>Schema Access Strategy: <strong>Use 'Schema Name' Property</strong></li>
              <li>Schema Registry: <strong>WS_CDP_Schema_Registry</strong></li>
              <li>Schema Name: <strong>#{Schema Name}</strong></li>
@@ -1336,8 +1380,8 @@
 <li>Configure the processor as follows:  <ol>
 <li>Processor Name: <strong>Write To Kafka - Avro</strong>  </li>
 <li>Properties:  <ol>
-<li>Kafka Brokers / bootstrap.servers <strong>#{Kafka Broker Endpoint}</strong>  </li>
-<li>Topic Name / topic: <strong>#{Kafka Destination Avro Topic}</strong>  </li>
+<li>Kafka Brokers: <strong>#{Kafka Broker Endpoint}</strong>  </li>
+<li>Topic Name: <strong>#{Kafka Destination Avro Topic}</strong>  </li>
 <li>Record Reader: <strong>WS_JSON_Syslog_Reader</strong>  </li>
 <li>Record Writer: <strong>WS_Avro_Syslog_Writer</strong>   </li>
 <li>Use Transactions: <strong>false</strong>  </li>
@@ -1455,7 +1499,14 @@
 <li>You can see that the data in that topic is binary (lots of garbage-like characters on the screen. This is because the topic contains Avro messages, which is a binary serialization format.)</li>
 </ol>
 <p>Fortunately, SMM is integrated to Schema Registry and can fetch the correct schema to properly deserialize the data and present a human-readable form of it.</p>
-<p>To do that select <strong>SMM</strong> as the <strong>Viewer</strong> to deserializer</p>
+<p>To do that select <strong>Avro</strong> as the <strong>Values</strong> Deserializer for the topic:<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/4.33.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/4.33.png" alt="Schema Registry Screenshot"></a></p>
+<p></p>
+<p>You will notice that after Avro is selected the messages are shown with a readable JSON encoding:<br>
+<br>
+</p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/4.34.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/4.34.png" alt="Schema Registry Screenshot"></a></p>
+<p></p>
 <h2 id="5-version-control-the-flow-into-the-dataflow-catalog"><strong>5. Version Control the flow into the DataFlow Catalog</strong></h2>
 <p>When your flow draft has been tested and is ready to be used you can publish it to the DataFlow Catalog so that you can deploy it from there.</p>
 <p>On the first time a flow draft is exported to the catalog you are asked to provide a name for the flow. This name must be unique and must not already exist in the catalog. After a flow is published, subsequent changes that are published will be saved in the catalog as new versions using the same name provided the first time. This name cannot be changed.</p>
@@ -1501,7 +1552,7 @@
 <p>4. Select the CDP environment where this flow will be deployed and click <strong>Continue</strong><br>
 <br>
 </p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/6.42.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/6.42.png" alt="Schema Registry Screenshot"></a></p><p></p>
-<p>5. Give the deployment a unique name (e.g <strong>\&lt;userid&gt;-syslog-to-kafka-001</strong>), then click <strong>Next</strong><br>
+<p>5. Give the deployment a unique name ( <strong><code>USERNAME-syslog-to-kafka-001</code></strong>), then click <strong>Next</strong><br>
 <br>
 </p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/6.43.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/6.43.png" alt="Schema Registry Screenshot"></a></p><p></p>
 <p>6. In the <strong>NiFi Configuration</strong> page, accept all the defaults (runtime version, autostart behavior, inbound connections and custom NAR) and click <strong>Next</strong>.<br>
@@ -1509,10 +1560,10 @@
 <em> CDP Workload User: The workload username for the current user<br>
 </em> CDP Workload Password: The workload password for the current user<br>
 <em> Kafka Broker Endpoint: A comma separated list of Kafka Brokers. <br>
-</em> Kafka Destination Avro Topic: <strong>\&lt;userid&gt;-syslog-avro</strong><br>
-<em> Kafka Destination JSON Topic: </em><em>\&lt;userid&gt;-syslog-json</em><em><br>
-</em> Kafka Producer ID: <strong>\&lt;userid&gt;-producer</strong><br>
-<em> Schema Name: </em><em>\&lt;userid&gt;-syslog-avro</em><em><br>
+</em> Kafka Destination Avro Topic: <code>USERNAME-syslog-avro</code><br>
+<em> Kafka Destination JSON Topic: <code>USERNAME-syslog-json</code><br>
+</em> Kafka Producer ID: <code>USERNAME-producer</code><br>
+<em> Schema Name: <code>USERNAME-syslog-avro</code><br>
 </em> Schema Registry Hostname: The hostname of the master server in the Kafka Datahub.<br>
 <em> Filter Rule: </em><em>SELECT * FROM FLOWFILE</em>*  </p>
 <ol start="8">
@@ -1581,7 +1632,7 @@
 <p>Explore the links in the <strong>Actions</strong> menu on this page.</p>
 </li>
 </ol>
-<h2 id="7-deploy-the-flow-using-cli-optional"><strong>7. Deploy the Flow using CLI [Optional]</strong></h2>
+<h2 id="7-deploy-the-flow-using-cli"><strong>7. Deploy the Flow using CLI</strong></h2>
 <p>In this section you will use the CDP CLI to deploy a flow in Cloudera DataFlow. For this you will use the following files created in the last section:</p>
 <ul>
 <li><strong>deploy.sh</strong>: file created with the CLI command copied from the CLI Command page.  </li>

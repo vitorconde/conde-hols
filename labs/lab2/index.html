@@ -943,14 +943,14 @@
 <li>Create and execute Jobs in SSB.</li>
 </ul>
 <h2 id="2-inspect-kafka-topics-in-smm"><strong>2. Inspect Kafka topics in SMM</strong></h2>
-<p>Use SMM to to show the kafka topics <strong><userid>-syslog-avro</userid></strong> that is being written to from the NiFi flow in module 1</p>
+<p>Use SMM to to show the kafka topics <strong><code>USERNAME-syslog-avro</code></strong> that is being written to from the NiFi flow in module 1</p>
 <ol>
 <li>Login to <strong>SMM</strong>.  </li>
 <li>
 <p>Click on the <strong>Topics icon</strong> <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.50.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.50.png" alt="SMM Topics icon and syslog-avro topic" style="vertical-align:middle; width:40px; height:36px;"></a></p>
 </li>
 <li>
-<p>and filter the topic <strong><userid>-syslog-avro</userid></strong>, which was created by the NiFi flow in Module 1<br>
+<p>and filter the topic <strong><code>USERNAME-syslog-avro</code></strong>, which was created by the NiFi flow in Module 1<br>
 <br>
 </p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.51.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.51.png" alt="Profile icon for syslog-avro topic"></a></p>
 <p></p>
@@ -1027,14 +1027,14 @@
 <li>
 <p>Enter the following details in the Create Project dialog box:  </p>
 <ol>
-<li>Name: <strong>\&lt;an unique name for your project&gt;</strong>  </li>
-<li>Clone URL: <strong>\&lt;the URL you copied in step 4&gt;</strong>  </li>
+<li>Name: <strong>&lt;an unique name for your project&gt;</strong>  </li>
+<li>Clone URL: <strong>&lt;the URL you copied in step 4&gt;</strong>  </li>
 <li>Branch: <strong>main</strong> (by default a GitHub repository is created with a <strong>main</strong> branch. If you modified that, make sure you specify the correct branch name here)  </li>
 <li>Authentication: <strong>Enabled</strong>  </li>
 <li>Method: <strong>SSH</strong>  </li>
-<li>Private Key: <strong>\&lt;upload the private key file associated with the key in your GitHub account&gt;</strong>  </li>
-<li>Public Key: <strong>\&lt;upload the public key file associated with the key in your GitHub account&gt;</strong>  </li>
-<li>Passphrase for Private Key: <strong>\&lt;if your private key is protected by a passphrase, enter it here; otherwise, leave it blank&gt;</strong><br>
+<li>Private Key: <strong>&lt;upload the private key file associated with the key in your GitHub account&gt;</strong>  </li>
+<li>Public Key: <strong>&lt;upload the public key file associated with the key in your GitHub account&gt;</strong>  </li>
+<li>Passphrase for Private Key: <strong>&lt;if your private key is protected by a passphrase, enter it here; otherwise, leave it blank&gt;</strong><br>
   <p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.63.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.63.png" alt="Create Project dialog in SSB"></a></p></li>
 </ol>
 </li>
@@ -1127,9 +1127,9 @@
 <li>
 <p>Enter the following details in the Catalog dialog box:  </p>
 <ol>
-<li>Name: <strong>\&lt;name of the catalog. E.g. dh-kudu&gt;</strong>  </li>
+<li>Name: <strong>&lt;name of the catalog. E.g. dh-kudu&gt;</strong>  </li>
 <li>Catalog Type: <strong>Kudu</strong>  </li>
-<li>Kudu Masters: <strong>\&lt;kudu_master1&gt;:7051,\&lt;kudu_master2&gt;:7051,\&lt;kudu_master3&gt;:7051</strong> <em>(see </em><em>Notes</em><em> below)</em>  </li>
+<li>Kudu Masters: <strong>&lt;kudu_master1&gt;:7051,\&lt;kudu_master2&gt;:7051,\&lt;kudu_master3&gt;:7051</strong> <em>(see </em><em>Notes</em><em> below)</em>  </li>
 </ol>
 <p></p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.77.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.77.png" alt="Kudu Masters configuration in SSB"></a></p><p></p>
 </li>
@@ -1305,17 +1305,17 @@
 <p>On the Explorer view, right-click on the <strong>Jobs</strong> item and select <strong>New Job</strong> to create a new job. Call it <strong>job2</strong>.</p>
 </li>
 <li>
-<p>Enter the same query from the previous job, but using the <strong>\&lt;userid&gt;-syslog-avro</strong> table (use the auto-completion to find the correct table name - <strong>\&lt;CTRL&gt;+\&lt;SPACE&gt;</strong>). You will notice that the auto-completion will prefix the table name with the catalog and database names:
-</p><div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="w">   </span><span class="err">SELECT</span><span class="w"> </span><span class="err">\*</span>
+<p>Enter the same query from the previous job, but using the <strong><code>USERNAME-syslog-avro</code></strong> table (use the auto-completion to find the correct table name - <strong>\&lt;CTRL&gt;+\&lt;SPACE&gt;</strong>). You will notice that the auto-completion will prefix the table name with the catalog and database names:
+</p><div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="w">   </span><span class="err">SELECT</span><span class="w"> </span><span class="err">*</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">   </span><span class="err">FROM</span><span class="w"> </span><span class="err">**\</span><span class="p">[</span><span class="err">au</span><span class="kc">t</span><span class="err">o</span><span class="mi">-</span><span class="err">comple</span><span class="kc">te</span><span class="w"> </span><span class="kc">t</span><span class="err">he</span><span class="w"> </span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">\&lt;userid\&gt;</span><span class="mi">-</span><span class="err">syslog</span><span class="mi">-</span><span class="err">avro\</span><span class="p">]</span><span class="err">**</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">   </span><span class="err">FROM</span><span class="w"> </span><span class="err">**</span><span class="p">[</span><span class="err">au</span><span class="kc">t</span><span class="err">o</span><span class="mi">-</span><span class="err">comple</span><span class="kc">te</span><span class="w"> </span><span class="kc">t</span><span class="err">he</span><span class="w"> </span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">`USERNAME</span><span class="mi">-</span><span class="err">syslog</span><span class="mi">-</span><span class="err">avro`</span><span class="p">]</span><span class="err">**</span>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">   </span><span class="err">WHERE</span><span class="w"> </span><span class="err">severi</span><span class="kc">t</span><span class="err">y</span><span class="w"> </span><span class="err">\=</span><span class="w"> </span><span class="mi">3</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">   </span><span class="err">WHERE</span><span class="w"> </span><span class="err">severi</span><span class="kc">t</span><span class="err">y</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="mi">3</span>
 </span></code></pre></div><p></p>
 </li>
 </ol>
 <p>Click <strong>Execute</strong> and check the results to verify that everything works as expected.</p>
-<ol start="3">
+<ol>
 <li>Once you're done, <strong>Stop</strong> your job.</li>
 </ol>
 <h3 id="93-job-3-using-a-windowing-function"><strong>9.3. Job 3: Using a windowing function</strong></h3>
@@ -1328,17 +1328,17 @@
 <li>
 <p>Enter the following query in the SQL editor:
 </p><div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="w">   </span><span class="err">SELECT</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">     </span><span class="err">wi</span><span class="kc">n</span><span class="err">dow\_s</span><span class="kc">tart</span><span class="p">,</span><span class="w"> </span><span class="err">wi</span><span class="kc">n</span><span class="err">dow\_e</span><span class="kc">n</span><span class="err">d</span><span class="p">,</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">     </span><span class="err">wi</span><span class="kc">n</span><span class="err">dow_s</span><span class="kc">tart</span><span class="p">,</span><span class="w"> </span><span class="err">wi</span><span class="kc">n</span><span class="err">dow_e</span><span class="kc">n</span><span class="err">d</span><span class="p">,</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">     </span><span class="err">severi</span><span class="kc">t</span><span class="err">y</span><span class="p">,</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">     </span><span class="err">cou</span><span class="kc">nt</span><span class="err">(\*)</span><span class="w"> </span><span class="err">as</span><span class="w"> </span><span class="err">severi</span><span class="kc">t</span><span class="err">y\_cou</span><span class="kc">nt</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">     </span><span class="err">cou</span><span class="kc">nt</span><span class="err">(*)</span><span class="w"> </span><span class="err">as</span><span class="w"> </span><span class="err">severi</span><span class="kc">t</span><span class="err">y_cou</span><span class="kc">nt</span>
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">   </span><span class="err">FROM</span>
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">     </span><span class="err">TABLE(</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">       </span><span class="err">HOP(TABLE</span><span class="w"> </span><span class="err">syslog\_da</span><span class="kc">ta</span><span class="p">,</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">           </span><span class="err">DESCRIPTOR(eve</span><span class="kc">nt</span><span class="err">\_</span><span class="kc">t</span><span class="err">ime)</span><span class="p">,</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">       </span><span class="err">HOP(TABLE</span><span class="w"> </span><span class="err">syslog_da</span><span class="kc">ta</span><span class="p">,</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">           </span><span class="err">DESCRIPTOR(eve</span><span class="kc">nt</span><span class="err">_</span><span class="kc">t</span><span class="err">ime)</span><span class="p">,</span>
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">           </span><span class="err">INTERVAL</span><span class="w"> </span><span class="err">'</span><span class="mi">5</span><span class="err">'</span><span class="w"> </span><span class="err">SECOND</span><span class="p">,</span>
 </span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">           </span><span class="err">INTERVAL</span><span class="w"> </span><span class="err">'</span><span class="mi">30</span><span class="err">'</span><span class="w"> </span><span class="err">SECOND))</span>
 </span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">   </span><span class="err">GROUP</span><span class="w"> </span><span class="err">BY</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">     </span><span class="err">wi</span><span class="kc">n</span><span class="err">dow\_s</span><span class="kc">tart</span><span class="p">,</span><span class="w"> </span><span class="err">wi</span><span class="kc">n</span><span class="err">dow\_e</span><span class="kc">n</span><span class="err">d</span><span class="p">,</span><span class="w"> </span><span class="err">severi</span><span class="kc">t</span><span class="err">y</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">     </span><span class="err">wi</span><span class="kc">n</span><span class="err">dow_s</span><span class="kc">tart</span><span class="p">,</span><span class="w"> </span><span class="err">wi</span><span class="kc">n</span><span class="err">dow_e</span><span class="kc">n</span><span class="err">d</span><span class="p">,</span><span class="w"> </span><span class="err">severi</span><span class="kc">t</span><span class="err">y</span>
 </span></code></pre></div><p></p>
 </li>
 </ol>
@@ -1357,23 +1357,22 @@
 <li>
 <p>Enter the following query in the SQL editor:
 </p><div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="w">   </span><span class="err">SELECT</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">     </span><span class="err">a.wi</span><span class="kc">n</span><span class="err">dow\_s</span><span class="kc">tart</span><span class="p">,</span><span class="w"> </span><span class="err">a.wi</span><span class="kc">n</span><span class="err">dow\_e</span><span class="kc">n</span><span class="err">d</span><span class="p">,</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">     </span><span class="err">a.wi</span><span class="kc">n</span><span class="err">dow_s</span><span class="kc">tart</span><span class="p">,</span><span class="w"> </span><span class="err">a.wi</span><span class="kc">n</span><span class="err">dow_e</span><span class="kc">n</span><span class="err">d</span><span class="p">,</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">     </span><span class="err">a.severi</span><span class="kc">t</span><span class="err">y</span><span class="p">,</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">     </span><span class="err">b.severi</span><span class="kc">t</span><span class="err">y\_desc</span><span class="p">,</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">     </span><span class="err">cou</span><span class="kc">nt</span><span class="err">(\*)</span><span class="w"> </span><span class="err">as</span><span class="w"> </span><span class="err">severi</span><span class="kc">t</span><span class="err">y\_cou</span><span class="kc">nt</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">     </span><span class="err">b.severi</span><span class="kc">t</span><span class="err">y_desc</span><span class="p">,</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">     </span><span class="err">cou</span><span class="kc">nt</span><span class="err">(*)</span><span class="w"> </span><span class="err">as</span><span class="w"> </span><span class="err">severi</span><span class="kc">t</span><span class="err">y_cou</span><span class="kc">nt</span>
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">   </span><span class="err">FROM</span>
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">     </span><span class="err">TABLE(</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">       </span><span class="err">HOP(TABLE</span><span class="w"> </span><span class="err">syslog\_da</span><span class="kc">ta</span><span class="p">,</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">           </span><span class="err">DESCRIPTOR(eve</span><span class="kc">nt</span><span class="err">\_</span><span class="kc">t</span><span class="err">ime)</span><span class="p">,</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">       </span><span class="err">HOP(TABLE</span><span class="w"> </span><span class="err">syslog_da</span><span class="kc">ta</span><span class="p">,</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">           </span><span class="err">DESCRIPTOR(eve</span><span class="kc">nt</span><span class="err">_</span><span class="kc">t</span><span class="err">ime)</span><span class="p">,</span>
 </span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">           </span><span class="err">INTERVAL</span><span class="w"> </span><span class="err">'</span><span class="mi">5</span><span class="err">'</span><span class="w"> </span><span class="err">SECOND</span><span class="p">,</span>
 </span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">           </span><span class="err">INTERVAL</span><span class="w"> </span><span class="err">'</span><span class="mi">30</span><span class="err">'</span><span class="w"> </span><span class="err">SECOND))</span><span class="w"> </span><span class="err">a</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">     </span><span class="err">JOIN</span><span class="w"> </span><span class="err">**\</span><span class="p">[</span><span class="err">au</span><span class="kc">t</span><span class="err">o</span><span class="mi">-</span><span class="err">comple</span><span class="kc">te</span><span class="w"> </span><span class="kc">t</span><span class="err">he</span><span class="w"> </span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">de</span><span class="kc">fault</span><span class="err">.syslog\_severi</span><span class="kc">t</span><span class="err">y\</span><span class="p">]</span><span class="err">**</span><span class="w"> </span><span class="err">b</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">       </span><span class="err">ON</span><span class="w"> </span><span class="err">a.severi</span><span class="kc">t</span><span class="err">y</span><span class="w"> </span><span class="err">\=</span><span class="w"> </span><span class="err">b.severi</span><span class="kc">t</span><span class="err">y</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">     </span><span class="err">JOIN</span><span class="w"> </span><span class="err">**</span><span class="p">[</span><span class="err">au</span><span class="kc">t</span><span class="err">o</span><span class="mi">-</span><span class="err">comple</span><span class="kc">te</span><span class="w"> </span><span class="kc">t</span><span class="err">he</span><span class="w"> </span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">de</span><span class="kc">fault</span><span class="err">.syslog_severi</span><span class="kc">t</span><span class="err">y</span><span class="p">]</span><span class="err">**</span><span class="w"> </span><span class="err">b</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">       </span><span class="err">ON</span><span class="w"> </span><span class="err">a.severi</span><span class="kc">t</span><span class="err">y</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">b.severi</span><span class="kc">t</span><span class="err">y</span>
 </span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">   </span><span class="err">GROUP</span><span class="w"> </span><span class="err">BY</span>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">     </span><span class="err">a.wi</span><span class="kc">n</span><span class="err">dow\_s</span><span class="kc">tart</span><span class="p">,</span><span class="w"> </span><span class="err">a.wi</span><span class="kc">n</span><span class="err">dow\_e</span><span class="kc">n</span><span class="err">d</span><span class="p">,</span><span class="w"> </span><span class="err">a.severi</span><span class="kc">t</span><span class="err">y</span><span class="p">,</span><span class="w"> </span><span class="err">b.severi</span><span class="kc">t</span><span class="err">y\_desc</span>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">   </span><span class="err">Click</span><span class="w"> </span><span class="err">**Execu</span><span class="kc">te</span><span class="err">**</span><span class="w"> </span><span class="err">a</span><span class="kc">n</span><span class="err">d</span><span class="w"> </span><span class="err">check</span><span class="w"> </span><span class="kc">t</span><span class="err">he</span><span class="w"> </span><span class="err">resul</span><span class="kc">ts</span><span class="w"> </span><span class="kc">t</span><span class="err">o</span><span class="w"> </span><span class="err">veri</span><span class="kc">f</span><span class="err">y</span><span class="w"> </span><span class="kc">t</span><span class="err">ha</span><span class="kc">t</span><span class="w"> </span><span class="err">every</span><span class="kc">t</span><span class="err">hi</span><span class="kc">n</span><span class="err">g</span><span class="w"> </span><span class="err">works</span><span class="w"> </span><span class="err">as</span><span class="w"> </span><span class="err">expec</span><span class="kc">te</span><span class="err">d.</span>
-</span></code></pre></div><p></p>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">     </span><span class="err">a.wi</span><span class="kc">n</span><span class="err">dow_s</span><span class="kc">tart</span><span class="p">,</span><span class="w"> </span><span class="err">a.wi</span><span class="kc">n</span><span class="err">dow_e</span><span class="kc">n</span><span class="err">d</span><span class="p">,</span><span class="w"> </span><span class="err">a.severi</span><span class="kc">t</span><span class="err">y</span><span class="p">,</span><span class="w"> </span><span class="err">b.severi</span><span class="kc">t</span><span class="err">y_desc</span>
+</span></code></pre></div>
+   Click <strong>Execute</strong> and check the results to verify that everything works as expected.<p></p>
 </li>
 <li>Once you're done, <strong>Stop</strong> your job.</li>
 </ol>
@@ -1389,7 +1388,7 @@ SSB makes it really easy to write data to different locations. All you have to d
 <li>
 <p>Enter the following properties for your topic:  </p>
 </li>
-<li>Topic Name: <strong>\&lt;userid&gt;-severity-counts</strong>  </li>
+<li>Topic Name: <strong><code>USERNAME-severity-counts</code></strong>  </li>
 <li>Partitions: <strong>1</strong>  </li>
 <li>Availability: <strong>MAXIMUM</strong>  </li>
 <li>Cleanup Policy: <strong>delete</strong></li>
@@ -1401,7 +1400,7 @@ SSB makes it really easy to write data to different locations. All you have to d
 <p>Back in the SSB UI, select <strong>job4</strong> in the Explorer pane to open the SQL editor for it. You should see the aggregation query that you had created in the previous section.  </p>
 </li>
 <li>
-<p>Before you can run this job in production you need to create a Virtual Table in SSB and map it to the <strong>\&lt;userid&gt;-severity-counts</strong> Kafka topic that was created above.</p>
+<p>Before you can run this job in production you need to create a Virtual Table in SSB and map it to the <strong><code>USERNAME-severity-counts</code></strong> Kafka topic that was created above.</p>
 </li>
 </ol>
 <p>The structure/schema of this table must match the structure of the output of the query that is being executed. Thankfully, SSB has a template feature that makes this very easy to do.  </p>
@@ -1413,16 +1412,16 @@ SSB makes it really easy to write data to different locations. All you have to d
 <li>The added template is a CREATE TABLE statement to create a Virtual Table of the type you selected. Before you can execute it you have to complete the template with the missing information.</li>
 </ol>
 <p>Make the following changes to the template:<br>
-   1. Table name: change the table name to <strong>&lt;userid&gt;_severity_counts</strong><br>
+   1. Table name: change the table name to <strong><code>USERNAME_severity_counts</code></strong><br>
    2. Primary key: add the following primary key clause after the last column in the table (severity_count):<br>
    3. Properties: replace all the properties in the WITH clause with the following:  </p>
 <div class="language-text highlight"><pre><span></span><code>  'connector' = 'upsert-kafka: &lt;data_source_name&gt;',
-  'topic' = '&lt;userid&gt;-severity-counts',
+  'topic' = '`USERNAME-severity-counts`',
   'key.format' = 'json',
   'value.format' = 'json'
 </code></pre></div>
 <ol start="4">
-<li>topic: <strong>&lt;userid&gt;-severity-counts</strong></li>
+<li>topic: <strong><code>USERNAME-severity-counts</code></strong></li>
 </ol>
 <p>There are other optional properties commented out in the template that you can ignore. The completed template should look like the one below:</p>
 <p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.98.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.98.png" alt="Completed CREATE TABLE template in SSB"></a></p>
@@ -1441,7 +1440,7 @@ SSB makes it really easy to write data to different locations. All you have to d
 </li>
 <li>
 <p>Modify the original query in the editor by adding the following line before the SELECT keyword:
-</p><div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w">   </span><span class="err">INSERT</span><span class="w"> </span><span class="err">INTO</span><span class="w"> </span><span class="err">&lt;userid&gt;_severi</span><span class="kc">t</span><span class="err">y_cou</span><span class="kc">nts</span>
+</p><div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w">   </span><span class="err">INSERT</span><span class="w"> </span><span class="err">INTO</span><span class="w"> </span><span class="err">`USERNAME_severi</span><span class="kc">t</span><span class="err">y_cou</span><span class="kc">nts</span><span class="err">`</span>
 </span></code></pre></div><p></p>
 </li>
 </ol>
@@ -1455,7 +1454,7 @@ SSB makes it really easy to write data to different locations. All you have to d
 <li>
 <p>You should see the output of the query on the Results tab once the job starts executing. You can close the tab or window at any time and the job will continue running on the Flink cluster.  </p>
 </li>
-<li>Open the SMM UI again, click on the <strong>Topics icon</strong> <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.50.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.50.png" style="vertical-align:middle; width:30px;" alt="Valid schema in SSB"></a> and search for the <strong>&lt;userid&gt;-severity-counts</strong> topic.  </li>
+<li>Open the SMM UI again, click on the <strong>Topics icon</strong> <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.50.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.50.png" style="vertical-align:middle; width:30px;" alt="Valid schema in SSB"></a> and search for the <strong><code>USERNAME-severity-counts</code></strong> topic.  </li>
 <li>
 <p>Click on the Data Explorer icon (<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.102.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.102.png" style="vertical-align:middle; width:30px;" alt="Valid schema in SSB"></a>) for the topic  to visualize the data in the topic. You should be able to see recently added data with the aggregations produced by <strong>job4</strong>:</p>
 <p></p><p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab2/2.103.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab2/2.103.png" alt="Aggregations produced by job4 in SMM"></a></p><p></p>

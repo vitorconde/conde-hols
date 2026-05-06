@@ -494,10 +494,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-deploy-the-postgresconnector" class="md-nav__link">
+  <a href="#2-required-details" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Deploy the PostgresConnector
+        2. Required details
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-create-a-work-table-in-the-postgresql-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Create a work table in the PostgreSQL database
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Create a work table in the PostgreSQL database">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quick-psql-cheat-sheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🐘 Quick psql Cheat Sheet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-deploy-the-postgresconnector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Deploy the PostgresConnector
       
     </span>
   </a>
@@ -580,10 +619,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-deploy-the-postgresconnector" class="md-nav__link">
+  <a href="#2-required-details" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Deploy the PostgresConnector
+        2. Required details
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-create-a-work-table-in-the-postgresql-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Create a work table in the PostgreSQL database
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Create a work table in the PostgreSQL database">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quick-psql-cheat-sheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🐘 Quick psql Cheat Sheet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-deploy-the-postgresconnector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Deploy the PostgresConnector
       
     </span>
   </a>
@@ -640,8 +718,95 @@
 <li>Synchronizing incremental data from databases to other systems  </li>
 <li>Collecting and storing audit records from database changes</li>
 </ul>
-<p>In this module you will configure and use Kafka Connect to capture changes being made to a PostgreSQL database.   </p>
-<h2 id="2-deploy-the-postgresconnector">2. Deploy the PostgresConnector</h2>
+<p>In this module you will configure and use Kafka Connect to capture changes being made to a PostgreSQL database.</p>
+<h2 id="2-required-details">2. Required details</h2>
+<p>The PostgreSQL database used in the workshop is hosted in a VM created in the cloud environment. To connect to PostgreSQL you must first connect to the VM (using your web browser) and then connect to PostgreSQL using the command line tool psql.</p>
+<p>Your workshop instructor will share the IP address and credentials to connect to the VM and to the PostgreSQL database. Before starting the workshop, ensure you have the following details for your group:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Credential</th>
+<th style="text-align: left;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">🖥️ <strong>VM IP Address</strong></td>
+<td style="text-align: left;"><code>INSTRUCTOR - TODO Update bastion_vm_hostname in mkdocs.yml</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">👤 <strong>OS Username</strong></td>
+<td style="text-align: left;"><code>workshop</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">🔑 <strong>OS Password</strong></td>
+<td style="text-align: left;"><code>cloudera</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">🗄️ <strong>DB Host IP</strong></td>
+<td style="text-align: left;"><code>localhost</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">🧑‍💻 <strong>DB Username</strong></td>
+<td style="text-align: left;"><code>cdc_USERNAME</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">🔐 <strong>DB Password</strong></td>
+<td style="text-align: left;"><code>cloudera</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">💾 <strong>DB Name</strong></td>
+<td style="text-align: left;"><code>DB_NAME</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-create-a-work-table-in-the-postgresql-database">3. Create a work table in the PostgreSQL database</h2>
+<ol>
+<li>Open a new browser tab and connect to <a href="https://INSTRUCTOR - TODO Update bastion_vm_hostname in mkdocs.yml/workshop/">https://INSTRUCTOR - TODO Update bastion_vm_hostname in mkdocs.yml/workshop/</a></li>
+<li>Login with the OS credentials listed in the table above  </li>
+<li>Once you are logged in, execute the following command to connect to your assigned PostgreSQL database:<br>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">   </span><span class="err">psql</span><span class="w"> </span><span class="mi">--</span><span class="err">hos</span><span class="kc">t</span><span class="w"> </span><span class="err">localhos</span><span class="kc">t</span><span class="w"> </span><span class="mi">--</span><span class="err">por</span><span class="kc">t</span><span class="w"> </span><span class="mi">5432</span><span class="w"> </span><span class="mi">--</span><span class="err">user</span><span class="w"> </span><span class="err">cdc_USERNAME</span><span class="w"> </span><span class="mi">--</span><span class="err">db</span><span class="kc">na</span><span class="err">me</span><span class="w"> </span><span class="err">DB_NAME</span>
+</span></code></pre></div></li>
+</ol>
+<p>The username and database name will be automatically populated based on your input at the top of the page.  </p>
+<h3 id="quick-psql-cheat-sheet">🐘 Quick psql Cheat Sheet</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Command</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>\d</code></td>
+<td style="text-align: left;">List all tables, views, and sequences.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>\d &lt;table_name&gt;</code></td>
+<td style="text-align: left;">Describe a specific table (columns, types, etc.).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>\q</code></td>
+<td style="text-align: left;">Exit the psql interactive terminal.</td>
+</tr>
+</tbody>
+</table>
+<ol start="4">
+<li>
+<p>Create a table by executing the following commands in psql:<br>
+</p><div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="w">   </span><span class="err">DROP</span><span class="w"> </span><span class="err">TABLE</span><span class="w"> </span><span class="err">IF</span><span class="w"> </span><span class="err">EXISTS</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">   </span><span class="err">CREATE</span><span class="w"> </span><span class="err">TABLE</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">(col</span><span class="mi">1</span><span class="w"> </span><span class="err">INTEGER</span><span class="w"> </span><span class="err">PRIMARY</span><span class="w"> </span><span class="err">KEY</span><span class="p">,</span><span class="w"> </span><span class="err">col</span><span class="mi">2</span><span class="w"> </span><span class="err">TEXT);</span>
+</span></code></pre></div><p></p>
+</li>
+<li>
+<p>Enable replication for the table so that you can capture changes made to it:<br>
+</p><div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="w">   </span><span class="err">ALTER</span><span class="w"> </span><span class="err">TABLE</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">REPLICA</span><span class="w"> </span><span class="err">IDENTITY</span><span class="w"> </span><span class="err">FULL;</span>
+</span></code></pre></div><p></p>
+</li>
+</ol>
+<h2 id="4-deploy-the-postgresconnector">4. Deploy the PostgresConnector</h2>
 <p>You will now deploy a PostgresConnector in Kafka Connect to capture changes in your assigned database.</p>
 <ol>
 <li>In the CDP Console, find the Streams Messaging (Kafka) DataHub of your environment and click on it to open the DataHub page.  </li>
@@ -669,31 +834,31 @@
 <tbody>
 <tr>
 <td style="text-align: left;"><strong>database.dbname</strong></td>
-<td style="text-align: left;">\&lt;DB name&gt;</td>
+<td style="text-align: left;"><code>DB_NAME</code></td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>database.hostname</strong></td>
-<td style="text-align: left;">\&lt;DB host IP address&gt;</td>
+<td style="text-align: left;">INSTRUCTOR - TODO Update bastion_vm_hostname in mkdocs.yml</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>database.password</strong></td>
+<td style="text-align: left;"><code>cloudera</code></td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>database.port</strong></td>
 <td style="text-align: left;">5432</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>database.user</strong></td>
-<td style="text-align: left;">\&lt;DB username&gt;</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>database.password</strong></td>
-<td style="text-align: left;">\&lt;DB password&gt;</td>
-</tr>
-<tr>
 <td style="text-align: left;"><strong>database.server.name</strong></td>
-<td style="text-align: left;">pg<strong>XX</strong></td>
+<td style="text-align: left;"><code>pg_USERNAME</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>database.user</strong></td>
+<td style="text-align: left;"><code>cdc_USERNAME</code></td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>plugin.name</strong></td>
-<td style="text-align: left;">pgoutput</td>
+<td style="text-align: left;"><code>pgoutput</code></td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>tasks.max</strong></td>
@@ -701,9 +866,9 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Important:</strong> The property <strong>database.server.name</strong> is <strong><em>not</em></strong> the hostname of the PostgreSQL server. This property is an arbitrary string that will be used to prefix the name of the topics created by this connector. The connector will create one topic per table in the specified database. The name of the topic will be <strong>\&lt;database.server.name&gt;.\&lt;schema&gt;.\&lt;table_name&gt;</strong>.</p>
-<ol start="8">
-<li>There are 3 additional properties needed to complete the connector configuration. Add the properties below by clicking on one the <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab4/4.156.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab4/4.156.png" alt="Edit Runtime settings and update Handler" style="vertical-align:middle; width:40px; height:36px;"></a>icons in the page:</li>
+<p><strong>Important:</strong> The property <strong>database.server.name</strong> is <strong><em>not</em></strong> the hostname of the PostgreSQL server. This property is an arbitrary string that will be used to prefix the name of the topics created by this connector. The connector will create one topic per table in the specified database.</p>
+<ol>
+<li>There are additional properties needed to complete the connector configuration. Add the properties below by clicking on the <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab4/4.156.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab4/4.156.png" alt="Edit Runtime settings and update Handler" style="vertical-align:middle; width:40px; height:36px;"></a> icons in the page:</li>
 </ol>
 <table>
 <thead>
@@ -718,16 +883,43 @@
 <td style="text-align: left;"><code>PLAIN</code></td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>producer.override.sasl.jaas.config</code></td>
-<td style="text-align: left;"><code>org.apache.kafka.common.security.plain.PlainLoginModule required username="&lt;user&gt;" password="&lt;password&gt;";</code></td>
+<td style="text-align: left;"><code>producer.override.security.protocol</code></td>
+<td style="text-align: left;"><code>SASL_SSL</code></td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>slot.name</code></td>
-<td style="text-align: left;"><code>groupXX</code> <em>(replace <code>XX</code>)</em></td>
+<td style="text-align: left;"><code>debezium_pg_USERNAME</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>publication.autocreate.mode</code></td>
+<td style="text-align: left;"><code>filtered</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>schema.include.list</code></td>
+<td style="text-align: left;"><code>public</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>snapshot.mode</code></td>
+<td style="text-align: left;"><code>initial</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>producer.override.sasl.jaas.config</code></td>
+<td style="text-align: left;"><code>org.apache.kafka.common.security.plain.PlainLoginModule required username="USERNAME" password="WORKLOAD_PASSWORD";</code></td>
 </tr>
 </tbody>
 </table>
-<ol start="9">
+<div class="admonition warning">
+<p class="admonition-title">Important: CDP Workload Password Required</p>
+<p>For the <code>producer.override.sasl.jaas.config</code> property, you <strong>MUST</strong> use your <strong>CDP Workload Password</strong>.</p>
+</div>
+<p>The format of input value should be:
+   </p><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>org.apache.kafka.common.security.plain.PlainLoginModule required username="USERNAME" password="&lt;YOUR_WORKLOAD_PASSWORD&gt;";
+</span></code></pre></div><p></p>
+<p><strong>Example</strong> (using <code>user001</code> with workload password <code>user001SecretPassword</code>):
+   </p><div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>org.apache.kafka.common.security.plain.PlainLoginModule required username="user001" password="user001SecretPassword";
+</span></code></pre></div>
+<br><p></p>
+<ol>
 <li>Once you have entered all the properties above, click on the <strong>Validate</strong> button. If the validation succeeds you will see the following message:</li>
 </ol>
 <p align="center"><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab4/4.157.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab4/4.157.png" style="vertical-align:middle; width:240px;" alt="Description"></a></p>
@@ -747,17 +939,17 @@
 <ol>
 <li>If you are not connected to the PostgreSQL database, connect to it using psql (see steps 3.1 to 3.3 above)  </li>
 <li>Execute the following commands below to generate activity on the work table
-<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">   </span><span class="err">INSERT</span><span class="w"> </span><span class="err">INTO</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">VALUES</span><span class="w"> </span><span class="err">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">'ONE');</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">   </span><span class="err">INSERT</span><span class="w"> </span><span class="err">INTO</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">VALUES</span><span class="w"> </span><span class="err">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="err">'TWO');</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">   </span><span class="err">INSERT</span><span class="w"> </span><span class="err">INTO</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">VALUES</span><span class="w"> </span><span class="err">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="err">'THREE');</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">   </span><span class="err">UPDATE</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">SET</span><span class="w"> </span><span class="err">col</span><span class="mi">2</span><span class="w"> </span><span class="err">\=</span><span class="w"> </span><span class="err">'TROIS'</span><span class="w"> </span><span class="err">WHERE</span><span class="w"> </span><span class="err">col</span><span class="mi">1</span><span class="w"> </span><span class="err">\=</span><span class="w"> </span><span class="mi">3</span><span class="err">;</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">   </span><span class="err">DELETE</span><span class="w"> </span><span class="err">FROM</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">WHERE</span><span class="w"> </span><span class="err">col</span><span class="mi">1</span><span class="w"> </span><span class="err">\=</span><span class="w"> </span><span class="mi">2</span><span class="err">;</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">   </span><span class="err">SELECT</span><span class="w"> </span><span class="err">\*</span><span class="w"> </span><span class="err">FROM</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble;</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="w">   </span><span class="err">INSERT</span><span class="w"> </span><span class="err">INTO</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">VALUES</span><span class="w"> </span><span class="err">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">'ONE');</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">   </span><span class="err">INSERT</span><span class="w"> </span><span class="err">INTO</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">VALUES</span><span class="w"> </span><span class="err">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="err">'TWO');</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">   </span><span class="err">INSERT</span><span class="w"> </span><span class="err">INTO</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">VALUES</span><span class="w"> </span><span class="err">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="err">'THREE');</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">   </span><span class="err">UPDATE</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">SET</span><span class="w"> </span><span class="err">col</span><span class="mi">2</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">'TROIS'</span><span class="w"> </span><span class="err">WHERE</span><span class="w"> </span><span class="err">col</span><span class="mi">1</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="mi">3</span><span class="err">;</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">   </span><span class="err">DELETE</span><span class="w"> </span><span class="err">FROM</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble</span><span class="w"> </span><span class="err">WHERE</span><span class="w"> </span><span class="err">col</span><span class="mi">1</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="mi">2</span><span class="err">;</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">   </span><span class="err">SELECT</span><span class="w"> </span><span class="err">*</span><span class="w"> </span><span class="err">FROM</span><span class="w"> </span><span class="err">work</span><span class="kc">ta</span><span class="err">ble;</span>
 </span></code></pre></div></li>
 </ol>
 <h2 id="6-verify-results">6. Verify results</h2>

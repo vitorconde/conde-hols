@@ -63,3 +63,124 @@
 .md-typeset .prereq-complete h2 {
   margin: 0.6em;
 }
+
+/* Username Input Container for variable substitution */
+.username-selector-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.username-input-container {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  background-color: var(--md-code-bg-color);
+  border-radius: 5px;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  align-items: center;
+  width: 50%;
+  min-width: 280px;
+}
+
+.username-input-container input[type="text"],
+.username-input-container select {
+  padding: 10px 12px;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--md-typeset-color);
+  background-color: var(--md-default-bg-color);
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  flex: 1;
+  min-width: 180px;
+}
+
+.username-input-container input[type="text"]:focus,
+.username-input-container select:focus {
+  outline: none;
+  border-color: var(--md-accent-fg-color);
+  box-shadow: 0 0 0 3px var(--md-accent-fg-color--transparent);
+}
+
+.username-input-container input[type="text"]::placeholder {
+  color: var(--md-default-fg-color--light);
+  opacity: 0.6;
+}
+
+.username-input-container select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 20px;
+  padding-right: 36px;
+}
+
+.username-input-container select option {
+  color: var(--md-typeset-color);
+  background-color: var(--md-default-bg-color);
+  padding: 8px;
+}
+
+.username-input-container button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  font-family: inherit;
+}
+
+#user-username-save {
+  background-color: var(--md-primary-fg-color);
+  color: #fff;
+}
+
+#user-username-save:hover {
+  background-color: var(--md-primary-fg-color--light);
+  transform: translateY(-2px);
+}
+
+#user-username-save:active {
+  transform: translateY(0);
+}
+
+#user-username-clear {
+  background-color: var(--md-accent-fg-color);
+  color: #fff;
+}
+
+#user-username-clear:hover {
+  background-color: #4444d9;
+  transform: translateY(-2px);
+}
+
+#user-username-clear:active {
+  transform: translateY(0);
+}
+
+.username-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.username-display h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--md-typeset-color);
+  font-weight: 600;
+}
+
+.username-display #selected-username {
+  color: var(--md-primary-fg-color);
+  font-weight: 700;
+}

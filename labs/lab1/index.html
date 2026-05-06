@@ -862,7 +862,7 @@
 <p>The following is a step by step guide in building a data flow for use within CDF-PC.</p>
 <h2 id="2-create-a-schema-in-schema-registry"><strong>2. Create a schema in Schema Registry</strong></h2>
 <ol>
-<li>Login to Schema Registry by clicking the appropriate hyperlink in the Streams Messaging Datahub.</li>
+<li>Log in to the Cloudera platform. Navigate to the "Data Hub" section and locate the Data Hub Type labeled "Streams Messaging" by clicking its name (hyperlink). Once inside, go to the "Services" tab and select "Schema Registry."</li>
 </ol>
 <p align="center">
   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/1.12.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/1.12.png" alt="Schema Registry Screenshot"></a>
@@ -947,7 +947,10 @@
 <h2 id="3-design-the-flow-in-the-flow-designer"><strong>3. Design the flow in the Flow Designer</strong></h2>
 <h3 id="31-create-a-new-flow"><strong>3.1 Create a new flow</strong></h3>
 <ol>
-<li>In Cloudera DataFlow, open the Flow Designer and create a new flow called <code>USERNAME-syslog-kafka-flow</code></li>
+<li>In Cloudera DataFlow, open the Flow Designer and create a new flow called <code>USERNAME-syslog-kafka-flow</code><blockquote>
+<p>Select NiFi 1.x during configuration</p>
+</blockquote>
+</li>
 </ol>
 <p align="center">
   <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/images/lab_images/lab1/3.1.png" data-desc-position="bottom"><img src="../../assets/images/lab_images/lab1/3.1.png" alt="Schema Registry Screenshot"></a>
